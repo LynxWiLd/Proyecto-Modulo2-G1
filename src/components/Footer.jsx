@@ -1,9 +1,23 @@
-import { Container } from 'react-bootstrap';
+import { Col, Container, Row } from "react-bootstrap";
 
 const Footer = () => (
   <footer className="bg-dark text-white py-3 mt-auto">
     <Container className="text-center">
-      <small>© 2025 Facundo Dev</small>
+      <Row>
+        <Col>&copy; Todos los derechos reservados</Col>
+        <Col>&copy; Todos los derechos reservados</Col>
+        <Col>&copy; Todos los derechos reservados</Col>
+      </Row>
+      <Row>
+        <Col>&copy; Todos los derechos reservados</Col>
+        <Col>&copy; Todos los derechos reservados</Col>
+        <Col>&copy; Todos los derechos reservados</Col>
+      </Row>
+      <Row>
+        <Col>&copy; Todos los derechos reservados</Col>
+        <Col>&copy; Todos los derechos reservados</Col>
+        <Col>&copy; Todos los derechos reservados</Col>
+      </Row>
     </Container>
   </footer>
 );
