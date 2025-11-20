@@ -1,29 +1,39 @@
 // src/App.jsx
-
+import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import AdminSongs from "./pages/AdminSongs";
-
-// Usuario de prueba (admin)
-const fakeUser = {
-  name: "Jose",
-  role: "admin", // 👈 así AdminSongs te deja entrar
-};
+import Login from "./pages/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  const handleLogout = () => setUser(null);
+
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar user={user} onLogout={handleLogout} />
 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
 
-        {/* Página de administración (solo admin) */}
-        <Route path="/admin" element={<AdminSongs user={fakeUser} />} />
+        {/* LOGIN */}
+        <Route path="/login" element={<Login onLogin={setUser} />} />
+
+        {/* ADMIN SOLO SI ESTÁ LOGUEADO */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute user={user}>
+              <AdminSongs user={user} />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       <Footer />

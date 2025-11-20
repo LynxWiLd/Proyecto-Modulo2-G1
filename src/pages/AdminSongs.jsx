@@ -3,13 +3,21 @@ import { useState } from "react";
 const EMPTY_SONG = {
   title: "",
   artist: "",
+  album: "",
   file: null,
 };
 
 function AdminSongs({ user }) {
-  // 🔐 Solo admin
-  const isAdmin = user?.role === "admin";
+  if (!user) {
+    return (
+      <main className="container py-5">
+        <h1>Acceso denegado</h1>
+        <p>Debes iniciar sesión para ver esta página.</p>
+      </main>
+    );
+  }
 
+  const isAdmin = user.role === "admin";
   if (!isAdmin) {
     return (
       <main className="container py-5">
@@ -19,79 +27,124 @@ function AdminSongs({ user }) {
     );
   }
 
-  const [songs, setSongs] = useState([]);
+  // 👇 Cada usuario tiene su propio storage
+  const storageKey = `songs_${user.id}`;
+
+  // Solo guardamos metadatos en localStorage (id, title, artist, album, ownerId)
+  const [songs, setSongs] = useState(() => {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch (e) {
+      console.error("Error leyendo canciones de localStorage", e);
+      return [];
+    }
+  });
+
+  // Mapa en memoria: id -> URL del audio (no persistente)
+  const [audioMap, setAudioMap] = useState({});
+
   const [form, setForm] = useState(EMPTY_SONG);
   const [editingId, setEditingId] = useState(null);
+  const [previewName, setPreviewName] = useState("");
 
-  // Manejo de inputs de texto
+  const saveToStorage = (newSongs) => {
+    setSongs(newSongs);
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(newSongs));
+    } catch (e) {
+      console.error("No se pudo guardar en localStorage", e);
+    }
+  };
+
+  const resetForm = () => {
+    setForm(EMPTY_SONG);
+    setPreviewName("");
+    setEditingId(null);
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Manejo del archivo
   const handleFileChange = (e) => {
     const file = e.target.files?.[0] || null;
-    setForm((prev) => ({ ...prev, file }));
-  };
 
-  const resetForm = () => {
-    setForm(EMPTY_SONG);
-    setEditingId(null);
+    if (!file) {
+      setForm((prev) => ({ ...prev, file: null }));
+      setPreviewName("");
+      return;
+    }
+
+    const fileName = file.name.replace(/\.[^/.]+$/, "");
+    setForm((prev) => ({
+      ...prev,
+      file,
+      title: prev.title || fileName,
+    }));
+    setPreviewName(file.name);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!form.title.trim() || !form.artist.trim()) {
-      alert("Título y artista son obligatorios");
+    if (!form.title.trim() || !form.artist.trim() || !form.album.trim()) {
+      alert("Título, artista y álbum son obligatorios");
       return;
     }
 
-    // Para nueva canción hay que tener archivo
     if (!editingId && !form.file) {
-      alert("Debes seleccionar un archivo de audio");
+      alert("Tenés que seleccionar un archivo de audio");
       return;
     }
 
-    // Si hay archivo nuevo, generamos URL
-    let audioUrl = null;
-
-    if (form.file) {
-      audioUrl = URL.createObjectURL(form.file);
-    }
+    let newSongs = [...songs];
+    let newAudioMap = { ...audioMap };
 
     if (editingId) {
-      // ✏️ Editar canción existente
-      setSongs((prev) =>
-        prev.map((song) => {
-          if (song.id !== editingId) return song;
+      // ✏️ Editar
+      newSongs = newSongs.map((song) => {
+        if (song.id !== editingId) return song;
 
-          // Si subimos un archivo nuevo, borramos la URL anterior
-          if (audioUrl && song.audioUrl) {
-            URL.revokeObjectURL(song.audioUrl);
+        let newUrl = song.audioUrlId ? audioMap[song.id] : null;
+
+        if (form.file) {
+          if (audioMap[song.id]) {
+            URL.revokeObjectURL(audioMap[song.id]);
           }
+          newUrl = URL.createObjectURL(form.file);
+          newAudioMap[song.id] = newUrl;
+        }
 
-          return {
-            ...song,
-            title: form.title,
-            artist: form.artist,
-            audioUrl: audioUrl || song.audioUrl,
-          };
-        })
-      );
+        return {
+          ...song,
+          title: form.title,
+          artist: form.artist,
+          album: form.album,
+        };
+      });
     } else {
       // ➕ Nueva canción
+      const id = crypto.randomUUID();
+      const audioUrl = URL.createObjectURL(form.file);
+
       const newSong = {
-        id: crypto.randomUUID(),
+        id,
+        ownerId: user.id, // 🔐 queda asociada al usuario
         title: form.title,
         artist: form.artist,
-        audioUrl,
+        album: form.album,
       };
 
-      setSongs((prev) => [...prev, newSong]);
+      newSongs.push(newSong);
+      newAudioMap[id] = audioUrl;
     }
 
+    setAudioMap(newAudioMap);
+    saveToStorage(newSongs);
     resetForm();
   };
 
@@ -100,73 +153,110 @@ function AdminSongs({ user }) {
     setForm({
       title: song.title,
       artist: song.artist,
-      file: null, // el archivo solo se vuelve a elegir si quiere cambiarlo
+      album: song.album,
+      file: null,
     });
-    // el usuario puede cambiar solo título / artista sin tocar el archivo
+    setPreviewName("");
   };
 
   const handleDelete = (id) => {
     if (!window.confirm("¿Seguro que querés borrar esta canción?")) return;
 
-    setSongs((prev) => {
-      const songToDelete = prev.find((s) => s.id === id);
-      if (songToDelete?.audioUrl) {
-        URL.revokeObjectURL(songToDelete.audioUrl);
-      }
-      return prev.filter((song) => song.id !== id);
-    });
+    const newSongs = songs.filter((song) => song.id !== id);
+    saveToStorage(newSongs);
+
+    if (audioMap[id]) {
+      URL.revokeObjectURL(audioMap[id]);
+      const { [id]: _, ...rest } = audioMap;
+      setAudioMap(rest);
+    }
   };
+
+  // Por seguridad extra: solo mostramos canciones cuyo ownerId coincide
+  const userSongs = songs.filter((song) => song.ownerId === user.id);
 
   return (
     <main className="container py-5">
-      <h1 className="mb-4">Administración de canciones</h1>
+      <h1 className="mb-4">Tus canciones</h1>
 
       {/* FORMULARIO */}
       <section className="mb-5">
         <h2 className="h4 mb-3">
-          {editingId ? "Editar canción" : "Agregar nueva canción"}
+          {editingId ? "Editar canción" : "Subir nueva canción"}
         </h2>
 
-        <form onSubmit={handleSubmit} className="d-grid gap-3" style={{ maxWidth: 500 }}>
+        <form
+          onSubmit={handleSubmit}
+          className="d-grid gap-3"
+          style={{ maxWidth: 600 }}
+        >
           <div>
-            <label className="form-label">Título</label>
-            <input
-              type="text"
-              name="title"
-              className="form-control"
-              value={form.title}
-              onChange={handleChange}
-              required
-            />
+            <label className="form-label">Archivo de audio</label>
+            <div
+              className="border rounded p-3 d-flex flex-column gap-2"
+              style={{ backgroundColor: "#1f1f1f" }}
+            >
+              <input
+                type="file"
+                accept="audio/*"
+                className="form-control"
+                onChange={handleFileChange}
+              />
+              <small className="text-muted">
+                Elegí un archivo de audio desde tu computadora.
+              </small>
+              {previewName && (
+                <div className="mt-1">
+                  <strong>Seleccionado:</strong> {previewName}
+                </div>
+              )}
+            </div>
           </div>
 
-          <div>
-            <label className="form-label">Artista</label>
-            <input
-              type="text"
-              name="artist"
-              className="form-control"
-              value={form.artist}
-              onChange={handleChange}
-              required
-            />
+          <div className="row g-3">
+            <div className="col-md-4">
+              <label className="form-label">Título</label>
+              <input
+                type="text"
+                name="title"
+                className="form-control"
+                value={form.title}
+                onChange={handleChange}
+                placeholder="Nombre de la canción"
+                required
+              />
+            </div>
+
+            <div className="col-md-4">
+              <label className="form-label">Artista</label>
+              <input
+                type="text"
+                name="artist"
+                className="form-control"
+                value={form.artist}
+                onChange={handleChange}
+                placeholder="Tu nombre artístico"
+                required
+              />
+            </div>
+
+            <div className="col-md-4">
+              <label className="form-label">Álbum</label>
+              <input
+                type="text"
+                name="album"
+                className="form-control"
+                value={form.album}
+                onChange={handleChange}
+                placeholder="Álbum / EP"
+                required
+              />
+            </div>
           </div>
 
-          <div>
-            <label className="form-label">
-              Archivo de audio {editingId && " (dejá vacío si no querés cambiarlo)"}
-            </label>
-            <input
-              type="file"
-              accept="audio/*"
-              className="form-control"
-              onChange={handleFileChange}
-            />
-          </div>
-
-          <div className="d-flex gap-2">
+          <div className="d-flex gap-2 mt-2">
             <button type="submit" className="btn btn-primary">
-              {editingId ? "Guardar cambios" : "Agregar canción"}
+              {editingId ? "Guardar cambios" : "Subir canción"}
             </button>
             {editingId && (
               <button
@@ -181,12 +271,12 @@ function AdminSongs({ user }) {
         </form>
       </section>
 
-      {/* TABLA + REPRODUCTOR */}
+      {/* LISTA DEL USUARIO ACTUAL */}
       <section>
-        <h2 className="h4 mb-3">Listado de canciones</h2>
+        <h2 className="h4 mb-3">Canciones de {user.name}</h2>
 
-        {songs.length === 0 ? (
-          <p>No hay canciones cargadas.</p>
+        {userSongs.length === 0 ? (
+          <p>No subiste ninguna canción todavía.</p>
         ) : (
           <div className="table-responsive">
             <table className="table table-dark table-striped align-middle">
@@ -195,21 +285,25 @@ function AdminSongs({ user }) {
                   <th>#</th>
                   <th>Título</th>
                   <th>Artista</th>
+                  <th>Álbum</th>
                   <th>Reproducir</th>
                   <th style={{ width: 160 }}>Acciones</th>
                 </tr>
               </thead>
               <tbody>
-                {songs.map((song, index) => (
+                {userSongs.map((song, index) => (
                   <tr key={song.id}>
                     <td>{index + 1}</td>
                     <td>{song.title}</td>
                     <td>{song.artist}</td>
+                    <td>{song.album}</td>
                     <td>
-                      {song.audioUrl ? (
-                        <audio controls src={song.audioUrl} />
+                      {audioMap[song.id] ? (
+                        <audio controls src={audioMap[song.id]} />
                       ) : (
-                        <span className="text-muted">Sin archivo</span>
+                        <span className="text-muted" style={{ fontSize: "0.85rem" }}>
+                          Para reproducirla, volvé a subir el archivo.
+                        </span>
                       )}
                     </td>
                     <td>
