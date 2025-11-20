@@ -11,14 +11,14 @@ function Login({ onLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 🔐 Acá definimos el usuario “válido”
+    // 🔐 Validación simple (podés cambiar estos datos)
     if (email === "artist@demo.com" && password === "1234") {
       onLogin({
         id: "artist-1",
         name: "Jose",
-        role: "admin", // este usuario puede entrar a /admin
+        role: "admin",
       });
-      navigate("/admin"); // después de loguear, lo manda al admin
+      navigate("/admin");
     } else {
       setError("Credenciales inválidas");
     }

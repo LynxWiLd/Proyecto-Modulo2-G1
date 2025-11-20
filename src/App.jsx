@@ -1,5 +1,5 @@
 // src/App.jsx
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -10,9 +10,28 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [user, setUser] = useState(null);
+  // 👇 Leemos el usuario desde localStorage al iniciar
+  const [user, setUser] = useState(() => {
+    try {
+      const saved = localStorage.getItem("currentUser");
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
+  });
 
-  const handleLogout = () => setUser(null);
+  // Cada vez que cambia el user, lo guardamos / borramos del storage
+  useEffect(() => {
+    if (user) {
+      localStorage.setItem("currentUser", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("currentUser");
+    }
+  }, [user]);
+
+  const handleLogout = () => {
+    setUser(null);
+  };
 
   return (
     <BrowserRouter>
@@ -22,10 +41,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
 
-        {/* LOGIN */}
+        {/* Login */}
         <Route path="/login" element={<Login onLogin={setUser} />} />
 
-        {/* ADMIN SOLO SI ESTÁ LOGUEADO */}
+        {/* Admin protegido */}
         <Route
           path="/admin"
           element={
