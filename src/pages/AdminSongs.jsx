@@ -1,222 +1,242 @@
-// src/pages/AdminSongs.jsx
-import { useState } from 'react'
-import { Table, Button, Modal, Form } from 'react-bootstrap'
+import { useState } from "react";
 
 const EMPTY_SONG = {
-  title: 'hola',
-  artist: '',
-  album: '',
-  genre: '',
-  duration: '',
-}
+  title: "",
+  artist: "",
+  file: null,
+};
 
-const MOCK_SONGS = [
-  { id: 1, title: 'Song 1', artist: 'Artist 1', album: 'Album 1', genre: 'Pop', duration: '03:30' },
-  { id: 2, title: 'Song 2', artist: 'Artist 2', album: 'Album 2', genre: 'Rock', duration: '04:10' },
-]
-
-export default function AdminSongs({ user }) {
-  // 🔐 control básico de admin
-  const isAdmin = user?.role === 'admin'
+function AdminSongs({ user }) {
+  // 🔐 Solo admin
+  const isAdmin = user?.role === "admin";
 
   if (!isAdmin) {
     return (
-      <div className="container py-4">
-        <h2>Acceso denegado</h2>
+      <main className="container py-5">
+        <h1>Acceso denegado</h1>
         <p>Esta página solo está disponible para usuarios administradores.</p>
-      </div>
-    )
+      </main>
+    );
   }
 
-  const [songs, setSongs] = useState(MOCK_SONGS)
-  const [showModal, setShowModal] = useState(false)
-  const [editingSong, setEditingSong] = useState(null)
-  const [formValues, setFormValues] = useState(EMPTY_SONG)
+  const [songs, setSongs] = useState([]);
+  const [form, setForm] = useState(EMPTY_SONG);
+  const [editingId, setEditingId] = useState(null);
 
-  const handleOpenNew = () => {
-    setEditingSong(null)
-    setFormValues(EMPTY_SONG)
-    setShowModal(true)
-  }
-
-  const handleOpenEdit = (song) => {
-    setEditingSong(song)
-    setFormValues(song)
-    setShowModal(true)
-  }
-
-  const handleClose = () => {
-    setShowModal(false)
-    setEditingSong(null)
-    setFormValues(EMPTY_SONG)
-  }
-
+  // Manejo de inputs de texto
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setFormValues((prev) => ({
-      ...prev,
-      [name]: value,
-    }))
-  }
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
 
-  const handleDelete = (id) => {
-    if (window.confirm('¿Seguro que querés borrar esta canción?')) {
-      setSongs((prev) => prev.filter((song) => song.id !== id))
-    }
-  }
+  // Manejo del archivo
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0] || null;
+    setForm((prev) => ({ ...prev, file }));
+  };
+
+  const resetForm = () => {
+    setForm(EMPTY_SONG);
+    setEditingId(null);
+  };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (editingSong) {
-      // ✏️ Editar
-      setSongs((prev) =>
-        prev.map((song) =>
-          song.id === editingSong.id
-            ? { ...editingSong, ...formValues }
-            : song
-        )
-      )
-    } else {
-      // ➕ Agregar
-      const newSong = {
-        ...formValues,
-        id: crypto.randomUUID(), // id único
-      }
-      setSongs((prev) => [...prev, newSong])
+    if (!form.title.trim() || !form.artist.trim()) {
+      alert("Título y artista son obligatorios");
+      return;
     }
 
-    handleClose()
-  }
+    // Para nueva canción hay que tener archivo
+    if (!editingId && !form.file) {
+      alert("Debes seleccionar un archivo de audio");
+      return;
+    }
+
+    // Si hay archivo nuevo, generamos URL
+    let audioUrl = null;
+
+    if (form.file) {
+      audioUrl = URL.createObjectURL(form.file);
+    }
+
+    if (editingId) {
+      // ✏️ Editar canción existente
+      setSongs((prev) =>
+        prev.map((song) => {
+          if (song.id !== editingId) return song;
+
+          // Si subimos un archivo nuevo, borramos la URL anterior
+          if (audioUrl && song.audioUrl) {
+            URL.revokeObjectURL(song.audioUrl);
+          }
+
+          return {
+            ...song,
+            title: form.title,
+            artist: form.artist,
+            audioUrl: audioUrl || song.audioUrl,
+          };
+        })
+      );
+    } else {
+      // ➕ Nueva canción
+      const newSong = {
+        id: crypto.randomUUID(),
+        title: form.title,
+        artist: form.artist,
+        audioUrl,
+      };
+
+      setSongs((prev) => [...prev, newSong]);
+    }
+
+    resetForm();
+  };
+
+  const handleEdit = (song) => {
+    setEditingId(song.id);
+    setForm({
+      title: song.title,
+      artist: song.artist,
+      file: null, // el archivo solo se vuelve a elegir si quiere cambiarlo
+    });
+    // el usuario puede cambiar solo título / artista sin tocar el archivo
+  };
+
+  const handleDelete = (id) => {
+    if (!window.confirm("¿Seguro que querés borrar esta canción?")) return;
+
+    setSongs((prev) => {
+      const songToDelete = prev.find((s) => s.id === id);
+      if (songToDelete?.audioUrl) {
+        URL.revokeObjectURL(songToDelete.audioUrl);
+      }
+      return prev.filter((song) => song.id !== id);
+    });
+  };
 
   return (
-    <div className="container py-4">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Administración de canciones</h2>
-        <Button variant="success" onClick={handleOpenNew}>
-          Agregar canción
-        </Button>
-      </div>
+    <main className="container py-5">
+      <h1 className="mb-4">Administración de canciones</h1>
 
-      {songs.length === 0 ? (
-        <p>No hay canciones cargadas.</p>
-      ) : (
-        <Table striped bordered hover responsive>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Título</th>
-              <th>Artista</th>
-              <th>Álbum</th>
-              <th>Género</th>
-              <th>Duración</th>
-              <th style={{ width: '160px' }}>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {songs.map((song, index) => (
-              <tr key={song.id}>
-                <td>{index + 1}</td>
-                <td>{song.title}</td>
-                <td>{song.artist}</td>
-                <td>{song.album}</td>
-                <td>{song.genre}</td>
-                <td>{song.duration}</td>
-                <td>
-                  <div className="d-flex gap-2">
-                    <Button
-                      size="sm"
-                      variant="primary"
-                      onClick={() => handleOpenEdit(song)}
-                    >
-                      Editar
-                    </Button>
-                    <Button
-                      size="sm"
-                      variant="danger"
-                      onClick={() => handleDelete(song.id)}
-                    >
-                      Borrar
-                    </Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+      {/* FORMULARIO */}
+      <section className="mb-5">
+        <h2 className="h4 mb-3">
+          {editingId ? "Editar canción" : "Agregar nueva canción"}
+        </h2>
 
-      {/* Modal para agregar / editar */}
-      <Modal show={showModal} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>
-            {editingSong ? 'Editar canción' : 'Agregar canción'}
-          </Modal.Title>
-        </Modal.Header>
-        <Form onSubmit={handleSubmit}>
-          <Modal.Body>
-            <Form.Group className="mb-3">
-              <Form.Label>Título</Form.Label>
-              <Form.Control
-                type="text"
-                name="title"
-                value={formValues.title}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
+        <form onSubmit={handleSubmit} className="d-grid gap-3" style={{ maxWidth: 500 }}>
+          <div>
+            <label className="form-label">Título</label>
+            <input
+              type="text"
+              name="title"
+              className="form-control"
+              value={form.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Artista</Form.Label>
-              <Form.Control
-                type="text"
-                name="artist"
-                value={formValues.artist}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
+          <div>
+            <label className="form-label">Artista</label>
+            <input
+              type="text"
+              name="artist"
+              className="form-control"
+              value={form.artist}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Álbum</Form.Label>
-              <Form.Control
-                type="text"
-                name="album"
-                value={formValues.album}
-                onChange={handleChange}
-              />
-            </Form.Group>
+          <div>
+            <label className="form-label">
+              Archivo de audio {editingId && " (dejá vacío si no querés cambiarlo)"}
+            </label>
+            <input
+              type="file"
+              accept="audio/*"
+              className="form-control"
+              onChange={handleFileChange}
+            />
+          </div>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Género</Form.Label>
-              <Form.Control
-                type="text"
-                name="genre"
-                value={formValues.genre}
-                onChange={handleChange}
-              />
-            </Form.Group>
+          <div className="d-flex gap-2">
+            <button type="submit" className="btn btn-primary">
+              {editingId ? "Guardar cambios" : "Agregar canción"}
+            </button>
+            {editingId && (
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={resetForm}
+              >
+                Cancelar edición
+              </button>
+            )}
+          </div>
+        </form>
+      </section>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Duración (mm:ss)</Form.Label>
-              <Form.Control
-                type="text"
-                name="duration"
-                value={formValues.duration}
-                onChange={handleChange}
-              />
-            </Form.Group>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Cancelar
-            </Button>
-            <Button variant="primary" type="submit">
-              {editingSong ? 'Guardar cambios' : 'Agregar'}
-            </Button>
-          </Modal.Footer>
-        </Form>
-      </Modal>
-    </div>
-  )
+      {/* TABLA + REPRODUCTOR */}
+      <section>
+        <h2 className="h4 mb-3">Listado de canciones</h2>
+
+        {songs.length === 0 ? (
+          <p>No hay canciones cargadas.</p>
+        ) : (
+          <div className="table-responsive">
+            <table className="table table-dark table-striped align-middle">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Título</th>
+                  <th>Artista</th>
+                  <th>Reproducir</th>
+                  <th style={{ width: 160 }}>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {songs.map((song, index) => (
+                  <tr key={song.id}>
+                    <td>{index + 1}</td>
+                    <td>{song.title}</td>
+                    <td>{song.artist}</td>
+                    <td>
+                      {song.audioUrl ? (
+                        <audio controls src={song.audioUrl} />
+                      ) : (
+                        <span className="text-muted">Sin archivo</span>
+                      )}
+                    </td>
+                    <td>
+                      <div className="d-flex gap-2">
+                        <button
+                          className="btn btn-sm btn-outline-light"
+                          onClick={() => handleEdit(song)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="btn btn-sm btn-danger"
+                          onClick={() => handleDelete(song.id)}
+                        >
+                          Borrar
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </section>
+    </main>
+  );
 }
+
+export default AdminSongs;
