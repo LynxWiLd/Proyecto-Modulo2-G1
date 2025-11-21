@@ -14,6 +14,16 @@ register,
 const { login } = useAuth();
 const navigate = useNavigate();
 
+const onSubmit = (data) => {
+    const ok = login (data.email, data.password);
+       if (ok) {
+      Swal.fire("Bienvenido!", "Sesión iniciada correctamente", "success");
+      navigate("/");
+    } else {
+      Swal.fire("Error", "Email o contraseña incorrectos", "error");
+    }
+  };
+  
 
 
 
