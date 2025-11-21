@@ -10,7 +10,7 @@ import { Link } from 'react-router';
 const DetalleCancion = ({ arrayDetalleCancion }) => {
     return (
         <main className='fondoDetalleCancion'>
-            <section className='text-light position-relative'>
+            <section className='text-ligth position-relative'>
                 {/* portada de la cancion */}
                 <Image src={imgPortada} className='imgPortadaCancion' fluid alt='imagen portada canción o album' />
 
@@ -81,7 +81,6 @@ const DetalleCancion = ({ arrayDetalleCancion }) => {
                 </Table>
             </section>
         </main>
-
     );
 };
 

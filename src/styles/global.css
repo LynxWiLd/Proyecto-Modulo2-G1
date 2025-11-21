@@ -62,7 +62,7 @@
 
 /*
   =============================================
-  3. Estilos para los OVERLAYS (TERCERA CAPA - SUPERIOR)
+  Estilos para los OVERLAYS (TERCERA CAPA - SUPERIOR)
   =============================================
 */
 .overlay {
@@ -92,21 +92,6 @@
   padding-bottom: 10px;
 }
 
-/* Opcional: Asegúrate de que el texto dentro del overlay sea legible */
-.bottom-left h5,
-.bottom-left p {
-  color: white; /* Por si Bootstrap no lo aplica correctamente */
-  margin-bottom: 0;
-  padding-left: 10px; /* Alineación del texto */
-}
-
-/*
-  =============================================
-  Ajustes para asegurar la legibilidad del fondo de main
-  =============================================
-*/
-
-
 .botonPlay{
   height: 50px;
   width: 50px;
@@ -129,8 +114,8 @@
 
 @media (min-width: 768px) {
   .imagen-container {
-    max-height: 450px; /* Ejemplo: Limita el contenedor a 400px de alto */
-    object-fit: contain;
+    max-height: 400px; /* Ejemplo: Limita el contenedor a 400px de alto */
+    object-fit: fit;
     /* Opcional: Puedes usar una altura basada en el viewport, ej: */
     /* max-height: 50vh; */
   }
