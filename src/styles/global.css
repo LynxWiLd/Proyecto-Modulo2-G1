@@ -39,6 +39,25 @@
   border-radius: 0;
 }
 
+/* ------------------------------------------- */
+/* CLASE NUEVA: CENTRADO TOTAL       */
+/* ------------------------------------------- */
+.centered-text {
+    /* Mueve el punto de inicio al centro del contenedor (50% de arriba, 50% de izquierda) */
+    top: 50%;
+    left: 50%;
+    
+    /* Mueve el elemento hacia atrás la mitad de su propio ancho y altura,
+       asegurando que el CENTRO del texto coincida con el centro de la imagen. */
+    transform: translate(-50%, -50%);
+    
+    /* Estilos opcionales para la caja central */
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente para el texto centrado */
+    border-radius: 5px;
+}
+/* ------------------------------------------- */
+
 /*
   =============================================
   3. Estilos para los OVERLAYS (TERCERA CAPA - SUPERIOR)
