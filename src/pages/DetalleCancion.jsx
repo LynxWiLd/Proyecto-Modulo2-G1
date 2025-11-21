@@ -1,10 +1,10 @@
 
 import Image from 'react-bootstrap/Image';
 import imgPortada from '../assets/Coldplay.jpg'
-import "../styles/detalleCancion.css";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 
-const DetalleCancion = () => {
+const DetalleCancion = ({ arrayDetalleCancion }) => {
     return (
         <main className='fondoDetalleCancion'>
             <section className='imagen-container position-relative'>
@@ -23,6 +23,16 @@ const DetalleCancion = () => {
                     <h5 className="mb-0">Nombre del Artista</h5>
                     <p className="mb-0">1.250.000 Reproducciones</p>
                 </div>
+            </section>
+
+            <section className='container imagen-container position-relative my-5'>
+                <ListGroup as="ul">
+                    <ListGroup.Item as="li" >
+                        Cras justo odio
+                    </ListGroup.Item>
+                    <ListGroup.Item as="li">Dapibus ac facilisis in</ListGroup.Item>
+                    <ListGroup.Item as="li">Porta ac consectetur ac</ListGroup.Item>
+                </ListGroup>
             </section>
         </main>
 
