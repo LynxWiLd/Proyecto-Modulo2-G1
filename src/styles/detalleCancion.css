@@ -1,0 +1,81 @@
+
+/* *******************************************************************************
+              CSS componente <DetalleCancion>
+******************************************************************************* */
+
+.fondoDetalleCancion {
+  min-height: 100vh; /* O la altura que necesites, por ejemplo 500px */
+  width: 100%;
+  background-image: url("../../public/pexels-frans-van-heerden-201846-1022692.jpg");
+  background-repeat: no-repeat; /* Que no se repita */
+  background-size: cover; /* Que ocupe toda la pantalla */
+  background-position: center; /* Centrar la imagen */
+}
+/*
+  =============================================
+  2. Estilos para el CONTENEDOR DE LA IMAGEN DE PORTADA Y OVERLAYS (SEGUNDA CAPA)
+  =============================================
+*/
+.imagen-container {
+  /* Crucial: Establece el contexto para los overlays absolutos */
+  position: relative; 
+  overflow: hidden;    /* Asegura que los overlays no sobresalgan de bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
+}
+
+/* Estilo de la IMAGEN DE PORTADA dentro del contenedor*/
+.imgPortadaCancion {
+  display: block; /* Elimina espacio extra debajo de la imagen */
+  width: 100%;    /* Asegura que ocupe todo el ancho del .imagen-container */
+  border-radius: 0;
+}
+
+/*
+  =============================================
+  3. Estilos para los OVERLAYS (TERCERA CAPA - SUPERIOR)
+  =============================================
+*/
+.overlay {
+  /* ¡CRÍTICO! Permite posicionar libremente dentro del .imagen-container */
+  position: absolute; 
+  /* ¡CRÍTICO! Asegura que el overlay esté por encima de la imagen (.imgPortadaCancion) */
+  z-index: 100; /* Un valor alto para garantizar la visibilidad */
+}
+
+.top-left {
+  top: 10px;    /* Distancia desde el borde superior */
+  left: 10px;   /* Distancia desde el borde izquierdo */
+}
+
+.bottom-left {
+  bottom: 0; 
+  left: 0; 
+  width: 100%; /* Ocupa todo el ancho inferior del .imagen-container */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente para legibilidad */
+  /* Las clases de Bootstrap 'p-2' ya dan padding, pero puedes ajustar más si necesitas */
+  padding-top: 10px; 
+  padding-bottom: 10px;
+}
+
+/* Opcional: Asegúrate de que el texto dentro del overlay sea legible */
+.bottom-left h5,
+.bottom-left p {
+  color: white; /* Por si Bootstrap no lo aplica correctamente */
+  margin-bottom: 0;
+  padding-left: 10px; /* Alineación del texto */
+}
+
+/*
+  =============================================
+  Ajustes para asegurar la legibilidad del fondo de main
+  =============================================
+*/
+.fondoDetalleCancion > .imagen-container {
+  /* Si el main tiene un background oscuro, el contenido blanco se verá mejor */
+  color: white; 
+}
+
+
+/* *******************************************************************************
+              FIN CSS componente <DetalleCancion>
+******************************************************************************* */
