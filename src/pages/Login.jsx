@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card, Container } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { useAuth } from "../contenido/AuthContext";
+import { useAuth } from "../data/AuthContext";
 import "../styles/stylologin.css";
 
 export default function Login() {

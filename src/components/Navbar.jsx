@@ -1,7 +1,7 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Icon from "../assets/icon.png";
-import { useAuth } from "../contenido/AuthContext";   
+import Icon from "/Icon.png";
+import { useAuth } from "../data/AuthContext";   
 
 const NavigationBar = () => {
   const { user, logout } = useAuth();   
@@ -11,7 +11,7 @@ const NavigationBar = () => {
       <img src={Icon} alt="icono" id="icon" />
       
       <Navbar.Brand as={Link} to="/">
-        Mi Sitio
+        Tuneo
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="navbar-nav" />
