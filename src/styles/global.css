@@ -5,9 +5,6 @@
   background: gray;
 }
 
-
-
-
 /* *******************************************************************************
               CSS componente <DetalleCancion>
 ******************************************************************************* */
@@ -27,34 +24,39 @@
 */
 .imagen-container {
   /* Crucial: Establece el contexto para los overlays absolutos */
-  position: relative; 
-  overflow: hidden;    /* Asegura que los overlays no sobresalgan de bordes redondeados */
+  position: relative;
+  overflow: hidden; /* Asegura que los overlays no sobresalgan de bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra para darle profundidad */
 }
 
 /* Estilo de la IMAGEN DE PORTADA dentro del contenedor*/
 .imgPortadaCancion {
   display: block; /* Elimina espacio extra debajo de la imagen */
-  width: 100%;    /* Asegura que ocupe todo el ancho del .imagen-container */
+  width: 100%; /* Asegura que ocupe todo el ancho del .imagen-container */
   border-radius: 0;
 }
 
-/* ------------------------------------------- */
+/* ------------------------------------ */
 /* nombre cancion: CENTRADO TOTAL       */
-/* ------------------------------------------- */
+/* ------------------------------------ */
 .centered-text {
-    /* Mueve el punto de inicio al centro del contenedor (50% de arriba, 50% de izquierda) */
-    top: 50%;
-    left: 50%;
-    
-    /* Mueve el elemento hacia atrás la mitad de su propio ancho y altura,
+  /* Mueve el punto de inicio al centro del contenedor (50% de arriba, 50% de izquierda) */
+  top: 50%;
+  left: 50%;
+
+  /* Mueve el elemento hacia atrás la mitad de su propio ancho y altura,
        asegurando que el CENTRO del texto coincida con el centro de la imagen. */
-    transform: translate(-50%, -50%);
-    
-    /* Estilos opcionales para la caja central */
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente para el texto centrado */
-    border-radius: 5px;
+  transform: translate(-50%, -50%);
+
+  /* Estilos opcionales para la caja central */
+  padding: 20px;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.4
+  ); /* Fondo semi-transparente para el texto centrado */
+  border-radius: 5px;
 }
 /* ------------------------------------------- */
 
@@ -65,23 +67,28 @@
 */
 .overlay {
   /* ¡CRÍTICO! Permite posicionar libremente dentro del .imagen-container */
-  position: absolute; 
+  position: absolute;
   /* ¡CRÍTICO! Asegura que el overlay esté por encima de la imagen (.imgPortadaCancion) */
   z-index: 100; /* Un valor alto para garantizar la visibilidad */
 }
 
 .top-left {
-  top: 10px;    /* Distancia desde el borde superior */
-  left: 10px;   /* Distancia desde el borde izquierdo */
+  top: 10px; /* Distancia desde el borde superior */
+  left: 10px; /* Distancia desde el borde izquierdo */
 }
 
 .bottom-left {
-  bottom: 0; 
-  left: 0; 
+  bottom: 0;
+  left: 0;
   width: 100%; /* Ocupa todo el ancho inferior del .imagen-container */
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente para legibilidad */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Fondo semi-transparente para legibilidad */
   /* Las clases de Bootstrap 'p-2' ya dan padding, pero puedes ajustar más si necesitas */
-  padding-top: 10px; 
+  padding-top: 10px;
   padding-bottom: 10px;
 }
 
@@ -98,24 +105,36 @@
   Ajustes para asegurar la legibilidad del fondo de main
   =============================================
 */
-.fondoDetalleCancion > .imagen-container {
-  /* Si el main tiene un background oscuro, el contenido blanco se verá mejor */
-  color: white; 
+
+
+.botonPlay{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+
+.fondoTransparente{
+   background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  );
 }
 
 
 /* =======================================================
-  4. Media Query: Ajuste de Altura para Pantallas Grandes
+  Media Query: Ajuste de Altura para Pantallas Grandes
   ======================================================= */
 
 @media (min-width: 768px) {
-    .imagen-container {
-      max-height: 450px; /* Ejemplo: Limita el contenedor a 400px de alto */
-      object-fit: contain;
-        /* Opcional: Puedes usar una altura basada en el viewport, ej: */
-        /* max-height: 50vh; */
-    }
+  .imagen-container {
+    max-height: 450px; /* Ejemplo: Limita el contenedor a 400px de alto */
+    object-fit: contain;
+    /* Opcional: Puedes usar una altura basada en el viewport, ej: */
+    /* max-height: 50vh; */
   }
+}
 
 /* *******************************************************************************
               FIN CSS componente <DetalleCancion>
