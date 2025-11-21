@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { useAuth } from "../contenido/AuthContext";
 import "../styles/stylologin.css";
 
-const Login = () => {
+export default function Login() {
    const{
 register,
  handleSubmit,
@@ -23,17 +23,60 @@ const onSubmit = (data) => {
       Swal.fire("Error", "Email o contraseña incorrectos", "error");
     }
   };
-  
 
+  return (
+   <Container className="login-container">
+      <Card className="login-card">
+        <h3 className="text-center mb-3">Iniciar Sesión</h3>
 
+         <Form onSubmit={handleSubmit(onSubmit)}>
+          <Form.Group className="mb-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Ingresá tu email"
+              {...register("email", { required: "Este campo es obligatorio" })}
+            />
+            {errors.email && (
+              <small className="text-danger">{errors.email.message}</small>
+            )}
+          </Form.Group>
 
+          <Form.Group className="mb-3">
+            <Form.Label>Contraseña</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Ingresá tu contraseña"
+              {...register("password", {
+                required: "Este campo es obligatorio",
+              })}
+            />
+            {errors.password && (
+              <small className="text-danger">{errors.password.message}</small>
+            )}
+          </Form.Group>
 
+          <Button
+            type="submit"
+            variant="success"
+            className="w-100 no-focus-outline"
+          >
+            Ingresar
+          </Button>
+        </Form>
 
-
-
+        <Button
+          className="w-100 mt-3"
+          variant="secondary"
+          onClick={() => navigate("/register")}
+        >
+          ¿No tenés cuenta? Registrate
+        </Button>
+      </Card>
+    </Container>
+  );
 }
-   
-   
 
 
-export default Login;
+
+
