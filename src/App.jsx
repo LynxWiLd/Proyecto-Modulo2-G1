@@ -9,7 +9,7 @@ import Register from "./pages/Register";
 
 function App() {
   return (
-    <BrowserRouter>
+   <>
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -18,7 +18,7 @@ function App() {
      <Route path="/register" element={<Register />} />
       </Routes>
       <Footer></Footer>
-    </BrowserRouter>
+    </>
   );
 }
 
