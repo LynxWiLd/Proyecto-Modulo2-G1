@@ -36,3 +36,26 @@ const login = (email, password) => {
       setUser(admin);
       return true;
     }
+
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const found = users.find(
+      (u) => u.email === email && u.password === password
+    );
+
+    if (!found) return false;
+
+    setUser(found);
+    return true;
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("currentUser");
+  };
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout, registerUser }}>
+      {children}
+    </AuthContext.Provider>
+  );
+}
