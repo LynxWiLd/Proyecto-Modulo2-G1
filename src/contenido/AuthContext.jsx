@@ -8,7 +8,7 @@ export function AuthProvider({ children }) {
     const saved = localStorage.getItem("currentUser");
     if (saved) setUser(JSON.parse(saved));
   }, []);
-   useEffect(() => {
+  useEffect(() => {
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
     } else {
@@ -30,7 +30,7 @@ export function AuthProvider({ children }) {
 
     return true;
   };
-const login = (email, password) => {
+  const login = (email, password) => {
     if (email === "admin@local.com" && password === "admin123") {
       const admin = { email, role: "admin" };
       setUser(admin);
