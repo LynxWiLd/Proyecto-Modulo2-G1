@@ -1,6 +1,7 @@
 
 import Image from 'react-bootstrap/Image';
-import imgPortada from '../assets/Coldplay.jpg'
+import imgPortada from '../assets/imgDetalleCancion/Coldplay.jpg'
+// import imgPortada from '../assets/imgDetalleCancion/portadaYellow.jfif'
 import ListGroup from 'react-bootstrap/ListGroup';
 
 
@@ -14,7 +15,7 @@ const DetalleCancion = ({ arrayDetalleCancion }) => {
                 {/*Overlay Superior Izquierda: "Artista Verificado" */}
                 <div className="overlay top-left">
                     {/* Clase de Bootstrap para el badge (fondo y forma) */}
-                    <span className="badge bg-success">Canción</span>
+                    <span className="badge bg-primary fs-2">Canción</span>
                 </div>
 
                 {/* Overlay centro: nombre Cancion */}
@@ -26,7 +27,7 @@ const DetalleCancion = ({ arrayDetalleCancion }) => {
                 {/* p-2: padding de Bootstrap, text-white: color de texto de Bootstrap */}
                 <div className="overlay bottom-left text-white p-2">
                     
-                    <p className="mb-0 fs-3 "><span className='fw-bold'>ColdPlay - Parachutes</span> - 2000 - 4:26 - 3.421.608.407</p>
+                    <p className="mb-0"><span className='fw-bold'>ColdPlay - Parachutes</span> - 2000 - 4:26 - 3.421.608.407</p>
                 </div>
             </section>
 
