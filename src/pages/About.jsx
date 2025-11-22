@@ -31,23 +31,22 @@ const integrantes = [
     nombre: "Integrante 6",
     rol: "Full Stack Developer",
     img: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg",
-  }
+  },
 ];
 
 const About = () => {
   const navigate = useNavigate();
 
   return (
-    <Container className="my-5">
-
+    <Container className="my-5 page-fade-in">
       <div className="row g-4 align-items-center">
-
         {/* Texto a la izquierda */}
         <div className="col-lg-6 col-md-6 col-sm-12 div-about-encabezado py-4">
           <h1 className="fw-bold">Sobre Nosotros</h1>
           <p className="fs-5">
-            Somos un equipo de desarrollo web trabajando en una plataforma musical
-            moderna, inspirada en experiencias como Spotify y YouTube Music.
+            Somos un equipo de desarrollo web trabajando en una plataforma
+            musical moderna, inspirada en experiencias como Spotify y YouTube
+            Music.
           </p>
         </div>
 
@@ -59,13 +58,15 @@ const About = () => {
             className="img-fluid rounded object-fit-cover img-about"
           />
         </div>
-
       </div>
 
       <section className="section-about-team">
-        <h3 className="fs-2 text-center mb-4">Nuestro Equipo</h3>
+        <h3 className="fs-2 text-center">Nuestro Equipo</h3>
+        <p>
+          Sabias que somos un grupo de compañeros del curso de Full Stack en
+          Rolling School!
+        </p>
         <hr />
-
         <div className="row g-4">
           {integrantes.map((persona, index) => (
             <div className="col-12 col-md-6 col-lg-4 about-card" key={index}>
@@ -85,13 +86,11 @@ const About = () => {
         </div>
       </section>
 
-     
       <div className="text-center my-4">
         <Button variant="success" onClick={() => navigate("/")}>
           Conoce más sobre este proyecto!
         </Button>
       </div>
-
     </Container>
   );
 };
