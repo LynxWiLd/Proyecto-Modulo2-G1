@@ -2,10 +2,11 @@
 import Image from 'react-bootstrap/Image';
 import imgPortada from '../assets/imgDetalleCancion/resizecom_yellow.jfif'
 import imgGrupo from '../assets/imgDetalleCancion/grupoColdplay.jfif'
-import { Table, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
+import TablaCanciones from './TablaCanciones';
 
-const DetalleCancion = () => {
+const DetalleCancion = ({ canciones }) => {
     return (
         <main className='fondoDetalleCancion'>
             <section className='text-ligth position-relative'>
@@ -63,51 +64,7 @@ const DetalleCancion = () => {
                 <h3>Recomendaciones</h3>
                 <p>Basadas en esta canción</p>
             </section>
-
-            <section className='px-3 mb-5 table-responsive'>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr className='text-center'>
-                            <th>#</th>
-                            {/* <th>url album</th> */}
-                            <th>Album</th>
-                            <th>Titulo</th>
-                            <th>Categoría</th>
-                            <th>Duración</th>
-                            <th>▶️</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            {/* <td><Image src={imgAlbum} thumbnail  alt='imagen de la cancion'/></td> */}
-                            <td>Viva La Vida</td>
-                            <td>Viva La Vida</td>
-                            <td>Pop</td>
-                            <td>4:02</td>
-                            <td>link cancion</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            {/* <td><Image src={imgAlbum} thumbnail  alt='imagen de la cancion'/></td> */}
-                            <td>Viva La Vida</td>
-                            <td>Viva La Vida</td>
-                            <td>Pop</td>
-                            <td>4:02</td>
-                            <td>link cancion</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            {/* <td><Image src={imgAlbum} thumbnail  alt='imagen de la cancion'/></td> */}
-                            <td>Viva La Vida</td>
-                            <td>Viva La Vida</td>
-                            <td>Pop</td>
-                            <td>4:02</td>
-                            <td>link cancion</td>
-                        </tr>
-                    </tbody>
-                </Table>
-            </section>
+            <TablaCanciones canciones={canciones}></TablaCanciones>
         </main>
     );
 };
