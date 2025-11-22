@@ -15,7 +15,7 @@ const DetalleCancion = () => {
                 </div>
                 {/*Overlay Superior Izquierda: "Artista Verificado" */}
                 <div className="overlay top-left">
-                    <span className="badge bg-primary">Canción</span>
+                    <span className="badge bg-primary">Detalle Canción</span>
                 </div>
 
                 {/* Overlay centro: nombre Cancion */}
@@ -29,20 +29,33 @@ const DetalleCancion = () => {
                 </div>
             </section>
 
-            {/* boton PLAY ára escuchar la cancion */}
-            <section className='container my-3 text-center'>
-                <Button variant='primary' className='botonPlay d-flex justify-content-center align-items-center rounded-circle'>
-                    <i className="bi bi-play-fill fs-1 text-white"></i>
+            {/* ------boton PLAY ára escuchar la cancion --------*/}
+            <section className='container my-3 d-flex justify-content-start align-items-center gap-4'>
+                <Button
+                    variant='primary'
+                    className='botonPlay d-flex justify-content-center align-items-center rounded-circle'
+                    title="Reproducir canción"
+                >
+                    <i className="bi bi-play-fill fs-1  text-white"></i>
                 </Button>
+
+                <Link className='text-light' title="Guardar en tu Biblioteca">
+                    <i className="bi bi-plus-circle fs-1"></i>
+                </Link>
+
+                <Link className='text-light' title='Más opciones'>
+                    <i className="bi bi-three-dots fs-1"></i>
+                </Link>
             </section>
 
+
             {/* ----- informacion del cantante o banda -------- */}
-            <section className='container d-flex align-items-center'>
-                <Image src={imgGrupo} roundedCircle alt='imagen del grupo' />
+            <section className='container d-flex justify-content-center align-items-center'>
+                <Image src={imgGrupo} className='imgCircularAlbum rounded-circle' alt='imagen del grupo' />
 
                 <div className='ms-3'>
-                    <div className='fw-bold fs-3 text-light'>Artista</div>
-                    <Link className='fw-bold fs-3 text-light' to={''}>ColdPlay</Link>
+                    <div className='fw-bold fs-4 text-light'>Artista</div>
+                    <Link className='fw-bold fs-4 text-light' to={''}>ColdPlay</Link>
                 </div>
             </section>
 

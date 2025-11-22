@@ -78,7 +78,9 @@
   /* Distancia desde el borde superior */
   left: 10px;
   /* Distancia desde el borde izquierdo */
-}
+  font-size: 15px;
+  }
+
 
 .bottom-left {
   bottom: 0;
@@ -97,6 +99,11 @@
   width: 50px;
 }
 
+.imgCircularAlbum {
+  height: 80px;
+  width: 80px;
+}
+
 .fondoTransparente {
   background-color: rgba(0, 0, 0, 0.7);
 }
@@ -104,10 +111,25 @@
 /* =======================================================
   Media Query: Ajuste de Altura de imagenes para Pantallas MD y Grandes
   ======================================================= */
+
+/* medianos */
 @media (min-width: 768px) and (max-width: 991px) {
   .imagen-container {
     max-height: 300px;
     object-fit: cover;
+  }
+
+  .textoDatosCancion{
+    font: size 30px;
+  }
+
+  .botonPlay {
+    height: 60px;
+    width: 60px;
+  }
+  .imgCircularAlbum {
+    height: 100px;
+    width: 100px;
   }
 }
 
@@ -116,6 +138,19 @@
   .imagen-container {
     max-height: 400px;
     object-fit: cover;
+  }
+
+   .textoDatosCancion{
+    font: size 35px;
+  }
+
+  .botonPlay {
+    height: 80px;
+    width: 80px;
+  }
+  .imgCircularAlbum {
+    height: 150px;
+    width: 150px;
   }
 }
 
