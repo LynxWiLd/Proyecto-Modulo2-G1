@@ -7,8 +7,8 @@ const TablaCanciones = ({ canciones }) => {
                 <thead>
                     <tr className='text-center'>
                         <th>#</th>
-                        <th>url album</th>
                         <th>Album</th>
+                        <th>Artista</th>
                         <th>Titulo</th>
                         <th>Categoría</th>
                         <th>Duración</th>
@@ -17,7 +17,7 @@ const TablaCanciones = ({ canciones }) => {
                 </thead>
                 <tbody>
                     {
-                        canciones.map((cancion, indice) => <ItemCancion key={cancion.idCancion} cancion={cancion} fila={indice + 1} ></ItemCancion>)
+                        canciones.map((cancionRecomendada, indice) => <ItemCancion key={cancionRecomendada.idCancion} cancionRecomendada={cancionRecomendada} fila={indice + 1} ></ItemCancion>)
                     }
                 </tbody>
             </Table>

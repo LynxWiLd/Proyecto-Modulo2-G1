@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import TablaCanciones from './TablaCanciones';
 
+// debera recibir por props la "cancion" seleccionada. El props "canciones" tiene las canciones recomendadas en la tabla de abajo
 const DetalleCancion = ({ canciones }) => {
     return (
         <main className='fondoDetalleCancion'>
