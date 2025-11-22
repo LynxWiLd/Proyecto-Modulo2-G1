@@ -1,22 +1,20 @@
 
 import Image from 'react-bootstrap/Image';
-import imgPortada from '../assets/imgDetalleCancion/portadaYellow.jfif'
+import imgPortada from '../assets/imgDetalleCancion/resizecom_yellow.jfif'
 import imgGrupo from '../assets/imgDetalleCancion/grupoColdplay.jfif'
-import imgCancion from '../assets/imgDetalleCancion/Coldplay.jpg'
-import imgAlbum from '../assets/imgDetalleCancion/vivaLaVida.png'
 import { Table, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 
-const DetalleCancion = ({ arrayDetalleCancion }) => {
+const DetalleCancion = () => {
     return (
         <main className='fondoDetalleCancion'>
             <section className='text-ligth position-relative'>
-                {/* portada de la cancion */}
-                <Image src={imgPortada} className='imgPortadaCancion' fluid alt='imagen portada canción o album' />
-
+                {/* imagen portada de la cancion */}
+                <div className='imagen-container'>
+                    <Image src={imgPortada} className='imgPortadaCancion' fluid alt='imagen portada canción o album' />
+                </div>
                 {/*Overlay Superior Izquierda: "Artista Verificado" */}
                 <div className="overlay top-left">
-                    {/* Clase de Bootstrap para el badge (fondo y forma) */}
                     <span className="badge bg-primary">Canción</span>
                 </div>
 
@@ -31,21 +29,20 @@ const DetalleCancion = ({ arrayDetalleCancion }) => {
                 </div>
             </section>
 
-            <section className='container my-3'>
-                <Button className='bg-success'>
-                    play ▶️
-                    {/* <i className="bi bi-play-fill"></i> */}
+            {/* boton PLAY ára escuchar la cancion */}
+            <section className='container my-3 text-center'>
+                <Button variant='primary' className='botonPlay d-flex justify-content-center align-items-center rounded-circle'>
+                    <i className="bi bi-play-fill fs-1 text-white"></i>
                 </Button>
             </section>
 
+            {/* ----- informacion del cantante o banda -------- */}
             <section className='container d-flex align-items-center'>
-                {/* Imagen Circular */}
-                <Image src={imgGrupo} roundedCircle  alt='imagen del grupo' />
+                <Image src={imgGrupo} roundedCircle alt='imagen del grupo' />
 
-                {/* Contenedor para los textos, colocado junto a la imagen */}
                 <div className='ms-3'>
                     <div className='fw-bold fs-3 text-light'>Artista</div>
-                    <Link className='fw-bold fs-3 text-light'>ColdPlay</Link>
+                    <Link className='fw-bold fs-3 text-light' to={''}>ColdPlay</Link>
                 </div>
             </section>
 
@@ -59,7 +56,7 @@ const DetalleCancion = ({ arrayDetalleCancion }) => {
                     <thead>
                         <tr className='text-center'>
                             <th>#</th>
-                            {/* <th>link album</th> */}
+                            {/* <th>url album</th> */}
                             <th>Album</th>
                             <th>Titulo</th>
                             <th>Categoría</th>
@@ -71,7 +68,25 @@ const DetalleCancion = ({ arrayDetalleCancion }) => {
                         <tr>
                             <td>1</td>
                             {/* <td><Image src={imgAlbum} thumbnail  alt='imagen de la cancion'/></td> */}
-                            <td>Viva La Vida or Death and All His Friends</td>
+                            <td>Viva La Vida</td>
+                            <td>Viva La Vida</td>
+                            <td>Pop</td>
+                            <td>4:02</td>
+                            <td>link cancion</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            {/* <td><Image src={imgAlbum} thumbnail  alt='imagen de la cancion'/></td> */}
+                            <td>Viva La Vida</td>
+                            <td>Viva La Vida</td>
+                            <td>Pop</td>
+                            <td>4:02</td>
+                            <td>link cancion</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            {/* <td><Image src={imgAlbum} thumbnail  alt='imagen de la cancion'/></td> */}
+                            <td>Viva La Vida</td>
                             <td>Viva La Vida</td>
                             <td>Pop</td>
                             <td>4:02</td>
