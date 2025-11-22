@@ -22,19 +22,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .div-about-encabezado {
-  h1 {
-    color: rgb(19, 153, 57);
-    font-weight: bold;
-  }
-  p {
-    color: #000000;
-  }
 
   box-shadow: #ffffff 0px 0px 10px;
+  background-color: #222226;
+  text-align: center;
+  color: #ffffff;
+  border-radius: 8px;
 }
-/*----------------FIN ABOUT US-----------*/
 
-/*-----------enxabezado----------------*/
 .section-about-team {
   img {
     height: 250px;

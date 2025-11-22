@@ -39,7 +39,7 @@ const About = () => (
     <div className="row g-4 align-items-center">
 
       {/* Texto a la izquierda */}
-      <div className="col-lg-6 col-md-6 col-sm-12 div-about-encabezado">
+      <div className="col-lg-6 col-md-6 col-sm-12 div-about-encabezado py-4">
         <h1 className="fw-bold">Sobre Nosotros</h1>
         <p className="fs-5">
           Somos un equipo de desarrollo web trabajando en una plataforma musical
