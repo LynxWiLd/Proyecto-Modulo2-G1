@@ -79,8 +79,7 @@
   left: 10px;
   /* Distancia desde el borde izquierdo */
   font-size: 15px;
-  }
-
+}
 
 .bottom-left {
   bottom: 0;
@@ -119,7 +118,15 @@
     object-fit: cover;
   }
 
-  .textoDatosCancion{
+  .top-left {
+    font-size: 20px;
+  }
+
+  .bottom-left {
+    font-size: 20px;
+  }
+
+  .textoDatosCancion {
     font: size 30px;
   }
 
@@ -140,7 +147,15 @@
     object-fit: cover;
   }
 
-   .textoDatosCancion{
+  .top-left {
+    font-size: 25px;
+  }
+
+  .bottom-left {
+    font-size: 25px;
+  }
+
+  .textoDatosCancion {
     font: size 35px;
   }
 
