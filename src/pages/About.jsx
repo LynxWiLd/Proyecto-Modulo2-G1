@@ -59,9 +59,9 @@ const About = () => (
 
     </div>
     
-      <section className="my-5 section-about-team">
+      <section className="section-about-team">
         <h3 className="fs-2 text-center mb-4">Nuestro Equipo</h3>
-<hr />
+<hr/>
         <div className="row g-4">
           {integrantes.map((persona, index) => (
             <div className="col-12 col-md-6 col-lg-4 about-card" key={index}>

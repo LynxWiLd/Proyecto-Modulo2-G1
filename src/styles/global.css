@@ -31,12 +31,19 @@
 }
 
 .section-about-team {
+  margin-top: 80px;
+  
   img {
     height: 250px;
     object-fit: cover;
   }
   h3{
     color: seagreen;
+  }
+  hr{
+    border: 2px solid seagreen;
+    width: 50px;
+    margin: 10px auto 30px auto;
   }
 }
 .about-card {
