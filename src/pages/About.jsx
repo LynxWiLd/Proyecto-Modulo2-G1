@@ -1,4 +1,4 @@
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 import perfilMujer1 from "../assets/perfil-mujer-1-sf.png";
@@ -8,37 +8,36 @@ import perfilHombre2 from "../assets/perfil-hombre-2-sf.png";
 import perfilHombre3 from "../assets/perfil-hombre-3-sf.png";
 import perfilHombre4 from "../assets/perfil-hombre-4-sf.png";
 
-
 const integrantes = [
   {
-    nombre: "Integrante 1",
+    nombre: "Valentina Iramain",
     rol: "Frontend Developer",
-    img: perfilMujer1, 
+    img: perfilMujer1,
   },
   {
-    nombre: "Integrante 2",
+    nombre: "Facundo Vera",
     rol: "Backend Developer",
     img: perfilHombre1,
   },
   {
-    nombre: "Integrante 3",
+    nombre: "Jonathan Exequiel Fiorenza",
     rol: "UX/UI Designer",
     img: perfilHombre2,
   },
   {
-    nombre: "Integrante 4",
+    nombre: "Jose Casas",
     rol: "Project Manager",
-    img: perfilMujer2,
-  },
-  {
-    nombre: "Integrante 5",
-    rol: "QA Tester",
     img: perfilHombre3,
   },
   {
-    nombre: "Integrante 6",
-    rol: "Full Stack Developer",
+    nombre: "Matías José Vivanco",
+    rol: "QA Tester",
     img: perfilHombre4,
+  },
+  {
+    nombre: "Corina Jimenez",
+    rol: "Full Stack Developer",
+    img: perfilMujer2,
   },
 ];
 
@@ -69,19 +68,19 @@ const About = () => {
       </div>
 
       <section className="section-about-team">
-        <h3 className="fs-2 text-center">Nuestro Equipo</h3>
-        <p>
+        <h3 className="fs-2 fw-bold text-center">Nuestro Equipo</h3>
+        <p className="fs-4">
           Sabias que somos un grupo de compañeros del curso de Full Stack en
           Rolling School!
         </p>
         <hr />
         <div className="row g-4">
           {integrantes.map((persona, index) => (
-            <div className="col-12 col-md-6 col-lg-4 about-card" key={index}>
-              <div className="card shadow-sm h-100 border-0">
-                <img
+            <div className="col-xs-12 col-md-6 col-lg-4 about-card" key={index}>
+              <div className="card shadow h-100 border-0">
+                <Image
                   src={persona.img}
-                  className="card-img-top"
+                  className="card-img-top rounded bg-success shadow"
                   alt={persona.nombre}
                 />
                 <div className="card-body">
@@ -95,6 +94,9 @@ const About = () => {
       </section>
 
       <div className="text-center my-4">
+        <p className="fs-4 ">
+          "De estudiantes a desarrolladores: este es nuestro viaje."
+        </p>
         <Button variant="success" onClick={() => navigate("/")}>
           Conoce más sobre este proyecto!
         </Button>

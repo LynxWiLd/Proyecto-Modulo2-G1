@@ -34,7 +34,6 @@
   margin-top: 80px;
   
   img {
-    height: 250px;
     object-fit: cover;
   }
   h3{
@@ -61,15 +60,11 @@
 
 /*efecto*/
 .page-fade-in {
-  animation: fadeInUp 0.8s ease forwards;
-  opacity: 0;
-  transform: translateY(20px);
+  animation: fadeIn 0.8s ease forwards;
 }
 
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 /*----------fin----enxabezado----------------*/
