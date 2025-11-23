@@ -1,10 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import "./styles/global.css";
+import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./data/AuthContext";
+import "./styles/global.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
