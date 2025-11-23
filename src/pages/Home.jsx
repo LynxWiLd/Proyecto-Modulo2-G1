@@ -40,7 +40,7 @@ const Home = () => {
             <FaMusic className="fs-2" /> Explora
           </h1>
         </Row>
-        <Col>
+        <Row>
           <Dropdown>
             <Dropdown.Toggle
               variant="outline-light"
@@ -62,7 +62,7 @@ const Home = () => {
               ))}
             </Dropdown.Menu>
           </Dropdown>
-        </Col>
+        </Row>
       </section>
 
       <section
