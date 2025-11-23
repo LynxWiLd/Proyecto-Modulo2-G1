@@ -1,36 +1,44 @@
 import { Container, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
+import perfilMujer1 from "../assets/perfil-mujer-1-sf.png";
+import perfilMujer2 from "../assets/perfil-mujer-2-sf.png";
+import perfilHombre1 from "../assets/perfil-hombre-1-sf.png";
+import perfilHombre2 from "../assets/perfil-hombre-2-sf.png";
+import perfilHombre3 from "../assets/perfil-hombre-3-sf.png";
+import perfilHombre4 from "../assets/perfil-hombre-4-sf.png";
+
+
 const integrantes = [
   {
     nombre: "Integrante 1",
     rol: "Frontend Developer",
-    img: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg",
+    img: perfilMujer1, 
   },
   {
     nombre: "Integrante 2",
     rol: "Backend Developer",
-    img: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg",
+    img: perfilHombre1,
   },
   {
     nombre: "Integrante 3",
     rol: "UX/UI Designer",
-    img: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg",
+    img: perfilHombre2,
   },
   {
     nombre: "Integrante 4",
     rol: "Project Manager",
-    img: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg",
+    img: perfilMujer2,
   },
   {
     nombre: "Integrante 5",
     rol: "QA Tester",
-    img: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg",
+    img: perfilHombre3,
   },
   {
     nombre: "Integrante 6",
     rol: "Full Stack Developer",
-    img: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg",
+    img: perfilHombre4,
   },
 ];
 
