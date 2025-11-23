@@ -3,36 +3,20 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import DetalleCancion from "./pages/DetalleCancion";
-import { useState,useEffect } from "react";
+import DetalleCancion from "./pages/paginaDeDetalle/DetalleCancion";
 
 function App() {
 
-  //==== para probar componente <detalleCancion> ------------------------------
 
-  // Recuperar la cadena JSON
-  const storedData = JSON.parse(localStorage.getItem('playlistFavorita')) || []
-  const [canciones, setCanciones] = useState(storedData)
-
-const cancion = [{
-      idCancion: 4,
-      tituloCancion: "Tusa",
-      artistaGrupo: "Karol G, Nicki Minaj",
-      categoriaCancion: "Reguetón",
-      urlImagenCancion: "https://ejemplo.com/imagen_tusa.jpg",
-      duracionCancion: "3:21",
-      urlCancion: "https://ejemplo.com/audio/tusa.mp3"
-    }]
-
-  // ==============================================================================
 
   return (
     <BrowserRouter>
       <Navbar></Navbar>
       <Routes >
-        {/* <Route path="/" element={<Home />} /> */}
-        {/* <Route path="/about" element={<About />} /> */}
-        <Route path="/" element={<DetalleCancion canciones={canciones} cancion={cancion}></DetalleCancion>} />
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        {/* <Route path="/paginaDeDetalle" element={<DetalleCancion canciones={canciones} cancion={cancion}></DetalleCancion>} /> */}
+        <Route path="/paginaDeDetalle" element={<DetalleCancion></DetalleCancion>} />
       </Routes>
       <Footer></Footer>
     </BrowserRouter>
