@@ -11,7 +11,7 @@ TablaCanciones
 // debera recibir por props la "cancion" seleccionada. El props "canciones" tiene las canciones recomendadas en la tabla de abajo
 const DetalleCancion = ({ canciones }) => {
     return (
-        <main className='fondoDetalleCancion'>
+        <main>
             <section className='text-ligth position-relative'>
                 {/* imagen portada de la cancion */}
                 <div className='imagen-container'>
