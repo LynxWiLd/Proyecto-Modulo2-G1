@@ -171,6 +171,11 @@
   width: 80px;
 }
 
+.imgCancion{
+  height: 50px;
+  width: 50px;
+}
+
 .fondoTransparente {
   background-color: rgba(27, 122, 35, 0.5);
 }
