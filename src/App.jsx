@@ -7,11 +7,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Error404 from "./pages/Error404";
 import DetalleCancion from "./pages/paginaDeDetalle/DetalleCancion";
+import FormularioCancion from "./pages/paginaDeAdministrador/FormularioCancion";
 
 function App() {
-
-
-
   return (
     <>
       <Navbar />
@@ -23,6 +21,7 @@ function App() {
         <Route path="*" element={<Error404 />} />
         {/* <Route path="/paginaDeDetalle" element={<DetalleCancion canciones={canciones} cancion={cancion}></DetalleCancion>} /> */}
         <Route path="/paginaDeDetalle" element={<DetalleCancion></DetalleCancion>} />
+        <Route path="/administrador" element={<FormularioCancion></FormularioCancion>} />
       </Routes>
       <Footer />
     </>
