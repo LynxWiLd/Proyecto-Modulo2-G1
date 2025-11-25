@@ -7,9 +7,9 @@ const FormularioCancion = () => {
         <main className='container mb-3'>
             <h1>titulo</h1>
             <Form>
-                <Form.Group className="mb-3 text-dark" controlId="exampleForm.ControlIdCancion">
+                <Form.Group className="mb-3 text-light" controlId="exampleForm.ControlIdCancion">
                     <Form.Label>ID:</Form.Label>
-                    <Form.Control type="text" />
+                    <Form.Control type="text" placeholder='ID Cancion' disabled />
                 </Form.Group>
                 <Form.Group className="mb-3 text-dark" controlId="exampleForm.ControlArtistaGrupo">
                     <Form.Label>Artista/Grupo:</Form.Label>
@@ -62,7 +62,9 @@ const FormularioCancion = () => {
                     <Form.Control type="text" placeholder='URL para reproducir la canción' />
                 </Form.Group>
             </Form>
-            <Button>Enviar</Button>
+            <div className='text-center'>
+                <Button variant='success fs-4 px-5'>Enviar</Button>
+            </div>
         </main>
     );
 };
