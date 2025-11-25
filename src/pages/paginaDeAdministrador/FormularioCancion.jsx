@@ -139,13 +139,13 @@ const FormularioCancion = () => {
                                 required: "Debe seleccionar una categoria",
                             })}>
                                 <option value=''>Seleccione uns Categoría</option>
-                                <option value="Pop">Pop</option>
                                 <option value="Rock">Rock</option>
+                                <option value="Pop">Pop</option>
                                 <option value="Electronica">Electrónica</option>
-                                <option value="HipHopRap">Hip Hop / Rap</option>
-                                <option value="Reggaeton">Reggaetón</option>
-                                <option value="Folclore">Folclore / Folk</option>
-                                <option value="Reggae">Reggae / Ska</option>
+                                <option value="Cuarteto">Cuarteto</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Folclore">Folclore</option>
+                                <option value="Reggae">Reggae</option>
                                 <option value="Clasica">Clásica</option>
                                 <option value="Tango">Tango</option>
                                 <option value="Jazz">Jazz</option>
