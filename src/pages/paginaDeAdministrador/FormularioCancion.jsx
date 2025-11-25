@@ -192,7 +192,7 @@ const FormularioCancion = () => {
                         </Form.Group>
                     </Col>
 
-                     <Col xs={12}>
+                    <Col xs={12}>
                         <Form.Group controlId="formFile" className="text-dark mb-3">
                             <Form.Label>URL ó mp3 para reproducir canción:</Form.Label>
                             <Form.Control type="file" {...register("urlCancion", {
