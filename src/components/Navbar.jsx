@@ -1,7 +1,7 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Icon from "/Icon.png";
-import { useAuth } from "../data/AuthContext";   
+import { useAuth } from "../context/AuthContext";   
 
 const NavigationBar = () => {
   const { user, logout } = useAuth();   
