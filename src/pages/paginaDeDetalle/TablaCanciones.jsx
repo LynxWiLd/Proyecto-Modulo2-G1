@@ -1,5 +1,7 @@
+import imgCancion1 from '../../assets/imgDetalleCancion/vivaLaVida.png'
 import ItemCancion from "./ItemCancion";
-import { Table } from 'react-bootstrap';
+import { Table, Image } from 'react-bootstrap';
+
 
 // const TablaCanciones = ({ canciones }) => {
 const TablaCanciones = () => {
@@ -14,13 +16,13 @@ const TablaCanciones = () => {
                         <th>Titulo</th>
                         <th>Categoría</th>
                         <th>Duración</th>
-                        <th>▶️</th>
+                        <th>Escuchar</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr className="text-center">
                         <td>1</td>
-                        <td>imagen</td>
+                        <td><Image src={imgCancion1} rounded className='imgCancion'/></td>
                         <td>Karol G, Nicki Minaj</td>
                         <td>Tusa</td>
                         <td>Reguetón</td>
@@ -29,7 +31,7 @@ const TablaCanciones = () => {
                     </tr>
                     <tr className="text-center">
                         <td>1</td>
-                        <td>imagen</td>
+                        <td><Image src={imgCancion1} rounded className='imgCancion'/></td>
                         <td>Karol G, Nicki Minaj</td>
                         <td>Tusa</td>
                         <td>Reguetón</td>
@@ -38,7 +40,7 @@ const TablaCanciones = () => {
                     </tr>
                     <tr className="text-center">
                         <td>1</td>
-                        <td>imagen</td>
+                        <td><Image src={imgCancion1} rounded className='imgCancion'/></td>
                         <td>Karol G, Nicki Minaj</td>
                         <td>Tusa</td>
                         <td>Reguetón</td>

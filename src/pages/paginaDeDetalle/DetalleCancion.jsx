@@ -1,6 +1,6 @@
 
 import Image from 'react-bootstrap/Image';
-import imgPortada from '../../assets/imgDetalleCancion/resizecom_yellow.jfif'
+import imgPortada from '../../assets/imgDetalleCancion/portadaYellow.jpg'
 import imgGrupo from '../../assets/imgDetalleCancion/grupoColdplay.jfif'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
@@ -12,6 +12,7 @@ TablaCanciones
 const DetalleCancion = ({ canciones }) => {
     return (
         <main className='fondoDetalleCancion'>
+
             <section className='text-ligth position-relative'>
                 {/* imagen portada de la cancion */}
                 <div className='imagen-container'>
@@ -19,12 +20,12 @@ const DetalleCancion = ({ canciones }) => {
                 </div>
                 {/*Overlay Superior Izquierda: "Artista Verificado" */}
                 <div className="overlay top-left">
-                    <span className="badge bg-primary">Detalle Canción</span>
+                    <span className="badge bg-success">Detalle Canción</span>
                 </div>
 
                 {/* Overlay centro: nombre Cancion */}
                 <div className="overlay centered-text text-white p-2">
-                    <h1 className="mb-0 fw-bold display-1">YELLOW</h1>
+                    <h1 className="mb-0 fw-bold display-1 px-3">YELLOW</h1>
                 </div>
 
                 {/* Overlay Inferior Izquierda: Detalles */}
@@ -36,7 +37,7 @@ const DetalleCancion = ({ canciones }) => {
             {/* ------boton PLAY ára escuchar la cancion --------*/}
             <section className='container my-3 d-flex justify-content-start align-items-center gap-4'>
                 <Button
-                    variant='primary'
+                    variant='success'
                     className='botonPlay d-flex justify-content-center align-items-center rounded-circle'
                     title="Reproducir canción"
                 >
@@ -57,17 +58,19 @@ const DetalleCancion = ({ canciones }) => {
             <section className='container d-flex justify-content-center align-items-center'>
                 <Image src={imgGrupo} className='imgCircularAlbum rounded-circle' alt='imagen del grupo' />
 
-                <div className='ms-3'>
+                <div className='ms-3 fondoTransparente p-4'>
                     <div className='fw-bold fs-4 text-light'>Artista</div>
                     <Link className='fw-bold fs-4 text-light' to={''}>ColdPlay</Link>
                 </div>
             </section>
 
-            <section className='px-3 py-2 mt-5 fondoTransparente'>
-                <h3>Recomendaciones</h3>
-                <p>Basadas en esta canción</p>
+            <section className='px-3 mt-5 fondoTransparente'>
+                <div className="d-flex align-items-center">
+                    <h3>Recomendaciones</h3>
+                    <p className="ms-3 mb-0 fw-bold">Basadas en esta canción</p>
+                </div>
+                <TablaCanciones canciones={canciones}></TablaCanciones>
             </section>
-            <TablaCanciones canciones={canciones}></TablaCanciones>
         </main>
     );
 };
