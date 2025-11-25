@@ -2,12 +2,17 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
+
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
+
+  // Cargar usuario guardado
   useEffect(() => {
     const saved = localStorage.getItem("currentUser");
     if (saved) setUser(JSON.parse(saved));
   }, []);
+
+  // Guardar usuario en localStorage
   useEffect(() => {
     if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
@@ -16,6 +21,7 @@ export function AuthProvider({ children }) {
     }
   }, [user]);
 
+  // Registrar nuevo usuario
   const registerUser = (nombre, email, password) => {
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
@@ -30,7 +36,10 @@ export function AuthProvider({ children }) {
 
     return true;
   };
+
+  // Login
   const login = (email, password) => {
+    // Login admin
     if (email === "admin@local.com" && password === "admin123") {
       const admin = { email, role: "admin" };
       setUser(admin);
@@ -48,13 +57,21 @@ export function AuthProvider({ children }) {
     return true;
   };
 
+  // Logout
   const logout = () => {
     setUser(null);
     localStorage.removeItem("currentUser");
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, registerUser }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        logout,
+        registerUser,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

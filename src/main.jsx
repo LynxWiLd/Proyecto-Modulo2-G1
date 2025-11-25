@@ -4,7 +4,7 @@ import App from "./App";
 import "bootstrap-icons/font/bootstrap-icons.min.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
-import { AuthProvider } from "./data/AuthContext";
+import { AuthProvider } from "./context/AuthContext";
 import "./styles/global.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(

@@ -1,0 +1,101 @@
+/* *****************************************************
+   SONGS CARDS - Facundo Vera - Componente SonCard.jsx
+******************************************************* */
+
+.song-card {
+  position: relative;
+  width: 260px;
+  padding: 15px;
+  border-radius: 20px;
+  background: #151515;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+}
+
+.song-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.img-container {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.img-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  transition: filter 0.2s ease;
+}
+
+.song-card:hover .img-container img {
+  filter: brightness(0.5);
+}
+
+/* Botón play */
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  opacity: 0;
+  background: white;
+  border: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  color: black;
+  transition: all 0.25s ease;
+}
+
+.song-card:hover .play-btn {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Texto */
+.song-info {
+  margin-top: 12px;
+}
+
+.song-info h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.song-info p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+/* Favorito */
+.favorite-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: #ffffff80;
+  transition: 0.2s;
+}
+
+.favorite-btn:hover {
+  color: #ff5f5f;
+}
+
+.favorite-btn.active {
+  color: #ff2e2e;
+}
+
+/* *****************************************************
+                    SONGS CARDS
+******************************************************* */

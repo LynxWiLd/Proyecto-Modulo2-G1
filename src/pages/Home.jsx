@@ -1,27 +1,27 @@
-import { Container, Row, Button, Col } from "react-bootstrap";
-import { FaUserPlus, FaMusic } from "react-icons/fa";
-import { FaFilter } from "react-icons/fa";
-import { Dropdown } from "react-bootstrap";
+import { Container, Dropdown, Row, Button } from "react-bootstrap";
+import { FaFilter, FaMusic, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import SongCard from "../components/SongCard";
+import "../styles/home.css"; // IMPORTANTE
 
 const Home = () => {
   const navigate = useNavigate();
-
-  const handleRegister = () => {
-    navigate("/register");
-  };
+  const { user } = useAuth(); 
 
   const [categoria, setCategoria] = useState("Todas");
-
   const categorias = ["Rock", "Pop", "Electrónica", "Cuarteto", "Rap"];
 
+  const [favoritos, setFavoritos] = useState([]);
+
   const canciones = [
-    { nombre: "Tema 1", categoria: "Rock" },
-    { nombre: "Tema 2", categoria: "Pop" },
-    { nombre: "Tema 3", categoria: "Cuarteto" },
-    { nombre: "Tema 4", categoria: "Rock" },
-    { nombre: "Tema 5", categoria: "Electrónica" },
+    { id: 1, nombre: "Tema 1", categoria: "Rock" },
+    { id: 2, nombre: "Tema 2", categoria: "Pop" },
+    { id: 3, nombre: "Tema 3", categoria: "Cuarteto" },
+    { id: 4, nombre: "Tema 4", categoria: "Rock" },
+    { id: 5, nombre: "Tema 5", categoria: "Electrónica" },
+    { id: 6, nombre: "Tema 6", categoria: "Rap" },
   ];
 
   const cancionesFiltradas =
@@ -29,63 +29,73 @@ const Home = () => {
       ? canciones
       : canciones.filter((c) => c.categoria === categoria);
 
+  const toggleFavorito = (id) => {
+    setFavoritos((prev) =>
+      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
+    );
+  };
+
+  const handleRegister = () => navigate("/register");
+
   return (
-    <Container
-      className="mt-5 p-4"
-      style={{ boxShadow: "0 0 15px rgba(0,0,0,0.4)" }}
-    >
-      <section className="mt-4 p-3 bg-dark border rounded-3 text-white">
-        <Row>
-          <h1 className="m-0 text-center ">
-            <FaMusic className="fs-2" /> Explora
-          </h1>
-        </Row>
-        <Row>
-          <Dropdown>
-            <Dropdown.Toggle
-              variant="outline-light"
-              id="dropdown-basic"
-              className="d-flex align-items-center gap-2"
-            >
-              <FaFilter /> Filtrar
-            </Dropdown.Toggle>
+    <Container className="mt-5 p-4 text-white">
 
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setCategoria("Todas")}>
-                Todas
+      <h1 className="text-center mb-4">
+        <FaMusic className="me-2" /> Explora Música
+      </h1>
+
+      {/* FILTRO */}
+      <div className="home-filter-container">
+        <Dropdown>
+          <Dropdown.Toggle className="home-filter-toggle" variant="dark">
+            <FaFilter className="me-2" /> Filtrar: {categoria}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu className="home-filter-menu">
+            <Dropdown.Item onClick={() => setCategoria("Todas")}>
+              Todas
+            </Dropdown.Item>
+
+            {categorias.map((cat) => (
+              <Dropdown.Item key={cat} onClick={() => setCategoria(cat)}>
+                {cat}
               </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
 
-              {categorias.map((cat) => (
-                <Dropdown.Item key={cat} onClick={() => setCategoria(cat)}>
-                  {cat}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
+      {/* CARDS */}
+      <div className="home-cards-glass">
+        <Row className="g-4">
+          {cancionesFiltradas.map((song) => (
+            <SongCard
+              key={song.id}
+              song={song}
+              isFavorite={favoritos.includes(song.id)}
+              toggleFavorito={toggleFavorito}
+            />
+          ))}
         </Row>
-      </section>
+      </div>
 
-      <section
-        className="mt-4 p-3 border rounded-3 text-center text-white"
-        style={{ backgroundColor: "#1f1f1f" }}
-      >
-        <h4>
-          <FaUserPlus /> Crea tu cuenta ahora
-        </h4>
-        <p>
-          Registrate gratis y desbloqueá una experiencia pensada para vos: mejor
-          sonido, categorías únicas y tus temas favoritos en un solo lugar.
-        </p>
+      {/* CREA TU CUENTA */}
+      {!user && (
+        <section className="home-create-account">
+          <h4 className="mb-3">
+            <FaUserPlus /> Crea tu cuenta ahora
+          </h4>
 
-        <Button
-          variant="success"
-          size="lg"
-          style={{ backgroundColor: "#1db954", border: "none" }}
-          onClick={handleRegister}
-        >
-          Crear Cuenta
-        </Button>
-      </section>
+          <p>
+            Registrate gratis para guardar favoritos, crear playlists
+            y recibir recomendaciones personalizadas.
+          </p>
+
+          <Button className="home-register-btn" onClick={handleRegister}>
+            Crear Cuenta
+          </Button>
+        </section>
+      )}
     </Container>
   );
 };
