@@ -21,7 +21,7 @@ function App() {
         <Route path="*" element={<Error404 />} />
         {/* <Route path="/paginaDeDetalle" element={<DetalleCancion canciones={canciones} cancion={cancion}></DetalleCancion>} /> */}
         <Route path="/paginaDeDetalle" element={<DetalleCancion></DetalleCancion>} />
-        <Route path="/administrador" element={<FormularioCancion></FormularioCancion>} />
+        <Route path="/crearCancion" element={<FormularioCancion></FormularioCancion>} />
       </Routes>
       <Footer />
     </>
