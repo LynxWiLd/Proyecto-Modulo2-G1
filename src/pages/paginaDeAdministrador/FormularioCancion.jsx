@@ -157,7 +157,7 @@ const FormularioCancion = () => {
                             </Form.Text>
                         </Form.Group>
                     </Col>
-               
+
                     <Col xs={12} md={4} lg={4}>
                         <Form.Group controlId="exampleForm.ControlduracionCancion" className="text-dark mb-3">
                             <Form.Label>Duración Canción:</Form.Label>
@@ -177,40 +177,26 @@ const FormularioCancion = () => {
                             <Form.Text className="text-danger">{errors.duracionCancion?.message}</Form.Text>
                         </Form.Group>
                     </Col>
-                    {/* <Col xs={12} md={6} lg={6}>
-                        <Form.Group controlId="exampleForm.ControlnroReproduccCancion" className="text-dark mb-3">
-                            <Form.Label>Nro de Reproducciones:</Form.Label>
-                            <Form.Control type="number" placeholder='Reproducciones' />
-                        </Form.Group>
-                    </Col> */}
                 </Row>
 
                 {/* Fila 5: URL Portada y URL Canción */}
                 {/* Nota: En pantallas muy grandes, podrías querer que estas URL ocupen la fila completa si son muy largas. Las dejo como 2 columnas por ahora. */}
                 <Row>
-                    <Col xs={12} md={6} lg={6}>
-                        <Form.Group controlId="exampleForm.ControlUrlPortadaCancion" className="text-dark mb-3">
+                    <Col xs={12}>
+                        <Form.Group controlId="formFile" className="text-dark mb-3">
                             <Form.Label>URL Imágen portada:</Form.Label>
-                            <Form.Control type="text" placeholder="Ej: https://ejemplo.com/imagen.png" {...register("urlImgCancion", {
+                            <Form.Control type="file" {...register("urlImgCancion", {
                                 required: "La URL de la imágen de portada de la canción es un dato obligatorio",
-                                // pattern: {
-                                //     value: /\\.(jpe?g|png|gif|webp)$/i,
-                                //     message: "La URL debe terminar en .jpg, .jpeg, .png, gif o webp."
-                                // }
                             })} />
                             <Form.Text className="text-danger">{errors.urlImgCancion?.message}</Form.Text>
                         </Form.Group>
                     </Col>
-                    <Col xs={12} md={6} lg={6}>
-                        <Form.Group controlId="exampleForm.ControlUrlCancion" className="text-dark mb-3">
+
+                     <Col xs={12}>
+                        <Form.Group controlId="formFile" className="text-dark mb-3">
                             <Form.Label>URL ó mp3 para reproducir canción:</Form.Label>
-                            <Form.Control type="text" placeholder="Ej: https://mi-musica.com/cancion.mp3"
-                            {...register("urlCancion", {
+                            <Form.Control type="file" {...register("urlCancion", {
                                 required: "La URL de la canción es un dato obligatorio",
-                                // pattern: {
-                                //     value: /\\.(mp3)$/i,
-                                //     message: "La URL debe terminar en la extensión .mp3."
-                                // }
                             })} />
                             <Form.Text className="text-danger">{errors.urlCancion?.message}</Form.Text>
                         </Form.Group>
