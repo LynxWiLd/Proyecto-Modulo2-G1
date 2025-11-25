@@ -18,10 +18,10 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Error404 />} />
         {/* <Route path="/paginaDeDetalle" element={<DetalleCancion canciones={canciones} cancion={cancion}></DetalleCancion>} /> */}
         <Route path="/paginaDeDetalle" element={<DetalleCancion></DetalleCancion>} />
         <Route path="/crearCancion" element={<FormularioCancion></FormularioCancion>} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
     </>
