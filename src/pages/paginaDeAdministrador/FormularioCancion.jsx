@@ -23,7 +23,7 @@ const FormularioCancion = ({titulo, crearCancion}) => {
             });
             reset()
         } else {
-            // agrego logica para CREAR CANCION
+            // agrego logica para EDITAR CANCION
         }
     };
 
