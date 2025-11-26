@@ -2,7 +2,7 @@ import { Button, Col, Row, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
+const FormularioCancion = ({ titulo, crearCancion, canciones, editarCancion }) => {
     const {
         register,
         handleSubmit,
@@ -42,7 +42,26 @@ const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
                 });
                 reset()
             }
-        };
+        }else{
+            //agrego la logica de EDITAR CANCION
+            const {idCancion, ...datosActualizados} = data
+             // Validar que el ID exista 
+            if (!idCancion) {
+                 Swal.fire({
+                    title: "Error de Edición",
+                    text: "No se encontró el ID de la canción para editar.",
+                    icon: "error"
+                });
+                return;
+            }
+            editarCancion(idCancion, datosActualizados);
+            Swal.fire({
+                title: "Canción Editada!",
+                text: `La Canción ${data.nombreCancion} fue editada correctamente.`,
+                icon: "success"
+            })
+            reset()
+        }
     }
 
     return (
