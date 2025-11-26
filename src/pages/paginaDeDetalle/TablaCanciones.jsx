@@ -4,7 +4,7 @@ import { Table, Image } from 'react-bootstrap';
 
 
 // const TablaCanciones = ({ canciones }) => {
-const TablaCanciones = () => {
+const TablaCanciones = ({canciones}) => {
     return (
         <section className='px-3 mb-5 table-responsive'>
             <Table striped bordered hover>
@@ -47,9 +47,9 @@ const TablaCanciones = () => {
                         <td>3:21</td>
                         <td>https://ejemplo.com/audio/tusa.mp3</td>
                     </tr>
-                    {/* {
+                    {
                         canciones.map((cancionRecomendada, indice) => <ItemCancion key={cancionRecomendada.idCancion} cancionRecomendada={cancionRecomendada} fila={indice + 1} ></ItemCancion>)
-                    } */}
+                    } 
                 </tbody>
             </Table>
         </section>
