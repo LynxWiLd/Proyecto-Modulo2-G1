@@ -14,20 +14,28 @@ const FormularioCancion = ({ titulo, crearCancion, canciones, editarCancion, bus
     } = useForm();
 
     const {id} = useParams();
+    
     useEffect(()=>{
         //si estoy editnado busco el objeto para dibujar en el formualrio
-        if(titulo === 'Editar Canción'){
-            const cancionBuscada = buscarCancion(id)
-            console.log(cancionBuscada)
-
-            setValue('artistaGrupo', cancionBuscada.artistaGrupo)
-            setValue('nombreCancion', cancionBuscada.nombreCancion)
-            setValue('nombreAlbum', cancionBuscada.nombreAlbum)
-            setValue('anioCancion', cancionBuscada.anioCancion)
-            setValue('categoriaCancion', cancionBuscada.categoriaCancion)
-            setValue('duracionCancion', cancionBuscada.duracionCancion)
-            setValue('urlImgCancion', cancionBuscada.urlImgCancion)
-            setValue('urlCancion', cancionBuscada.urlCancion)
+        if(titulo === 'Editar Cancion' && id ){
+            const cancionABuscar = buscarCancion(id)
+            console.log((cancionABuscar))
+            
+            if(cancionABuscar){
+           
+            setValue("artistaGrupo", cancionABuscar.artistaGrupo)
+            setValue("nombreCancion", cancionABuscar.nombreCancion)
+            setValue("nombreAlbum", cancionABuscar.nombreAlbum)
+            setValue("anioCancion", cancionABuscar.anioCancion)
+            setValue("categoriaCancion", cancionABuscar.categoriaCancion)
+            setValue("duracionCancion", cancionABuscar.duracionCancion)
+            setValue("urlImgCancion", cancionABuscar.urlImgCancion)
+            setValue("urlCancion", cancionABuscar.urlCancion)
+            }else{
+                console.log('no se carga la cancion')
+            }
+            
+          
         }
     },[]);
 
@@ -65,23 +73,11 @@ const FormularioCancion = ({ titulo, crearCancion, canciones, editarCancion, bus
             }
         }else{
             //agrego la logica de EDITAR CANCION
-            const {idCancion, ...datosActualizados} = data
-             // Validar que el ID exista 
-            if (!idCancion) {
-                 Swal.fire({
-                    title: "Error de Edición",
-                    text: "No se encontró el ID de la canción para editar.",
-                    icon: "error"
-                });
-                return;
-            }
-            editarCancion(idCancion, datosActualizados);
-            Swal.fire({
-                title: "Canción Editada!",
-                text: `La Canción ${data.nombreCancion} fue editada correctamente.`,
-                icon: "success"
-            })
-            reset()
+           editarCancion(id, data)
+           Swal.fire({
+            title: "Canción Editada!",
+            text: `La Canción ${data.nombreCancion} fue editada correctamente.`,
+            icon: "success"});
         }
     }
 

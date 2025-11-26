@@ -37,7 +37,7 @@ function App() {
   // 1. Buscar la cancion dentro del array que tiene tal ID y actualizar sus valores
   const cancionesEditadas = canciones.map((itemCancion)=> {
     //buscar el objeto a editar 
-    if(itemCancion.id=== idCancion){
+    if(itemCancion.idCancion=== idCancion){
       return{
         ...itemCancion,
         ...cancionEditar
@@ -49,7 +49,7 @@ function App() {
 }
 
 const buscarCancion = (idCancion)=>{
-  const cancionEncontrada = canciones.find((item)=> item.id === idCancion)
+  const cancionEncontrada = canciones.find((item)=> item.idCancion === idCancion)
   return cancionEncontrada
 }
 
@@ -64,7 +64,7 @@ const buscarCancion = (idCancion)=>{
         {/* <Route path="/paginaDeDetalle" element={<DetalleCancion canciones={canciones} cancion={cancion}></DetalleCancion>} /> */}
         <Route path="/paginaDeDetalle" element={<DetalleCancion></DetalleCancion>} />
         <Route path="/crearCancion" element={<FormularioCancion titulo={'Crear Canción'} crearCancion={crearCancion} canciones={canciones}></FormularioCancion>} />
-        <Route path="/editarCancion/:id" element={<FormularioCancion titulo={'Editar Canción'} editarCancion={editarCancion} buscarCancion={buscarCancion} canciones={canciones}></FormularioCancion>} />
+        <Route path="/editarCancion/:id" element={<FormularioCancion titulo={'Editar Cancion'} editarCancion={editarCancion} buscarCancion={buscarCancion} canciones={canciones}></FormularioCancion>} />
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
