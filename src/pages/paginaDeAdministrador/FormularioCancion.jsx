@@ -1,14 +1,35 @@
+import { useEffect } from 'react';
 import { Button, Col, Row, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import { useParams } from 'react-router';
 import Swal from "sweetalert2";
 
-const FormularioCancion = ({ titulo, crearCancion, canciones, editarCancion }) => {
+const FormularioCancion = ({ titulo, crearCancion, canciones, editarCancion, buscarCancion }) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-        reset
+        reset,
+        setValue
     } = useForm();
+
+    const {id} = useParams();
+    useEffect(()=>{
+        //si estoy editnado busco el objeto para dibujar en el formualrio
+        if(titulo === 'Editar Canción'){
+            const cancionBuscada = buscarCancion(id)
+            console.log(cancionBuscada)
+
+            setValue('artistaGrupo', cancionBuscada.artistaGrupo)
+            setValue('nombreCancion', cancionBuscada.nombreCancion)
+            setValue('nombreAlbum', cancionBuscada.nombreAlbum)
+            setValue('anioCancion', cancionBuscada.anioCancion)
+            setValue('categoriaCancion', cancionBuscada.categoriaCancion)
+            setValue('duracionCancion', cancionBuscada.duracionCancion)
+            setValue('urlImgCancion', cancionBuscada.urlImgCancion)
+            setValue('urlCancion', cancionBuscada.urlCancion)
+        }
+    },[]);
 
     const onSubmit = (data) => {
         console.log(data);
