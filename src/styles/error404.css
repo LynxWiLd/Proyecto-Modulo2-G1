@@ -22,3 +22,13 @@
   transform: translateY(-4px);
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
+.error404-card h1 {
+  font-size: 6rem;
+}
+.error404-card h2 {
+  font-weight: 600;
+}
+.error404-card p {
+  font-size: 1.1rem;
+  color: #6c757d;
+}
