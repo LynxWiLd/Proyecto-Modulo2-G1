@@ -2,21 +2,22 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card, Container } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../routes/AuthContext";
 import "../styles/stylologin.css";
 
 export default function Login() {
-   const{
-register,
- handleSubmit,
-  formState: { errors }
-} = useForm();
-const { login } = useAuth();
-const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const { login } = useAuth();
+  
+  const navigate = useNavigate();
 
-const onSubmit = (data) => {
-    const ok = login (data.email, data.password);
-       if (ok) {
+  const onSubmit = (data) => {
+    const ok = login(data.email, data.password);
+    if (ok) {
       Swal.fire("Bienvenido!", "Sesión iniciada correctamente", "success");
       navigate("/");
     } else {
@@ -25,11 +26,11 @@ const onSubmit = (data) => {
   };
 
   return (
-   <Container className="login-container">
+    <Container className="login-container">
       <Card className="login-card">
         <h3 className="text-center mb-3">Iniciar Sesión</h3>
 
-         <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-3">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -76,7 +77,3 @@ const onSubmit = (data) => {
     </Container>
   );
 }
-
-
-
-

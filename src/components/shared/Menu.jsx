@@ -1,15 +1,15 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Icon from "/Icon.png";
-import { useAuth } from "../data/AuthContext";   
+import { useAuth } from "../routes/AuthContext";
 
-const NavigationBar = () => {
-  const { user, logout } = useAuth();   
+const Menu = () => {
+  const { user, logout } = useAuth();
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="px-5">
       <img src={Icon} alt="icono" id="icon" />
-      
+
       <Navbar.Brand as={Link} to="/">
         Tuneo
       </Navbar.Brand>
@@ -28,9 +28,7 @@ const NavigationBar = () => {
 
         <Nav>
           {user ? (
-            <Nav.Link onClick={logout}>
-              Cerrar sesión
-            </Nav.Link>
+            <Nav.Link onClick={logout}>Cerrar sesión</Nav.Link>
           ) : (
             <Nav.Link as={Link} to="/login">
               Iniciar Sesion
@@ -42,4 +40,4 @@ const NavigationBar = () => {
   );
 };
 
-export default NavigationBar;
+export default Menu;
