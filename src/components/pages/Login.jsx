@@ -12,7 +12,6 @@ export default function Login() {
     formState: { errors },
   } = useForm();
   const { login } = useAuth();
-  
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
