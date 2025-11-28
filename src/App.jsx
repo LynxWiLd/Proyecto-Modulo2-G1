@@ -29,19 +29,44 @@ function App() {
     setCanciones([...canciones, nuevaCancion]);
   };
 
+  const usuarioSessionStorage =
+    JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
+  const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
+
+  const adminLocalStorage = JSON.parse(localStorage.getItem("adminKey")) || [];
+  const [servicios, setServicios] = useState(adminLocalStorage);
+
+  useEffect(() => {
+    sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
+  }, [usuarioLogueado]);
+
+  useEffect(() => {
+    localStorage.setItem("adminKey", JSON.stringify(servicios));
+  }, [servicios]);
+
   return (
-    <>
-      <Menu />
+    <BrowserRouter>
+      <Menu
+        usuarioLogueado={usuarioLogueado}
+        setUsuarioLogueado={setUsuarioLogueado}
+      />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        {/* <Route path="/paginaDeDetalle" element={<DetalleCancion canciones={canciones} cancion={cancion}></DetalleCancion>} /> */}
         <Route
-          path="/paginaDeDetalle"
-          element={<DetalleCancion></DetalleCancion>}
+          path="/login"
+          element={<Login setUsuarioLogueado={setUsuarioLogueado} />}
         />
+        <Route path="/register" element={<Register />} />
+        <Route element={<ProtectorRutas usuarioLogueado={usuarioLogueado} />}>
+          <Route
+            path="/administracion"
+            element={<div>Administración (Ruta Protegida)</div>}
+          />
+        </Route>
+
+        <Route path="/paginaDeDetalle" element={<DetalleCancion />} />
         <Route
           path="/crearCancion"
           element={
@@ -49,14 +74,14 @@ function App() {
               titulo={"Crear Canción"}
               crearCancion={crearCancion}
               canciones={canciones}
-            ></FormularioCancion>
+            />
           }
         />
         <Route path="*" element={<Error404 />} />
       </Routes>
 
       <Footer />
-    </>
+    </BrowserRouter>
   );
 }
 
