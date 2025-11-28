@@ -1,15 +1,99 @@
 /* Contenedor centrado en pantalla */
-.login-container {
+/*.login-container {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Tarjeta del login */
+/* Tarjeta del login 
 .login-card {
   padding: 2rem;
   width: 100%;
   max-width: 400px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+*/
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  
+}
+
+/* ===== TARJETA CON GLASS EFFECT ===== */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 30px 25px;
+
+  border-radius: 1.7rem;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+
+  animation: fadeIn 0.8s ease-out;
+
+ 
+  color: #fff;
+}
+
+
+/* ===== TÍTULO ===== */
+.login-card h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 30px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+}
+
+/* ===== CAMPOS DEL FORMULARIO ===== */
+.login-card label {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.login-card input.form-control {
+  padding: 10px;
+  border-radius: 0.9rem;
+  border: none;
+
+  background: rgba(121, 118, 118, 0.75);
+  transition: all 0.3s ease;
+}
+
+.login-card input.form-control:focus {
+  background: #00000049;
+  box-shadow: 0 0 12px rgba(64, 68, 198, 0.8);
+  transform: scale(1.02);
+}
+
+/* ===== BOTONES ===== */
+.login-card button {
+  padding: 10px;
+  font-size: 1.1rem;
+  border-radius: 0.9rem;
+  font-weight: 600;
+  transition: 0.3s ease;
+
+}
+
+
+/* ===== ANIMACIÓN ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
