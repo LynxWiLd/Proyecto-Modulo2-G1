@@ -2,7 +2,7 @@ import { Container, Dropdown, Row, Button } from "react-bootstrap";
 import { FaFilter, FaMusic, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../routes/AuthContext";
+import { useAuth } from "../routes/ProtectorRutas";
 import SongCard from "../services/SongCard";
 import "../styles/home.css"; // IMPORTANTE
 

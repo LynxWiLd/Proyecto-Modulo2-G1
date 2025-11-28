@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Card, Container } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { useAuth } from "../routes/AuthContext";
+import { useAuth } from "../routes/ProtectorRutas";
 
 export default function Register() {
   const { registerUser } = useAuth();
