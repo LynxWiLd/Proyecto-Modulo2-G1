@@ -20,7 +20,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+
   
 }
 
@@ -28,14 +28,14 @@
 .login-card {
   width: 100%;
   max-width: 400px;
-  padding: 30px 25px;
+  padding: 2rem;
 
   border-radius: 1.7rem;
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 
   border: 1px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  box-shadow:  0 12px 25px rgba(0, 0, 0, 0.5);
 
   animation: fadeIn 0.8s ease-out;
 
@@ -46,12 +46,13 @@
 
 /* ===== TÍTULO ===== */
 .login-card h1 {
-  font-size: 2.2rem;
+  font-size: 2rem;
   font-weight: 800;
-  margin-bottom: 30px;
+  margin-bottom:25px;
   color: #ffffff;
   letter-spacing: 1px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+  text-shadow: 0 12px 25px rgba(153, 156, 153, 0.6);
+text-align: center;
 }
 
 /* ===== CAMPOS DEL FORMULARIO ===== */
@@ -61,7 +62,7 @@
 }
 
 .login-card input.form-control {
-  padding: 10px;
+  padding: 9px;
   border-radius: 0.9rem;
   border: none;
 
@@ -77,7 +78,7 @@
 
 /* ===== BOTONES ===== */
 .login-card button {
-  padding: 10px;
+  padding: 9px;
   font-size: 1.1rem;
   border-radius: 0.9rem;
   font-weight: 600;
