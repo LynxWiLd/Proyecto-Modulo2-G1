@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Menu from "./components/shared/Menu";
 import Footer from "./components/shared/Footer";
 import Home from "./components/pages/Home";
@@ -9,6 +9,7 @@ import Error404 from "./components/pages/Error404";
 import DetalleCancion from "./components/pages/paginaDeDetalle/DetalleCancion";
 import { useEffect, useState } from "react";
 import FormularioCancion from "./components/shared/FormularioCancion";
+import ProtectorRutas from "./components/routes/ProtectorRutas";
 
 function App() {
   //canciones

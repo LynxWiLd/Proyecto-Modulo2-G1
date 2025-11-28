@@ -2,13 +2,11 @@ import { Container, Dropdown, Row, Button } from "react-bootstrap";
 import { FaFilter, FaMusic, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../routes/ProtectorRutas";
 import SongCard from "../services/SongCard";
-import "../styles/home.css"; // IMPORTANTE
+import "../styles/home.css";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { user } = useAuth(); 
 
   const [categoria, setCategoria] = useState("Todas");
   const categorias = ["Rock", "Pop", "Electrónica", "Cuarteto", "Rap"];
@@ -80,24 +78,25 @@ const Home = () => {
       </div>
 
       {/* CREA TU CUENTA */}
-      {!user && (
-        <section className="home-create-account">
-          <h4 className="mb-3">
-            <FaUserPlus /> Crea tu cuenta ahora
-          </h4>
+      <section className="home-create-account">
+        <h4 className="mb-3">
+          <FaUserPlus /> Crea tu cuenta ahora
+        </h4>
 
-          <p>
-            Registrate gratis para guardar favoritos, crear playlists
-            y recibir recomendaciones personalizadas.
-          </p>
+        <p>
+          Registrate gratis para guardar favoritos, crear playlists
+          y recibir recomendaciones personalizadas.
+        </p>
 
-          <Button className="home-register-btn" onClick={handleRegister}>
-            Crear Cuenta
-          </Button>
-        </section>
-      )}
+        <Button className="home-register-btn" onClick={handleRegister}>
+          Crear Cuenta
+        </Button>
+      </section>
+
     </Container>
   );
 };
 
 export default Home;
+
+
