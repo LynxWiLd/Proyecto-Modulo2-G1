@@ -1,9 +1,8 @@
-import { Button, Col, Row, InputGroup } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
+import { Button, Col, Row, Form } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
-const FormularioCancion = () => {
+const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
     const {
         register,
         handleSubmit,
@@ -11,25 +10,40 @@ const FormularioCancion = () => {
         reset
     } = useForm();
 
-    //titulo se pasara por props desde administrador
-    const titulo = 'Crear Canción'
-
     const onSubmit = (data) => {
         console.log(data);
 
         if (titulo === 'Crear Canción') {
-            //agreego la logica de creae
-            // crearCancion(data)
-            Swal.fire({
-                title: "Canción Creada!",
-                text: `La Canción fue creada correctamente.`,
-                icon: "success"
-            });
-            reset()
-        } else {
-            // agrego logica para editar
-        }
-    };
+            //agreego la logica de CREAR CANCION
+
+            // verificar que la CANCION Y ARTISTA no este repetida
+            const cancionBuscada = canciones.find((cancion) =>
+                // 1. Compara el nombre de la canción (limpio y minúsculas)
+                cancion.nombreCancion.toLowerCase() === data.nombreCancion.toLowerCase().trim() &&
+                // 2. Compara el artista (limpio y minúsculas)
+                cancion.artistaGrupo.toLowerCase() === data.artistaGrupo.toLowerCase().trim()
+            );
+            console.log(cancionBuscada)
+
+            if (cancionBuscada) {
+                Swal.fire({
+                    title: "Canción Ya Existente!",
+                    text: `La Canción ${data.nombreCancion} ya existe.`,
+                    icon: "error"
+                });
+                reset()
+                return;
+            } else {
+                crearCancion(data)
+                Swal.fire({
+                    title: "Canción Creada!",
+                    text: `La Canción ${data.nombreCancion} fue creada correctamente.`,
+                    icon: "success"
+                });
+                reset()
+            }
+        };
+    }
 
     return (
         <main className='container mb-3'>
@@ -180,12 +194,11 @@ const FormularioCancion = () => {
                 </Row>
 
                 {/* Fila 5: URL Portada y URL Canción */}
-                {/* Nota: En pantallas muy grandes, podrías querer que estas URL ocupen la fila completa si son muy largas. Las dejo como 2 columnas por ahora. */}
                 <Row>
                     <Col xs={12}>
-                        <Form.Group controlId="formFile" className="text-dark mb-3">
+                        <Form.Group controlId="exampleForm.ControlUrlImgCancion" className="text-dark mb-3">
                             <Form.Label>URL Imágen portada:</Form.Label>
-                            <Form.Control type="file" {...register("urlImgCancion", {
+                            <Form.Control type="url" {...register("urlImgCancion", {
                                 required: "La URL de la imágen de portada de la canción es un dato obligatorio",
                             })} />
                             <Form.Text className="text-danger">{errors.urlImgCancion?.message}</Form.Text>
@@ -193,9 +206,9 @@ const FormularioCancion = () => {
                     </Col>
 
                     <Col xs={12}>
-                        <Form.Group controlId="formFile" className="text-dark mb-3">
+                        <Form.Group controlId="exampleForm.ControlUrlCancion" className="text-dark mb-3">
                             <Form.Label>URL ó mp3 para reproducir canción:</Form.Label>
-                            <Form.Control type="file" {...register("urlCancion", {
+                            <Form.Control type="url" {...register("urlCancion", {
                                 required: "La URL de la canción es un dato obligatorio",
                             })} />
                             <Form.Text className="text-danger">{errors.urlCancion?.message}</Form.Text>
@@ -213,14 +226,3 @@ const FormularioCancion = () => {
 };
 
 export default FormularioCancion;
-
-// idCancion
-// artistaGrupoCancion
-// tituloCancion
-// albumCancion
-// anioCancion
-// categoriaCancion
-// duracionCancion
-// nroReprodccionesCancion
-// urlImagenCancion
-// urlCancion

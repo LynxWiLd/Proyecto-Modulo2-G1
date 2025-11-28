@@ -2,8 +2,8 @@ import { Container, Dropdown, Row, Button } from "react-bootstrap";
 import { FaFilter, FaMusic, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../context/AuthContext";
-import SongCard from "../components/SongCard";
+import { useAuth } from "../routes/AuthContext";
+import SongCard from "../services/SongCard";
 import "../styles/home.css"; // IMPORTANTE
 
 const Home = () => {
