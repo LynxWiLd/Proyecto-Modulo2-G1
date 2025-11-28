@@ -31,8 +31,8 @@ const Login = ({ setUsuarioLogueado }) => {
       setUsuarioLogueado(true);
       
       Swal.fire({
-        title: "Bienvenido Administrador",
-        text: "Ingresando al sistema",
+        title: "¡Bienvenido al centro de control!",
+        text: "Tu musica y sistema sincronizados. Adelante",
         icon: "success",
                  
       });
@@ -40,7 +40,7 @@ const Login = ({ setUsuarioLogueado }) => {
     } else {
       Swal.fire({
         title: "Ocurrió un error",
-        text: "Credenciales incorrectas",
+        text: "Algo está fuera de sintonía. Usuario o contraseña incorrectos.",
         icon: "error",
       });
     }
