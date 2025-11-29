@@ -1,12 +1,12 @@
 import { Container, Button, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-import perfilMujer1 from "../assets/perfil-mujer-1-sf.png";
-import perfilMujer2 from "../assets/perfil-mujer-2-sf.png";
-import perfilHombre1 from "../assets/perfil-hombre-1-sf.png";
-import perfilHombre2 from "../assets/perfil-hombre-2-sf.png";
-import perfilHombre3 from "../assets/perfil-hombre-3-sf.png";
-import perfilHombre4 from "../assets/perfil-hombre-4-sf.png";
+import perfilMujer1 from "../assets/profile/perfil-mujer-1-sf.png";
+import perfilMujer2 from "../assets/profile/perfil-mujer-2-sf.png";
+import perfilHombre1 from "../assets/profile/perfil-hombre-1-sf.png";
+import perfilHombre2 from "../assets/profile/perfil-hombre-2-sf.png";
+import perfilHombre3 from "../assets/profile/perfil-hombre-3-sf.png";
+import perfilHombre4 from "../assets/profile/perfil-hombre-4-sf.png";
 
 const integrantes = [
   {
