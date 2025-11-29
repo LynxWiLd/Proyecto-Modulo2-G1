@@ -9,6 +9,7 @@ import Error404 from "./components/pages/Error404";
 import DetalleCancion from "./components/pages/paginaDeDetalle/DetalleCancion";
 import { useEffect, useState } from "react";
 import FormularioCancion from "./components/shared/FormularioCancion";
+import UserPage from "./components/pages/UserPage";
 
 function App() {
   //canciones
@@ -53,6 +54,7 @@ function App() {
           }
         />
         <Route path="*" element={<Error404 />} />
+        <Route path="/userPage" element={<UserPage/>} />
       </Routes>
 
       <Footer />
