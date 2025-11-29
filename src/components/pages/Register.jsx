@@ -1,83 +1,122 @@
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { Form, Button, Card, Container } from "react-bootstrap";
+import { useNavigate } from "react-router-dom"; 
 import Swal from "sweetalert2";
-import { useAuth } from "../routes/AuthContext";
 
-export default function Register() {
-  const { registerUser } = useAuth();
+const Registro = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const navigate = useNavigate();
-  const onSubmit = (data) => {
-    const ok = registerUser(data.nombre, data.email, data.password);
+  const navegacion = useNavigate();
 
-    if (ok) {
-      Swal.fire("Registrado!", "Cuenta creada con éxito", "success");
-      navigate("/login");
-    } else {
-      Swal.fire("Error", "El email ya está registrado", "error");
-    }
+  const onSubmit = (data) => {
+    console.log("Datos de registro:", data);
+    
+    
+    
+    Swal.fire({
+      title: "¡Registro Exitoso!",
+      text: "Tu cuenta ha sido creada. Ahora puedes iniciar sesión.",
+      icon: "success",
+    }).then(() => {
+        
+        navegacion('/login'); 
+    });
   };
 
   return (
-    <Container className="d-flex justify-content-center align-items-center min-vh-100">
-      <Card className="p-4 shadow w-100" style={{ maxWidth: "400px" }}>
-        <h3 className="text-center mb-3">Registrarse</h3>
-
+    <Container className="login-container">
+    
+      <Card className="login-card">
+        <h1>Registrarse</h1>
+        
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group className="mb-3">
+         
+          <Form.Group className="mb-3" controlId="formBasicUsername">
             <Form.Label>Nombre</Form.Label>
             <Form.Control
               type="text"
-              {...register("nombre", { required: "Campo obligatorio" })}
+              placeholder="Ingresá tu nombre"
+              {...register("nombre", {
+                required: "El nombre es obligatorio",
+                minLength: {
+                  value: 2,
+                  message: "El nombre debe tener al menos 2 caracteres",
+                },
+                maxLength: {
+                    value: 50,
+                    message: "El nombre no debe superar los 50 caracteres",
+                  },
+              })}
             />
-            {errors.nombre && (
-              <small className="text-danger">{errors.nombre.message}</small>
-            )}
+            <Form.Text className="text-danger">{errors.nombre?.message}</Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          
+          <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              {...register("email", { required: "Campo obligatorio" })}
+              placeholder="Ingresá tu email"
+              {...register("email", {
+                required: "Este campo es obligatorio",
+                pattern: {
+                  value:
+                    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                  message:
+                    "El email debe cumplir con el siguiente formato correo@dominio.extension",
+                },
+              })}
             />
-            {errors.email && (
-              <small className="text-danger">{errors.email.message}</small>
-            )}
+            <Form.Text className="text-danger">{errors.email?.message}</Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3">
+         
+          <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
+              placeholder="Password"
               {...register("password", {
-                required: "Campo obligatorio",
-                minLength: 6,
+                required: "Este campo es obligatorio",
+                pattern: {
+                  value:
+                    /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{8,16}$/,
+                  message:
+                    "La contraseña debe tener entre 8 y 16 caracteres, al menos un dígito, al menos una minúscula, al menos una mayúscula y al menos un caracter especial.",
+                },
               })}
             />
-            {errors.password && (
-              <small className="text-danger">{errors.password.message}</small>
-            )}
+            <Form.Text className="text-danger">
+              {errors.password?.message}
+            </Form.Text>
           </Form.Group>
 
-          <Button type="submit" className="w-100">
-            Registrar
+       
+          <Button
+            type="submit"
+            variant="success"
+            className="w-100 no-focus-outline"
+          >
+            Crear Cuenta
           </Button>
         </Form>
-
+      
         <Button
-          variant="secondary"
           className="w-100 mt-3"
-          onClick={() => navigate("/login")}
+          variant="secondary"
+          onClick={() => navegacion("/login")} 
         >
-          ¿Ya tenés cuenta? Iniciar Sesión
+          ¿Ya tenés cuenta? Inicia Sesión
         </Button>
       </Card>
     </Container>
   );
-}
+};
+
+export default Registro;

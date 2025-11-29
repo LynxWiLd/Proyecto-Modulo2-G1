@@ -1,78 +1,111 @@
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import { Form, Button, Card, Container } from "react-bootstrap";
+import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
-import { useAuth } from "../routes/AuthContext";
 import "../styles/stylologin.css";
 
-export default function Login() {
+
+
+
+
+const Login = ({ setUsuarioLogueado }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const { login } = useAuth();
-  const navigate = useNavigate();
+
+  
+  const navegacion = useNavigate(); 
 
   const onSubmit = (data) => {
-    const ok = login(data.email, data.password);
-    if (ok) {
-      Swal.fire("Bienvenido!", "Sesión iniciada correctamente", "success");
-      navigate("/");
+    console.log(data);
+    if (
+      data.email === import.meta.env.VITE_ADMIN_EMAIL&&
+      data.password === import.meta.env.VITE_ADMIN_PASSWORD
+    ) {
+      
+      setUsuarioLogueado(true);
+      
+      Swal.fire({
+        title: "¡Bienvenido al centro de control!",
+        text: "Tu musica y sistema sincronizados. Adelante",
+        icon: "success",
+                 
+      });
+      navegacion("/administracion");
     } else {
-      Swal.fire("Error", "Email o contraseña incorrectos", "error");
+      Swal.fire({
+        title: "Ocurrió un error",
+        text: "Algo está fuera de sintonía. Usuario o contraseña incorrectos.",
+        icon: "error",
+      });
     }
   };
 
   return (
     <Container className="login-container">
-      <Card className="login-card">
-        <h3 className="text-center mb-3">Iniciar Sesión</h3>
-
+      <Card className="login-card ">
+        <h1>Iniciar Sesión</h1>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
               placeholder="Ingresá tu email"
-              {...register("email", { required: "Este campo es obligatorio" })}
+              {...register("email", {
+                required: "Este campo es obligatorio",
+                pattern: {
+                  value:
+                    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
+                  message:
+                    "El email debe cumplir con el siguiente formato carlos@admin.com",
+                },
+              })}
             />
-            {errors.email && (
-              <small className="text-danger">{errors.email.message}</small>
-            )}
+            <Form.Text className="text-danger">{errors.email?.message}</Form.Text>
           </Form.Group>
 
-          <Form.Group className="mb-3">
+          <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label>Contraseña</Form.Label>
             <Form.Control
               type="password"
               placeholder="Ingresá tu contraseña"
               {...register("password", {
                 required: "Este campo es obligatorio",
+                pattern: {
+                  value:
+                    /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,16}$/,
+                  message:
+                    "La contraseña debe tener entre 5 y 16 caracteres.",
+                },
               })}
             />
-            {errors.password && (
-              <small className="text-danger">{errors.password.message}</small>
-            )}
+            <Form.Text className="text-danger">
+              {errors.password?.message}
+            </Form.Text>
           </Form.Group>
 
           <Button
             type="submit"
             variant="success"
-            className="w-100 no-focus-outline"
+            className="w-100  btnverde no-focus-outline"
           >
             Ingresar
           </Button>
         </Form>
-
         <Button
-          className="w-100 mt-3"
+          className="w-100 mt-3 "
           variant="secondary"
-          onClick={() => navigate("/register")}
+          onClick={() => navegacion("/register")} 
         >
           ¿No tenés cuenta? Registrate
         </Button>
       </Card>
     </Container>
   );
-}
+};
+export default Login;

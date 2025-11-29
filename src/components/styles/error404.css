@@ -1,0 +1,82 @@
+.error404-container {
+  min-height: 100vh;
+  background: linear-gradient(120deg, var(--bg-1), var(--bg-2), var(--bg-3));
+  animation: fadeIn 1.2s ease-in forwards;
+  padding: 20px;
+}
+
+.error404-card {
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  animation: float 3s infinite ease-in-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 520px;
+}
+
+.error404-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+.error404-code {
+  animation: pulse 1.5s infinite alternate;
+  user-select: none;
+  letter-spacing: 4px;
+}
+
+.error404-btn {
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.error404-btn:hover {
+  transform: translateY(-5px);
+  filter: brightness(1.15);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: 0.7; }
+}
+
+/* 🎯 Paleta Light */
+:root {
+  --bg-1: #f8fafc;
+  --bg-2: #e2e8f0;
+  --bg-3: #cbd5e1;
+  --card-bg: rgba(255,255,255,0.85);
+  --border: rgba(0,0,0,0.07);
+}
+
+/* 🌙 Paleta Dark NO NEGRA */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-1: #2b3035;
+    --bg-2: #495057;
+    --bg-3: #6c757d;
+    --card-bg: rgba(35,40,45,0.9);
+    --border: rgba(255,255,255,0.12);
+  }
+
+  .error404-card {
+    color: #e5e9ee;
+  }
+
+  .error404-btn {
+    background-color: #198754;
+    border: none;
+  }
+}
