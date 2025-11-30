@@ -67,7 +67,7 @@ function App() {
           />
         </Route>
 
-        <Route path="/paginaDeDetalle" element={<DetalleCancion />} />
+        <Route path="/detalleCancion" element={<DetalleCancion />} />
         <Route
           path="/crearCancion"
           element={
