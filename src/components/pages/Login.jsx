@@ -18,7 +18,7 @@ export default function Login() {
     const ok = login(data.email, data.password);
     if (ok) {
       Swal.fire("Bienvenido!", "Sesión iniciada correctamente", "success");
-      navigate("/");
+      navigate("/UserPage");
     } else {
       Swal.fire("Error", "Email o contraseña incorrectos", "error");
     }
