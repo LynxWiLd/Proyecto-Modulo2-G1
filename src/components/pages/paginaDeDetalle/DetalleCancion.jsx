@@ -91,7 +91,7 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
 
 
             {/* ----- informacion del cantante o banda -------- */}
-            <section className='container d-flex justify-content-center align-items-center'>
+            <section className='container d-flex justify-content-center align-items-center mb-3'>
                 <Image src={imgGrupo} className='imgCircularAlbum rounded-circle' alt='imagen del grupo' />
 
                 <div className='ms-3 fondoTransparente p-4'>
@@ -100,7 +100,7 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
                 </div>
             </section>
 
-            <section className='px-3 mt-5 fondoTransparente'>
+            <section className='pt-2 ps-3 fondoTransparente'>
                 <div className="d-flex align-items-center">
                     <h3>Recomendaciones</h3>
                     <p className="ms-3 mb-0 fw-bold">Basadas en esta canción</p>
@@ -108,9 +108,10 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
                 <TablaCanciones canciones={canciones}></TablaCanciones>
             </section>
 
-            <section className='container my-3'>
-                <h3 className='text-dark'>Pulicaciones Populares</h3>
-                <Row xs={1} md={3} lg={4} className="g-4">
+            {/* grilla de card */}
+            <section>
+                <h3 className='py-2 ps-3 fondoTransparente'>Publicaciones Populares</h3>
+                <Row xs={2} md={3} lg={4} className="g-4 mb-4">
                     {Array.from({ length: 6 }).map((_, idx) => (
                         <Col key={idx}>
                             <Card className="card-con-boton">
@@ -135,6 +136,20 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
                                     </Card.Text>
                                 </Card.Body>
                             </Card>
+                        </Col>
+                    ))}
+                </Row>
+            </section>
+
+
+            {/* Grilla de imagenes circulares */}
+            <section>
+                <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
+
+                <Row xs={2} md={3} lg={4} className="g-4">
+                    {Array.from({ length: 6 }).map((_, idx) => (
+                        <Col key={idx}>
+                            <Image src={imgGrupo} className='imgCircularAlbum rounded-circle' alt='imagen del grupo' />
                         </Col>
                     ))}
                 </Row>

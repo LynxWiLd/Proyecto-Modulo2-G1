@@ -177,6 +177,7 @@
   /* (Asegúrate de que tus estilos base ya definan width, height, etc.) */
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Sombra inicial */
+  cursor: "pointer";
 }
 
 /* Estado Activo: Cuando el usuario está presionando el botón */
@@ -228,10 +229,10 @@
   transform: translateY(10px);
 
   /* Lo sube 20px desde el borde inferior */
-  bottom: 20px ;
+  bottom: 20px;
 
   /* Lo mueve 20px desde el borde derecho */
-  right: 20px ;
+  right: 20px;
 }
 
 /* Efecto Hover (Al pasar el mouse sobre la Card) */
