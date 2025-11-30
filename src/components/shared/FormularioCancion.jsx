@@ -50,15 +50,9 @@ const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
             <h1 className='py-3 text-success text-center'>{titulo}</h1>
 
             <Form onSubmit={handleSubmit(onSubmit)}>
-                {/* Fila 1: ID y Artista/Grupo */}
+                {/* Fila 1: Artista/Grupo */}
                 <Row>
-                    <Col xs={12} md={6} lg={6}>
-                        <Form.Group controlId="exampleForm.ControlIdCancion" className="text-light mb-3">
-                            <Form.Label>ID:</Form.Label>
-                            <Form.Control type="text" placeholder='ID Cancion se crea aleatoriamente' disabled />
-                        </Form.Group>
-                    </Col>
-                    <Col xs={12} md={6} lg={6}>
+                    <Col xs={12}>
                         <Form.Group controlId="exampleForm.ControlArtistaGrupo" className="text-dark mb-3">
                             <Form.Label>Artista/Grupo:</Form.Label>
                             <Form.Control type="text" placeholder='Nombre del Artista o Grupo'  {...register("artistaGrupo", {
@@ -71,7 +65,7 @@ const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
                                 maxLength: {
                                     value: 50,
                                     message:
-                                        "El servicio debe contener como máximo 50 caracteres",
+                                        "El artista debe contener como máximo 50 caracteres",
                                 },
                             })} />
                             <Form.Text className="text-danger">{errors.artistaGrupo?.message}</Form.Text>
@@ -150,7 +144,7 @@ const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
                         <Form.Group controlId="exampleForm.ControlCategoriaCancion" className="text-dark mb-3">
                             <Form.Label>Categoría:</Form.Label>
                             <Form.Select aria-label="Seleccionar Categoría" {...register("categoriaCancion", {
-                                required: "Debe seleccionar una categoria",
+                                required: "Debe seleccionar una Categoría",
                             })}>
                                 <option value=''>Seleccione uns Categoría</option>
                                 <option value="Rock">Rock</option>
