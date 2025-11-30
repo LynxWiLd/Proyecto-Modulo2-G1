@@ -5,11 +5,43 @@ import imgGrupo from '../../assets/imgDetalleCancion/grupoColdplay.jfif'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import TablaCanciones from './TablaCanciones';
+import { useEffect, useState } from 'react'; // 👈 Importa useState
+import Swal from 'sweetalert2'; // 👈 Importa SweetAlert2
 
-TablaCanciones
 
-// debera recibir por props la "cancion" seleccionada. El props "canciones" tiene las canciones recomendadas en la tabla de abajo
-const DetalleCancion = ({ canciones }) => {
+// debera recibir por path el ID de la "cancion" seleccionada. canciones tiene un array con las canciones del localstorage para mostrar en la lista de sugeridos
+const DetalleCancion = ({ canciones,buscarCancion }) => {
+
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    // Función para manejar el clic y la lógica del boton PLAY
+    const handlePlayPause = () => {
+        // Invierte el estado actual
+        const newState = !isPlaying;
+        setIsPlaying(newState);
+
+        // Lógica del SweetAlert y el ícono
+        if (newState) {
+            // Si pasa a 'Reproduciendo' (Play)
+            Swal.fire({
+                title: '¡A Reproducir!',
+                text: 'Tu canción se está reproduciendo. ¡Sube el volumen!',
+                icon: 'success',
+                timer: 2500, // Se cierra automáticamente en 2.5 segundos
+                timerProgressBar: true,
+                showConfirmButton: false
+            });
+        } else {
+            // Si pasa a 'Pausa' (Pause)
+            Swal.fire({
+                title: 'Pausa',
+                text: 'La canción ha sido pausada.',
+                icon: 'info',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+    };
     return (
         <main>
             <section className='text-ligth position-relative'>
@@ -33,14 +65,16 @@ const DetalleCancion = ({ canciones }) => {
                 </div>
             </section>
 
-            {/* ------boton PLAY ára escuchar la cancion --------*/}
+
             <section className='container my-3 d-flex justify-content-start align-items-center gap-4'>
+                {/* ------boton PLAY ára escuchar la cancion --------*/}
                 <Button
                     variant='success'
                     className='botonPlay d-flex justify-content-center align-items-center rounded-circle'
-                    title="Reproducir canción"
-                >
-                    <i className="bi bi-play-fill fs-1  text-white"></i>
+                    onClick={handlePlayPause}
+                    title={isPlaying ? "Pausar canción" : "Reproducir canción"}>
+                    {/* 🔴 PASO 5: Renderizado Condicional del Ícono */}
+                    <i className={`bi ${isPlaying ? 'bi-pause-fill' : 'bi-play-fill'} fs-1 text-white`}></i>
                 </Button>
 
                 <Link className='text-light' title="Guardar en tu Biblioteca">

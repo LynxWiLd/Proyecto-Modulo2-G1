@@ -166,9 +166,34 @@
   padding-bottom: 10px;
 }
 
+/* .botonPlay {
+  height: 50px;
+  width: 50px;
+} */
+
+/* --------------------------------------
+   CSS para el efecto de presionado (Click)
+   -------------------------------------- */
+
+/* Estado Normal: Añade una pequeña sombra para darle profundidad */
 .botonPlay {
   height: 50px;
   width: 50px;
+  /* (Asegúrate de que tus estilos base ya definan width, height, etc.) */
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Sombra inicial */
+}
+
+/* Estado Activo: Cuando el usuario está presionando el botón */
+.botonPlay:active {
+  /* 1. Escala el botón para que se vea ligeramente más pequeño (efecto de "hundimiento") */
+  transform: scale(0.95);
+
+  /* 2. Opcional: Reduce la sombra para simular que está "dentro" */
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+
+  /* 3. Opcional: Mueve el botón hacia abajo un poco para que parezca que se hunde */
+  /* transform: translateY(2px); */
 }
 
 .imgCircularAlbum {
@@ -250,4 +275,3 @@
 /* *******************************************************************************
               FIN CSS componente <DetalleCancion> - VALENTINA
 ******************************************************************************* */
-
