@@ -166,13 +166,8 @@
   padding-bottom: 10px;
 }
 
-/* .botonPlay {
-  height: 50px;
-  width: 50px;
-} */
-
 /* --------------------------------------
-   CSS para el efecto de presionado (Click)
+   Boton PLAY de la cancion seleccionada 
    -------------------------------------- */
 
 /* Estado Normal: Añade una pequeña sombra para darle profundidad */
@@ -195,6 +190,7 @@
   /* 3. Opcional: Mueve el botón hacia abajo un poco para que parezca que se hunde */
   /* transform: translateY(2px); */
 }
+/* ---------------------------------------------- */
 
 .imgCircularAlbum {
   height: 80px;
@@ -209,6 +205,45 @@
 .fondoTransparente {
   background-color: rgba(27, 122, 35, 0.5);
 }
+
+/* ------------------------------------------------------------------- */
+/* grilla de card de recomendaciones para la cancion seleccionada*/
+/* ------------------------------------------------------------------- */
+.card-con-boton {
+  overflow: hidden; /* Asegura que no haya scrollbars si hay efectos fuera del borde */
+}
+
+/* Estilos del Botón Play (boton-play-overlay) */
+
+.boton-play-overlay {
+  /* Ocultar y preparar la animación */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  /* Ajuste de tamaño para que se vea bien */
+  width: 50px;
+  height: 50px;
+
+  /* Moverlo un poco hacia abajo para el efecto de "entrada" */
+  transform: translateY(10px);
+
+  /* Lo sube 20px desde el borde inferior */
+  bottom: 20px ;
+
+  /* Lo mueve 20px desde el borde derecho */
+  right: 20px ;
+}
+
+/* Efecto Hover (Al pasar el mouse sobre la Card) */
+
+.card-con-boton:hover .boton-play-overlay {
+  /* Hacer visible */
+  opacity: 1;
+
+  /* Mover a su posición final (la definida por bottom-0 y end-0) */
+  transform: translateY(0);
+}
+/* ------------------------------------------------------------------- */
 
 /* =======================================================
   Media Query: Ajuste de Altura de imagenes para Pantallas MD y Grandes

@@ -7,10 +7,13 @@ import { Link } from 'react-router';
 import TablaCanciones from './TablaCanciones';
 import { useEffect, useState } from 'react'; // 👈 Importa useState
 import Swal from 'sweetalert2'; // 👈 Importa SweetAlert2
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 
 // debera recibir por path el ID de la "cancion" seleccionada. canciones tiene un array con las canciones del localstorage para mostrar en la lista de sugeridos
-const DetalleCancion = ({ canciones,buscarCancion }) => {
+const DetalleCancion = ({ canciones, buscarCancion }) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -103,6 +106,38 @@ const DetalleCancion = ({ canciones,buscarCancion }) => {
                     <p className="ms-3 mb-0 fw-bold">Basadas en esta canción</p>
                 </div>
                 <TablaCanciones canciones={canciones}></TablaCanciones>
+            </section>
+
+            <section className='container my-3'>
+                <h3 className='text-dark'>Pulicaciones Populares</h3>
+                <Row xs={1} md={3} lg={4} className="g-4">
+                    {Array.from({ length: 6 }).map((_, idx) => (
+                        <Col key={idx}>
+                            <Card className="card-con-boton">
+                                <div className="card-img-container position-relative p-2">
+                                    <Card.Img variant="top" src={imgGrupo} />
+
+                                    {/* El Botón de Play: Usa position-absolute y la clase para esconderlo */}
+                                    <Button
+                                        variant='success'
+                                        // Posicionamiento: absoluto, abajo (bottom-0), a la derecha (end-0)
+                                        className='boton-play-overlay position-absolute d-flex justify-content-center align-items-center rounded-circle'
+                                        title="Reproducir"
+                                    >
+                                        <i className="bi bi-play-fill fs-3 text-white"></i>
+                                    </Button>
+                                </div>
+
+                                <Card.Body>
+                                    <Card.Title>Nombre Cancion</Card.Title>
+                                    <Card.Text>
+                                        Año Album - Album
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    ))}
+                </Row>
             </section>
         </main>
     );
