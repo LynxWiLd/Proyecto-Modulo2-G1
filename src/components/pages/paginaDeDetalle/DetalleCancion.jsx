@@ -2,7 +2,7 @@
 import Image from 'react-bootstrap/Image';
 import imgPortada from '../../assets/imgDetalleCancion/portadaYellow.jpg'
 import imgGrupo from '../../assets/imgDetalleCancion/grupoColdplay.jfif'
-import { Button } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router';
 import TablaCanciones from './TablaCanciones';
 import { useEffect, useState } from 'react'; // 👈 Importa useState
@@ -111,34 +111,36 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
             {/* grilla de card */}
             <section>
                 <h3 className='py-2 ps-3 fondoTransparente'>Publicaciones Populares</h3>
-                <Row xs={2} md={3} lg={4} className="g-4 mb-4">
-                    {Array.from({ length: 6 }).map((_, idx) => (
-                        <Col key={idx}>
-                            <Card className="card-con-boton">
-                                <div className="card-img-container position-relative p-2">
-                                    <Card.Img variant="top" src={imgGrupo} />
+                <Container>
+                    <Row xs={2} md={3} lg={4} className="g-4 mb-4">
+                        {Array.from({ length: 6 }).map((_, idx) => (
+                            <Col key={idx}>
+                                <Card className="card-con-boton">
+                                    <div className="card-img-container position-relative p-2">
+                                        <Card.Img variant="top" src={imgGrupo} />
 
-                                    {/* El Botón de Play: Usa position-absolute y la clase para esconderlo */}
-                                    <Button
-                                        variant='success'
-                                        // Posicionamiento: absoluto, abajo (bottom-0), a la derecha (end-0)
-                                        className='boton-play-overlay position-absolute d-flex justify-content-center align-items-center rounded-circle'
-                                        title="Reproducir"
-                                    >
-                                        <i className="bi bi-play-fill fs-3 text-white"></i>
-                                    </Button>
-                                </div>
+                                        {/* El Botón de Play: Usa position-absolute y la clase para esconderlo */}
+                                        <Button
+                                            variant='success'
+                                            // Posicionamiento: absoluto, abajo (bottom-0), a la derecha (end-0)
+                                            className='boton-play-overlay position-absolute d-flex justify-content-center align-items-center rounded-circle'
+                                            title="Reproducir"
+                                        >
+                                            <i className="bi bi-play-fill fs-3 text-white"></i>
+                                        </Button>
+                                    </div>
 
-                                <Card.Body>
-                                    <Card.Title>Nombre Cancion</Card.Title>
-                                    <Card.Text>
-                                        Año Album - Album
-                                    </Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
+                                    <Card.Body>
+                                        <Card.Title>Nombre Cancion</Card.Title>
+                                        <Card.Text>
+                                            Año Album - Album
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
             </section>
 
 
