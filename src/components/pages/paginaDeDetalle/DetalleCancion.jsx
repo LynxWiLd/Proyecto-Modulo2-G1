@@ -91,7 +91,7 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
 
 
             {/* ----- informacion del cantante o banda -------- */}
-            <section className='container d-flex justify-content-center align-items-center mb-3'>
+            <section className='container d-flex justify-content-center align-items-center mb-5'>
                 <Image src={imgGrupo} className='imgCircularAlbum rounded-circle' alt='imagen del grupo' />
 
                 <div className='ms-3 fondoTransparente p-4'>
@@ -99,6 +99,7 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
                     <Link className='fw-bold fs-4 text-light' to={''}>ColdPlay</Link>
                 </div>
             </section>
+
 
             <section className='pt-2 ps-3 fondoTransparente'>
                 <div className="d-flex align-items-center">
@@ -147,14 +148,26 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
             {/* Grilla de imagenes circulares */}
             <section>
                 <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
+                <Container>
+                    <Row xs={3} md={4} lg={6} className="g-6">
+                        {Array.from({ length: 6 }).map((_, idx) => (
+                            // Col: Contenedor para cada tarjeta
+                            <Col key={idx}>
+                                <div className="text-center">
+                                    <Image
+                                        src={imgGrupo}
+                                        alt="artista recomendado"
+                                        className="galeria-circular-img mb-2"
+                                        roundedCircle
+                                    />
 
-                <Row xs={2} md={3} lg={4} className="g-4">
-                    {Array.from({ length: 6 }).map((_, idx) => (
-                        <Col key={idx}>
-                            <Image src={imgGrupo} className='imgCircularAlbum rounded-circle' alt='imagen del grupo' />
-                        </Col>
-                    ))}
-                </Row>
+                                    {/* Título o nombre debajo de la imagen */}
+                                    <p className="fw-bold">Nombre Artista</p>
+                                </div>
+                            </Col>
+                        ))}
+                    </Row>
+                </Container>
             </section>
         </main>
     );

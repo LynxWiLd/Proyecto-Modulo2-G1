@@ -246,6 +246,32 @@
 }
 /* ------------------------------------------------------------------- */
 
+/******************************************************************
+  Clase CSS para controlar el tamaño de las imágenes.
+/****************************************************************/
+.galeria-circular-img {
+  /* Define un tamaño fijo y cuadrado para la imagen */
+  width: 150px;
+  height: 150px;
+
+  /* object-fit: cover asegura que la imagen cubra el área 
+       sin distorsionarse, recortando el exceso si es necesario. */
+  object-fit: cover;
+
+  /* Agregamos una sombra sutil para un mejor efecto visual (opcional) */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Media Query: Hacemos las imágenes más pequeñas en móviles (xs)
+  para que quepan mejor cuando hay 2 por fila.
+*/
+@media (max-width: 575.98px) {
+  .galeria-circular-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 /* =======================================================
   Media Query: Ajuste de Altura de imagenes para Pantallas MD y Grandes
   ======================================================= */
