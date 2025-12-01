@@ -4,7 +4,7 @@ import "../styles/songcard.css";
 
 const SongCard = ({ song, isFavorite, toggleFavorito }) => {
   return (
-    <Col sm={6} md={4} lg={3}>
+    <Col sm={12} md={6} lg={3}>
       <Card
         className="bg-dark text-white p-2"
         style={{

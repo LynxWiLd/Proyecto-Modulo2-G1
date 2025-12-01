@@ -26,7 +26,7 @@ const Menu = () => {
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/UserPage">
+          <Nav.Link as={Link} to="/">
             Inicio
           </Nav.Link>
 

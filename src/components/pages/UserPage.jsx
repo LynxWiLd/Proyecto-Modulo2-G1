@@ -1,14 +1,21 @@
-import { Container, Dropdown, Row, Button } from "react-bootstrap";
-import { FaFilter, FaMusic, FaUserPlus } from "react-icons/fa";
+import {
+  Container,
+  Dropdown,
+  Row,
+  Form,
+  FormControl,
+  Button,
+  InputGroup,
+} from "react-bootstrap";
+import { FaFilter, FaRegHeart, FaUserPlus, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../routes/AuthContext";
 import SongCard from "../services/SongCard";
-import "../styles/home.css"; // IMPORTANTE
+import "../styles/guest.css"; // IMPORTANTE
 
 const UserPage = () => {
   const navigate = useNavigate();
-  const { user } = useAuth(); 
 
   const [categoria, setCategoria] = useState("Todas");
   const categorias = ["Rock", "Pop", "Electrónica", "Cuarteto", "Rap"];
@@ -35,49 +42,76 @@ const UserPage = () => {
     );
   };
 
-  const handleRegister = () => navigate("/register");
-
   return (
-    <Container className="mt-5 p-4 text-white">
+    <Container className="mt-4 text-white">
+      <Row className="mx-1 justify-content-center">
+        <div className="col-12 col-md-7 col-lg-8 guest-glass">
+          <div className="my-3 d-flex justify-content-center">
+            {/*Filtro*/}
+            <Dropdown className="d-none d-md-block">
+              <Dropdown.Toggle variant="dark">
+                <FaFilter className="me-2" /> Filtrar: {categoria}
+              </Dropdown.Toggle>
 
-      <h1 className="text-center mb-4">
-        <FaMusic className="me-2" /> UserPAGE
-      </h1>
+              <Dropdown.Menu className="home-filter-menu">
+                <Dropdown.Item onClick={() => setCategoria("Todas")}>
+                  Todas
+                </Dropdown.Item>
 
-      {/* FILTRO */}
-      <div className="home-filter-container">
-        <Dropdown>
-          <Dropdown.Toggle className="home-filter-toggle" variant="dark">
-            <FaFilter className="me-2" /> Filtrar: {categoria}
-          </Dropdown.Toggle>
-
-          <Dropdown.Menu className="home-filter-menu">
-            <Dropdown.Item onClick={() => setCategoria("Todas")}>
-              Todas
-            </Dropdown.Item>
-
-            {categorias.map((cat) => (
-              <Dropdown.Item key={cat} onClick={() => setCategoria(cat)}>
-                {cat}
-              </Dropdown.Item>
+                {categorias.map((cat) => (
+                  <Dropdown.Item key={cat} onClick={() => setCategoria(cat)}>
+                    {cat}
+                  </Dropdown.Item>
+                ))}
+              </Dropdown.Menu>
+            </Dropdown>
+            {/*Buscador*/}
+            <InputGroup className="guest-search mx-2">
+              {/* Campo de entrada de texto */}
+              <FormControl
+                placeholder="¿Que cancion quieres reproducir?"
+                aria-label="Buscador de música"
+              />
+              {/* Botón de búsqueda */}
+              <Button variant="dark">
+                <FaSearch />
+              </Button>
+            </InputGroup>
+          </div>
+          {/*Principal*/}
+          <Row className="g-2">
+            {cancionesFiltradas.map((song) => (
+              <SongCard
+                key={song.id}
+                song={song}
+                isFavorite={favoritos.includes(song.id)}
+                toggleFavorito={toggleFavorito}
+              />
             ))}
-          </Dropdown.Menu>
-        </Dropdown>
-      </div>
-
-      {/* CARDS */}
-      <div className="home-cards-glass">
-        <Row className="g-4">
-          {cancionesFiltradas.map((song) => (
-            <SongCard
-              key={song.id}
-              song={song}
-              isFavorite={favoritos.includes(song.id)}
-              toggleFavorito={toggleFavorito}
-            />
-          ))}
-        </Row>
-      </div>
+          </Row>
+          {/* Listas */}
+          <div className="guest-glass mt-5 mx-2">
+            <h2 className="m-2">holaa</h2>
+            <Row className="g-2">
+              {cancionesFiltradas.map((song) => (
+                <SongCard
+                  key={song.id}
+                  song={song}
+                  isFavorite={favoritos.includes(song.id)}
+                  toggleFavorito={toggleFavorito}
+                />
+              ))}
+            </Row>
+          </div>
+        </div>
+        {/*Lista de favoritos*/}
+        <div className="d-none d-md-block col-md-4 col-lg-3 guest-glass mx-md-4">
+          <h5 className="text-center">
+            <FaRegHeart className="me-2 mb-1" />
+            Tu Lista de Favoritos
+          </h5>
+        </div>
+      </Row>
     </Container>
   );
 };
