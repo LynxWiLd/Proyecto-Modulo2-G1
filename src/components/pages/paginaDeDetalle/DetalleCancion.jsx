@@ -13,7 +13,8 @@ import Row from 'react-bootstrap/Row';
 
 
 // debera recibir por path el ID de la "cancion" seleccionada. canciones tiene un array con las canciones del localstorage para mostrar en la lista de sugeridos
-const DetalleCancion = ({ canciones, buscarCancion }) => {
+// const DetalleCancion = ({ canciones, buscarCancion }) => {
+    const DetalleCancion = ({canciones}) => {
 
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -45,6 +46,14 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
             });
         }
     };
+
+ // buscar cancion
+//   const buscarCancion = (idCancion)=>{
+//     const cancionEncontrada = canciones.find((item)=>item.id===idCancion)
+//     return cancionEncontrada
+//   }
+
+
     return (
         <main>
             <section className='text-ligth position-relative'>
@@ -146,7 +155,7 @@ const DetalleCancion = ({ canciones, buscarCancion }) => {
 
 
             {/* Grilla de imagenes circulares */}
-            <section>
+            <section className='mb-5'>
                 <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
                 <Container>
                     <Row xs={3} md={4} lg={6} className="g-6">
