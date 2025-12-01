@@ -76,12 +76,7 @@ const FormularioCancion = ({
       return;
     }
 
-    const nuevaCancion = {
-      ...data,
-      id: crypto.randomUUID ? crypto.randomUUID() : Date.now(),
-    };
-
-    crearCancion(nuevaCancion);
+    crearCancion(data);
 
     Swal.fire({
       title: "Canción creada",
@@ -122,23 +117,12 @@ const FormularioCancion = ({
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        if (!eliminarCancion) {
-          Swal.fire({
-            title: "Error",
-            text: "No se pudo eliminar la canción.",
-            icon: "error",
-          });
-          return;
-        }
-
         eliminarCancion(cancion.id);
-
         Swal.fire({
           title: "Eliminada",
           text: "La canción fue eliminada correctamente.",
           icon: "success",
         });
-
         if (cancionEditando?.id === cancion.id) {
           cancelarEdicion();
         }
