@@ -28,46 +28,6 @@ const DetalleCancion = ({ canciones }) => {
     // variable de estado: pausa o play
     const [isPlaying, setIsPlaying] = useState(false);
 
-    // array de objetos con artistas recomendados para maquetar grilla de imagenes circulares
-    const artistasRecomendados = [
-        {
-            id: 1,
-            nombre: "Bad Bunny",
-            fotoCantante: "../../assets/imgDetalleCancion/badBunny.webp"
-        },
-        {
-            id: 2,
-            nombre: "María Becerra",
-            fotoCantante: "../../assets/imgDetalleCancion/mariaBecerra.webp"
-        },
-        {
-            id: 3,
-            nombre: "Airbag",
-            fotoCantante: "../../assets/imgDetalleCancion/airgag.jpg"
-        },
-        {
-            id: 4,
-            nombre: "Luck Ra",
-            fotoCantante: "../../assets/imgDetalleCancion/luckRa.avif"
-        },
-        {
-            id: 5,
-            nombre: "Bizarrap",
-            fotoCantante: "../../assets/imgDetalleCancion/bizarrap.webp"
-        },
-        {
-            id: 6,
-            nombre: "Emilia Mernes",
-            fotoCantante: "../../assets/imgDetalleCancion/emilia-mernes.webp"
-        },
-        {
-            id: 7,
-            nombre: "Coldplay",
-            fotoCantante: "../../assets/imgDetalleCancion/Coldplay.jpg"
-        }
-    ];
-
-
     // Función para manejar el clic y la lógica del boton PLAY y PAUSE
     const handlePlayPause = () => {
         // Invierte el estado actual
@@ -186,8 +146,7 @@ const DetalleCancion = ({ canciones }) => {
                 <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
                 <Container>
                     <Row xs={3} md={4} lg={6} className="g-6">
-                        {Array.from({ length: 6 }).map((_, idx) => (
-                            <Col key={idx}>
+                            <Col>
                                 <div className="text-center">
                                     <Image
                                         src={badBunnyImg}
@@ -195,17 +154,64 @@ const DetalleCancion = ({ canciones }) => {
                                         className="galeria-circular-img mb-2"
                                         roundedCircle
                                     />
-
-                                    {/* Título o nombre debajo de la imagen */}
-                                    <p className="fw-bold">Bad Bunny</p>
+                                    <p className="fw-bold text-dark">Bad Bunny</p>
                                 </div>
-
-                                {/* Para armar grilla de imagenes circulares  */}
-                                {/* {
-                                artistasRecomendados.map((artista, indice) => <CardArtistasRecomendados key={indice} artista={artista}></CardArtistasRecomendados>)
-                                } */}
                             </Col>
-                        ))}
+                            <Col>
+                                <div className="text-center">
+                                    <Image
+                                        src={mariaBecerraImg}
+                                        alt='Foto Bud Bunny'
+                                        className="galeria-circular-img mb-2"
+                                        roundedCircle
+                                    />
+                                    <p className="fw-bold text-dark">María Becerra</p>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className="text-center">
+                                    <Image
+                                        src={airbagImg}
+                                        alt='Foto Bud Bunny'
+                                        className="galeria-circular-img mb-2"
+                                        roundedCircle
+                                    />
+                                    <p className="fw-bold text-dark">AirBag</p>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className="text-center">
+                                    <Image
+                                        src={luckRaImg}
+                                        alt='Foto Bud Bunny'
+                                        className="galeria-circular-img mb-2"
+                                        roundedCircle
+                                    />
+                                    <p className="fw-bold text-dark">Luck Ra</p>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className="text-center">
+                                    <Image
+                                        src={bizarrapImg}
+                                        alt='Foto Bud Bunny'
+                                        className="galeria-circular-img mb-2"
+                                        roundedCircle
+                                    />
+                                    <p className="fw-bold text-dark">Bizarrap</p>
+                                </div>
+                            </Col>
+                            <Col>
+                                <div className="text-center">
+                                    <Image
+                                        src={emiliaMernesImg}
+                                        alt='Foto Bud Bunny'
+                                        className="galeria-circular-img mb-2"
+                                        roundedCircle
+                                    />
+                                    <p className="fw-bold text-dark">Emilia Mernes</p>
+                                </div>
+                            </Col>
                     </Row>
                 </Container>
             </section>

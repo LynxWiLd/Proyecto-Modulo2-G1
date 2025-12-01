@@ -21,3 +21,8 @@ const CardArtistasRecomendados = ({artista}) => {
 };
 
 export default CardArtistasRecomendados;
+
+        {/* Para armar grilla de imagenes circulares  */}
+                                {/* {
+                                artistasRecomendados.map((artista, indice) => <CardArtistasRecomendados key={indice} artista={artista}></CardArtistasRecomendados>)
+                                } */}
