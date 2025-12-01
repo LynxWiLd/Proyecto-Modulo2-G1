@@ -81,20 +81,6 @@
 /* *******************************************************************************
               CSS componente <DetalleCancion> - VALENTINA
 ******************************************************************************* */
-/* fondo pared de ladrillos */
-.fondoDetalleCancion {
-  min-height: 100vh;
-  /* O la altura que necesites, por ejemplo 500px */
-  width: 100%;
-  background-image: url("../../src/assets/imgDetalleCancion/paredLadrillos.jpg");
-  background-repeat: no-repeat;
-  /* Que no se repita */
-  background-size: cover;
-  /* Que ocupe toda la pantalla */
-  background-position: center;
-  /* Centrar la imagen */
-}
-
 /*
   =============================================
   Estilos para el CONTENEDOR DE LA IMAGEN DE PORTADA Y OVERLAYS (SEGUNDA CAPA)
@@ -280,13 +266,21 @@
   /* Define un tamaño fijo y cuadrado para la imagen */
   width: 150px;
   height: 150px;
-
+transition: transform 0.3s ease-in-out;
   /* object-fit: cover asegura que la imagen cubra el área 
        sin distorsionarse, recortando el exceso si es necesario. */
   object-fit: cover;
 
   /* Agregamos una sombra sutil para un mejor efecto visual (opcional) */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estado al pasar el puntero (hover) */
+.galeria-circular-img:hover {
+    /* Agranda la imagen en un 10% */
+    transform: scale(1.1); 
+    /* Opcional: Eleva la imagen ligeramente para un mejor efecto visual */
+    z-index: 10;
 }
 
 

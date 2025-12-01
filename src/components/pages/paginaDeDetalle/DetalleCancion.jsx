@@ -147,7 +147,7 @@ const DetalleCancion = ({ canciones }) => {
                 <Container>
                     <Row xs={3} md={4} lg={6} className="g-6">
                             <Col>
-                                <div className="text-center">
+                                <div className="text-center ">
                                     <Image
                                         src={badBunnyImg}
                                         alt='Foto Bud Bunny'
@@ -209,7 +209,8 @@ const DetalleCancion = ({ canciones }) => {
                                         className="galeria-circular-img mb-2"
                                         roundedCircle
                                     />
-                                    <p className="fw-bold text-dark">Emilia Mernes</p>
+                                    <p className="fw-bold text-dark"
+                                    >Emilia Mernes</p>
                                 </div>
                             </Col>
                     </Row>
