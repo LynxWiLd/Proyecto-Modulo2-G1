@@ -192,17 +192,6 @@
   /* transform: translateY(2px); */
 }
 /* ---------------------------------------------- */
-
-.imgCircularAlbum {
-  height: 80px;
-  width: 80px;
-}
-
-.imgCancion {
-  height: 50px;
-  width: 50px;
-}
-
 .fondoTransparente {
   background-color: rgba(27, 122, 35, 0.5);
 }
@@ -258,6 +247,30 @@
   /* Mover a su posición final (la definida por bottom-0 y end-0) */
   transform: translateY(0);
 }
+
+/* 1. Define el aspecto de la imagen (ej. cuadrado) */
+.card-con-boton .card-img-container {
+    /* Establece la relación de aspecto 1:1 (cuadrado).
+      Esto fuerza al contenedor a tener el mismo alto que ancho, 
+      independientemente del tamaño de la imagen original.
+    */
+    aspect-ratio: 1 / 1; 
+    
+    /* Asegura que cualquier parte que se desborde se oculte */
+    overflow: hidden; 
+}
+
+/* 2. Ajusta la imagen al contenedor */
+.card-con-boton .card-img-container .card-img-top {
+    /* Ocupar el 100% del contenedor */
+    width: 100%; 
+    height: 100%;
+    
+    /* Asegura que la imagen cubra todo el espacio sin distorsionarse. 
+       Recortará las partes que no encajen. */
+    object-fit: cover; 
+}
+
 /* ------------------------------------------------------------------- */
 
 /******************************************************************
@@ -276,6 +289,11 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
+
+/* =======================================================
+  Media Query: Ajuste de Altura de imagenes para Pantallas MD y Grandes
+  ======================================================= */
 /* Media Query: Hacemos las imágenes más pequeñas en móviles (xs)
   para que quepan mejor cuando hay 2 por fila.
 */
@@ -285,11 +303,6 @@
     height: 100px;
   }
 }
-
-/* =======================================================
-  Media Query: Ajuste de Altura de imagenes para Pantallas MD y Grandes
-  ======================================================= */
-
 /* medianos */
 @media (min-width: 768px) and (max-width: 991px) {
   .imagen-container {

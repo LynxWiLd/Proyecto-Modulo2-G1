@@ -5,7 +5,7 @@ const CardCancionesPopulares = ({cancionPopular}) => {
     return (
         <Col>
             <Card className="card-con-boton">
-                <div className="card-img-container position-relative p-2">
+                <div className="card-img-container position-relative">
                     <Card.Img variant="top" src={cancionPopular.urlImgCancion} alt={`Imagen de la portada de la cancion ${cancionPopular.nombreCancion}`}/>
 
                     {/* El Botón de Play: Usa position-absolute y la clase para esconderlo */}

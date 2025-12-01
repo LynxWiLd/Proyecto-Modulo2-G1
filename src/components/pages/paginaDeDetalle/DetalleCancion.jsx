@@ -1,25 +1,66 @@
 
 import Image from 'react-bootstrap/Image';
 import imgPortada from '../../assets/imgDetalleCancion/portadaYellow.jpg'
-import imgGrupo from '../../assets/imgDetalleCancion/grupoColdplay.jfif'
+import imgGrupo from '../../assets/imgDetalleCancion/Coldplay.jpg'
 import { Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router';
 import TablaCanciones from './TablaCanciones';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import Card from 'react-bootstrap/Card';
-import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import CardCancionesPopulares from './CardCancionesPopulares';
+import CardArtistasRecomendados from './CardArtistasRecomendados';
+
 
 
 // debera recibir por path el ID de la "cancion" seleccionada. canciones tiene un array con las canciones del localstorage para mostrar en la lista de sugeridos
 // const DetalleCancion = ({ canciones, buscarCancion }) => {
 const DetalleCancion = ({ canciones }) => {
 
+    // variable de estado: pausa o play
     const [isPlaying, setIsPlaying] = useState(false);
 
-    // Función para manejar el clic y la lógica del boton PLAY
+    // array de objetos con artistas recomendados para maquetar grilla de imagenes circulares
+    const artistasRecomendados = [
+        {
+            id: 1,
+            nombre: "Bad Bunny",
+            fotoCantante: "../../assets/imgDetalleCancion/badBunny.webp"
+        },
+        {
+            id: 2,
+            nombre: "María Becerra",
+            fotoCantante: "../../assets/imgDetalleCancion/mariaBecerra.webp"
+        },
+        {
+            id: 3,
+            nombre: "Airbag",
+            fotoCantante: "../../assets/imgDetalleCancion/airgag.jpg"
+        },
+        {
+            id: 4,
+            nombre: "Luck Ra",
+            fotoCantante: "../../assets/imgDetalleCancion/luckRa.avif"
+        },
+        {
+            id: 5,
+            nombre: "Bizarrap",
+            fotoCantante: "../../assets/imgDetalleCancion/bizarrap.webp"
+        },
+        {
+            id: 6,
+            nombre: "Emilia Mernes",
+            fotoCantante: "../../assets/imgDetalleCancion/emilia-mernes.webp"
+        },
+        {
+            id: 7,
+            nombre: "Coldplay",
+            fotoCantante: "../../assets/imgDetalleCancion/Coldplay.jpg"
+        }
+    ];
+
+
+    // Función para manejar el clic y la lógica del boton PLAY y PAUSE
     const handlePlayPause = () => {
         // Invierte el estado actual
         const newState = !isPlaying;
@@ -102,7 +143,7 @@ const DetalleCancion = ({ canciones }) => {
 
             {/* ----- informacion del cantante o banda -------- */}
             <section className='container d-flex justify-content-center align-items-center mb-5'>
-                <Image src={imgGrupo} className='imgCircularAlbum rounded-circle' alt='imagen del grupo' />
+                <Image src={imgGrupo} className='galeria-circular-img rounded-circle' alt='imagen del grupo' />
 
                 <div className='ms-3 fondoTransparente p-4'>
                     <div className='fw-bold fs-4 text-light'>Artista</div>
@@ -119,9 +160,9 @@ const DetalleCancion = ({ canciones }) => {
                 <TablaCanciones canciones={canciones}></TablaCanciones>
             </section>
 
-            {/* grilla de card */}
+            {/* grilla de card usando localStorage */}
             <section>
-                <h3 className='py-2 ps-3 fondoTransparente'>Publicaciones Populares</h3>
+                <h3 className='py-2 ps-3 mb-3 fondoTransparente'>Publicaciones Populares</h3>
                 <Container>
                     <Row xs={2} md={3} lg={4} className="g-4 mb-4">
                         {
@@ -132,27 +173,14 @@ const DetalleCancion = ({ canciones }) => {
             </section>
 
 
-            {/* Grilla de imagenes circulares */}
+            {/* Grilla de imagenes circulares usando array maquetado*/}
             <section className='mb-5'>
                 <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
                 <Container>
                     <Row xs={3} md={4} lg={6} className="g-6">
-                        {Array.from({ length: 6 }).map((_, idx) => (
-                            // Col: Contenedor para cada tarjeta
-                            <Col key={idx}>
-                                <div className="text-center">
-                                    <Image
-                                        src={imgGrupo}
-                                        alt="artista recomendado"
-                                        className="galeria-circular-img mb-2"
-                                        roundedCircle
-                                    />
-
-                                    {/* Título o nombre debajo de la imagen */}
-                                    <p className="fw-bold">Nombre Artista</p>
-                                </div>
-                            </Col>
-                        ))}
+                        {
+                            artistasRecomendados.map((artista, indice) => <CardArtistasRecomendados key={indice} artista={artista}></CardArtistasRecomendados>)
+                        }
                     </Row>
                 </Container>
             </section>
