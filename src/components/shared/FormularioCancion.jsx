@@ -192,7 +192,7 @@ const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
                     <Col xs={12}>
                         <Form.Group controlId="exampleForm.ControlUrlImgCancion" className="text-dark mb-3">
                             <Form.Label>URL Imágen portada:</Form.Label>
-                            <Form.Control type="url" {...register("urlImgCancion", {
+                            <Form.Control type="text" placeholder='archivo de imagen de portada de la canción' {...register("urlImgCancion", {
                                 required: "La URL de la imágen de portada de la canción es un dato obligatorio",
                             })} />
                             <Form.Text className="text-danger">{errors.urlImgCancion?.message}</Form.Text>
@@ -202,7 +202,7 @@ const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
                     <Col xs={12}>
                         <Form.Group controlId="exampleForm.ControlUrlCancion" className="text-dark mb-3">
                             <Form.Label>URL ó mp3 para reproducir canción:</Form.Label>
-                            <Form.Control type="url" {...register("urlCancion", {
+                            <Form.Control type="text" placeholder='archivo para escuchar la canción'  {...register("urlCancion", {
                                 required: "La URL de la canción es un dato obligatorio",
                             })} />
                             <Form.Text className="text-danger">{errors.urlCancion?.message}</Form.Text>
