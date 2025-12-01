@@ -2,14 +2,22 @@
 import Image from 'react-bootstrap/Image';
 import imgPortada from '../../assets/imgDetalleCancion/portadaYellow.jpg'
 import imgGrupo from '../../assets/imgDetalleCancion/Coldplay.jpg'
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router';
 import TablaCanciones from './TablaCanciones';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import Row from 'react-bootstrap/Row';
 import CardCancionesPopulares from './CardCancionesPopulares';
-import CardArtistasRecomendados from './CardArtistasRecomendados';
+// import CardArtistasRecomendados from './CardArtistasRecomendados';
+
+// IMPORTACIONES PARA LOS ARTISTAS RECOMENDADOS:
+import badBunnyImg from '../../assets/imgDetalleCancion/badBunny.webp';
+import mariaBecerraImg from '../../assets/imgDetalleCancion/mariaBecerra.webp';
+import airbagImg from '../../assets/imgDetalleCancion/airgag.jpg';
+import luckRaImg from '../../assets/imgDetalleCancion/luckRa.avif';
+import bizarrapImg from '../../assets/imgDetalleCancion/bizarrap.webp';
+import emiliaMernesImg from '../../assets/imgDetalleCancion/emilia-mernes.webp';
+
 
 
 
@@ -178,9 +186,26 @@ const DetalleCancion = ({ canciones }) => {
                 <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
                 <Container>
                     <Row xs={3} md={4} lg={6} className="g-6">
-                        {
-                            artistasRecomendados.map((artista, indice) => <CardArtistasRecomendados key={indice} artista={artista}></CardArtistasRecomendados>)
-                        }
+                        {Array.from({ length: 6 }).map((_, idx) => (
+                            <Col key={idx}>
+                                <div className="text-center">
+                                    <Image
+                                        src={badBunnyImg}
+                                        alt='Foto Bud Bunny'
+                                        className="galeria-circular-img mb-2"
+                                        roundedCircle
+                                    />
+
+                                    {/* Título o nombre debajo de la imagen */}
+                                    <p className="fw-bold">Bad Bunny</p>
+                                </div>
+
+                                {/* Para armar grilla de imagenes circulares  */}
+                                {/* {
+                                artistasRecomendados.map((artista, indice) => <CardArtistasRecomendados key={indice} artista={artista}></CardArtistasRecomendados>)
+                                } */}
+                            </Col>
+                        ))}
                     </Row>
                 </Container>
             </section>
