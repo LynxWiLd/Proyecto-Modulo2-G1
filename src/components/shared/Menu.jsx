@@ -1,10 +1,19 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // <-- ¡IMPORTANTE! Añadida useNavigate
 import Icon from "/Icon.png";
 import { useAuth } from "../routes/AuthContext";
 
 const Menu = () => {
-  const { user, logout } = useAuth();
+  // 1. Renombramos el 'logout' del contexto a 'authLogout'
+  const { user, logout: authLogout } = useAuth(); 
+  const navigate = useNavigate();
+  
+  // 2. Nueva función para manejar el cierre de sesión y la redirección
+  const handleLogout = () => {
+      authLogout(); 
+      navigate("/"); 
+  };
+  
 
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="px-5">
@@ -17,7 +26,7 @@ const Menu = () => {
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">
+          <Nav.Link as={Link} to="/UserPage">
             Inicio
           </Nav.Link>
 
@@ -28,7 +37,8 @@ const Menu = () => {
 
         <Nav>
           {user ? (
-            <Nav.Link onClick={logout}>Cerrar sesión</Nav.Link>
+            // 3. Aplicamos la nueva función al onClick
+            <Nav.Link onClick={handleLogout}>Cerrar sesión</Nav.Link>
           ) : (
             <Nav.Link as={Link} to="/login">
               Iniciar Sesion
