@@ -212,6 +212,10 @@
 /* ------------------------------------------------------------------- */
 .card-con-boton {
   overflow: hidden; /* Asegura que no haya scrollbars si hay efectos fuera del borde */
+  /* Agrega una transición suave para que el efecto no sea brusco */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  /* Asegura que la tarjeta esté lista para la transformación (mejora el rendimiento) */
+  will-change: transform;
 }
 
 /* Estilos del Botón Play (boton-play-overlay) */
@@ -236,6 +240,16 @@
 }
 
 /* Efecto Hover (Al pasar el mouse sobre la Card) */
+.card-con-boton:hover {
+  /* Agrandar la tarjeta un 3% (1.03) */
+  transform: scale(1.03);
+
+  /* Levantar la tarjeta añadiendo una sombra más profunda (opcional, pero recomendado) */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+
+  /* Asegura que el contenido (como el botón de Play) no se recorte */
+  z-index: 10;
+}
 
 .card-con-boton:hover .boton-play-overlay {
   /* Hacer visible */

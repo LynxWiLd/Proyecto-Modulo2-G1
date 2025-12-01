@@ -109,7 +109,7 @@ import Row from 'react-bootstrap/Row';
                 </div>
             </section>
 
-
+            {/* Tabla de canciones recomnedadas usando localStorage */}
             <section className='pt-2 ps-3 fondoTransparente'>
                 <div className="d-flex align-items-center">
                     <h3>Recomendaciones</h3>
