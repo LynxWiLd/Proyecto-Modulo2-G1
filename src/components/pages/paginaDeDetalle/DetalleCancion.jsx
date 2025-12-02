@@ -83,7 +83,7 @@ const DetalleCancion = ({ canciones }) => {
             <section className='text-ligth position-relative'>
                 {/* imagen portada de la cancion */}
                 <div className='imagen-container'>
-                    <Image src={imgPortada} className='imgPortadaCancion' fluid alt='imagen portada canción o album' />
+                    <Image src={cancionBuscada.urlImgCancion} className='imgPortadaCancion' fluid alt={`imagen de la cancion ${cancionBuscada.nombreCancion}`} />
                 </div>
                 {/*Overlay Superior Izquierda: "Artista Verificado" */}
                 <div className="overlay top-left">
@@ -124,7 +124,7 @@ const DetalleCancion = ({ canciones }) => {
 
             {/* ----- informacion del cantante o banda -------- */}
             <section className='container d-flex justify-content-center align-items-center mb-5'>
-                <Image src={imgGrupo} className='galeria-circular-img rounded-circle' alt='imagen del grupo' />
+                <Image src={cancionBuscada.urlImgCancion} className='galeria-circular-img rounded-circle' alt={`imagen del Artista ${cancionBuscada.artistaGrupo}`}/>
 
                 <div className='ms-3 fondoTransparente p-4'>
                     <div className='fw-bold fs-4 text-light'>Artista</div>

@@ -92,7 +92,8 @@
   /* Asegura que los overlays no sobresalgan de bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   /* Sombra para darle profundidad */
-  object-fit: covfiller;
+  /* object-fit: covfiller; */
+  object-fit: contain;
   max-height: 200px;
 }
 
@@ -236,25 +237,25 @@
 
 /* 1. Define el aspecto de la imagen (ej. cuadrado) */
 .card-con-boton .card-img-container {
-    /* Establece la relación de aspecto 1:1 (cuadrado).
+  /* Establece la relación de aspecto 1:1 (cuadrado).
       Esto fuerza al contenedor a tener el mismo alto que ancho, 
       independientemente del tamaño de la imagen original.
     */
-    aspect-ratio: 1 / 1; 
-    
-    /* Asegura que cualquier parte que se desborde se oculte */
-    overflow: hidden; 
+  aspect-ratio: 1 / 1;
+
+  /* Asegura que cualquier parte que se desborde se oculte */
+  overflow: hidden;
 }
 
 /* 2. Ajusta la imagen al contenedor */
 .card-con-boton .card-img-container .card-img-top {
-    /* Ocupar el 100% del contenedor */
-    width: 100%; 
-    height: 100%;
-    
-    /* Asegura que la imagen cubra todo el espacio sin distorsionarse. 
+  /* Ocupar el 100% del contenedor */
+  width: 100%;
+  height: 100%;
+
+  /* Asegura que la imagen cubra todo el espacio sin distorsionarse. 
        Recortará las partes que no encajen. */
-    object-fit: cover; 
+  object-fit: cover;
 }
 
 /* ------------------------------------------------------------------- */
@@ -266,7 +267,7 @@
   /* Define un tamaño fijo y cuadrado para la imagen */
   width: 150px;
   height: 150px;
-transition: transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   /* object-fit: cover asegura que la imagen cubra el área 
        sin distorsionarse, recortando el exceso si es necesario. */
   object-fit: cover;
@@ -277,13 +278,11 @@ transition: transform 0.3s ease-in-out;
 
 /* Estado al pasar el puntero (hover) */
 .galeria-circular-img:hover {
-    /* Agranda la imagen en un 10% */
-    transform: scale(1.1); 
-    /* Opcional: Eleva la imagen ligeramente para un mejor efecto visual */
-    z-index: 10;
+  /* Agranda la imagen en un 10% */
+  transform: scale(1.1);
+  /* Opcional: Eleva la imagen ligeramente para un mejor efecto visual */
+  z-index: 10;
 }
-
-
 
 /* =======================================================
   Media Query: Ajuste de Altura de imagenes para Pantallas MD y Grandes
