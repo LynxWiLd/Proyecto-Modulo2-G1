@@ -6,9 +6,9 @@ import About from "./components/pages/About";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Error404 from "./components/pages/Error404";
-import DetalleCancion from "./components/pages/DetalleCancion";
+import DetalleCancion from "./components/pages/paginaDeDetalle/DetalleCancion";
 import { useEffect, useState } from "react";
-import FormularioCancion from "./components/pages/FormularioCancion";
+import FormularioCancion from "./components/shared/FormularioCancion";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import Administracion from "./components/pages/Administracion";
 
@@ -21,17 +21,25 @@ function App() {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
 
-  //LocalStorage de las canciones
-  const songLocalStorage = JSON.parse(localStorage.getItem("adminKey")) || [];
-  const [canciones, setCanciones] = useState(songLocalStorage);
+
+  //canciones
+  const cancionesLocalStorage =
+    JSON.parse(localStorage.getItem("cancionesKey")) || [];
+  const [canciones, setCanciones] = useState(cancionesLocalStorage);
+
   useEffect(() => {
-    localStorage.setItem("adminKey", JSON.stringify(canciones));
+    localStorage.setItem("cancionesKey", JSON.stringify(canciones));
   }, [canciones]);
 
-  const crearCancion = (nuevaSong) => {
-    nuevaSong.id = crypto.randomUUID();
-    setCanciones([...canciones, nuevaSong]);
+  //CRUD - CREAR CANCION
+  const crearCancion = (nuevaCancion) => {
+    //crear ID cancion y agregarlo al objeto
+    nuevaCancion.idCancion = crypto.randomUUID();
+
+    // agrego la nueva cancion al array que existe
+    setCanciones([...canciones, nuevaCancion]);
   };
+
 
   const editarCancion = (idSong, nuevaSong) => {
     const songEditado = canciones.map((song) => {

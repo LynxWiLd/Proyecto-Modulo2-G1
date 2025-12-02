@@ -81,20 +81,6 @@
 /* *******************************************************************************
               CSS componente <DetalleCancion> - VALENTINA
 ******************************************************************************* */
-/* fondo pared de ladrillos */
-.fondoDetalleCancion {
-  min-height: 100vh;
-  /* O la altura que necesites, por ejemplo 500px */
-  width: 100%;
-  background-image: url("../../src/assets/imgDetalleCancion/paredLadrillos.jpg");
-  background-repeat: no-repeat;
-  /* Que no se repita */
-  background-size: cover;
-  /* Que ocupe toda la pantalla */
-  background-position: center;
-  /* Centrar la imagen */
-}
-
 /*
   =============================================
   Estilos para el CONTENEDOR DE LA IMAGEN DE PORTADA Y OVERLAYS (SEGUNDA CAPA)
@@ -106,7 +92,8 @@
   /* Asegura que los overlays no sobresalgan de bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   /* Sombra para darle profundidad */
-  object-fit: covfiller;
+  /* object-fit: covfiller; */
+  object-fit: contain;
   max-height: 200px;
 }
 
@@ -166,29 +153,149 @@
   padding-bottom: 10px;
 }
 
+/* --------------------------------------
+   Boton PLAY de la cancion seleccionada 
+   -------------------------------------- */
+
+/* Estado Normal: Añade una pequeña sombra para darle profundidad */
 .botonPlay {
   height: 50px;
   width: 50px;
+  /* (Asegúrate de que tus estilos base ya definan width, height, etc.) */
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4); /* Sombra inicial */
+  cursor: "pointer";
 }
 
-.imgCircularAlbum {
-  height: 80px;
-  width: 80px;
-}
+/* Estado Activo: Cuando el usuario está presionando el botón */
+.botonPlay:active {
+  /* 1. Escala el botón para que se vea ligeramente más pequeño (efecto de "hundimiento") */
+  transform: scale(0.95);
 
-.imgCancion {
-  height: 50px;
-  width: 50px;
-}
+  /* 2. Opcional: Reduce la sombra para simular que está "dentro" */
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
 
+  /* 3. Opcional: Mueve el botón hacia abajo un poco para que parezca que se hunde */
+  /* transform: translateY(2px); */
+}
+/* ---------------------------------------------- */
 .fondoTransparente {
   background-color: rgba(27, 122, 35, 0.5);
+}
+
+/* ------------------------------------------------------------------- */
+/* grilla de card de recomendaciones para la cancion seleccionada*/
+/* ------------------------------------------------------------------- */
+.card-con-boton {
+  overflow: hidden; /* Asegura que no haya scrollbars si hay efectos fuera del borde */
+  /* Agrega una transición suave para que el efecto no sea brusco */
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  /* Asegura que la tarjeta esté lista para la transformación (mejora el rendimiento) */
+  will-change: transform;
+}
+
+/* Estilos del Botón Play (boton-play-overlay) */
+
+.boton-play-overlay {
+  /* Ocultar y preparar la animación */
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+
+  /* Ajuste de tamaño para que se vea bien */
+  width: 50px;
+  height: 50px;
+
+  /* Moverlo un poco hacia abajo para el efecto de "entrada" */
+  transform: translateY(10px);
+
+  /* Lo sube 20px desde el borde inferior */
+  bottom: 20px;
+
+  /* Lo mueve 20px desde el borde derecho */
+  right: 20px;
+}
+
+/* Efecto Hover (Al pasar el mouse sobre la Card) */
+.card-con-boton:hover {
+  /* Agrandar la tarjeta un 3% (1.03) */
+  transform: scale(1.03);
+
+  /* Levantar la tarjeta añadiendo una sombra más profunda (opcional, pero recomendado) */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+
+  /* Asegura que el contenido (como el botón de Play) no se recorte */
+  z-index: 10;
+}
+
+.card-con-boton:hover .boton-play-overlay {
+  /* Hacer visible */
+  opacity: 1;
+
+  /* Mover a su posición final (la definida por bottom-0 y end-0) */
+  transform: translateY(0);
+}
+
+/* 1. Define el aspecto de la imagen (ej. cuadrado) */
+.card-con-boton .card-img-container {
+  /* Establece la relación de aspecto 1:1 (cuadrado).
+      Esto fuerza al contenedor a tener el mismo alto que ancho, 
+      independientemente del tamaño de la imagen original.
+    */
+  aspect-ratio: 1 / 1;
+
+  /* Asegura que cualquier parte que se desborde se oculte */
+  overflow: hidden;
+}
+
+/* 2. Ajusta la imagen al contenedor */
+.card-con-boton .card-img-container .card-img-top {
+  /* Ocupar el 100% del contenedor */
+  width: 100%;
+  height: 100%;
+
+  /* Asegura que la imagen cubra todo el espacio sin distorsionarse. 
+       Recortará las partes que no encajen. */
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------------------- */
+
+/******************************************************************
+  Clase CSS para controlar el tamaño de las imágenes circulares de grilla de ARTISTAS RECOMENDADOS
+/****************************************************************/
+.galeria-circular-img {
+  /* Define un tamaño fijo y cuadrado para la imagen */
+  width: 150px;
+  height: 150px;
+  transition: transform 0.3s ease-in-out;
+  /* object-fit: cover asegura que la imagen cubra el área 
+       sin distorsionarse, recortando el exceso si es necesario. */
+  object-fit: cover;
+
+  /* Agregamos una sombra sutil para un mejor efecto visual (opcional) */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estado al pasar el puntero (hover) */
+.galeria-circular-img:hover {
+  /* Agranda la imagen en un 10% */
+  transform: scale(1.1);
+  /* Opcional: Eleva la imagen ligeramente para un mejor efecto visual */
+  z-index: 10;
 }
 
 /* =======================================================
   Media Query: Ajuste de Altura de imagenes para Pantallas MD y Grandes
   ======================================================= */
-
+/* Media Query: Hacemos las imágenes más pequeñas en móviles (xs)
+  para que quepan mejor cuando hay 2 por fila.
+*/
+@media (max-width: 575.98px) {
+  .galeria-circular-img {
+    width: 100px;
+    height: 100px;
+  }
+}
 /* medianos */
 @media (min-width: 768px) and (max-width: 991px) {
   .imagen-container {
@@ -250,4 +357,3 @@
 /* *******************************************************************************
               FIN CSS componente <DetalleCancion> - VALENTINA
 ******************************************************************************* */
-
