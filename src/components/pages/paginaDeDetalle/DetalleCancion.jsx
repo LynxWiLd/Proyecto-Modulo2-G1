@@ -126,9 +126,9 @@ const DetalleCancion = ({ canciones }) => {
             <section className='container d-flex justify-content-center align-items-center mb-5'>
                 <Image src={cancionBuscada.urlImgCancion} className='galeria-circular-img rounded-circle' alt={`imagen del Artista ${cancionBuscada.artistaGrupo}`}/>
 
-                <div className='ms-3 fondoTransparente p-4'>
-                    <div className='fw-bold fs-4 text-light'>Artista</div>
-                    <Link className='fw-bold fs-4 text-light' to={''}>{cancionBuscada.artistaGrupo}</Link>
+                <div className='ms-3 fondoTransparente p-4 text-center'>
+                    <div className='fw-bold text-light'>Artista</div>
+                    <Link className='fw-bold text-light' to={''}>{cancionBuscada.artistaGrupo}</Link>
                 </div>
             </section>
 
