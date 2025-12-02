@@ -7,10 +7,9 @@ import {
   Button,
   InputGroup,
 } from "react-bootstrap";
-import { FaFilter, FaRegHeart, FaUserPlus, FaSearch } from "react-icons/fa";
+import { FaFilter, FaRegHeart, FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../routes/AuthContext";
 import SongCard from "../services/SongCard";
 import "../styles/guest.css"; // IMPORTANTE
 
@@ -69,7 +68,7 @@ const UserPage = () => {
             <InputGroup className="guest-search mx-2">
               {/* Campo de entrada de texto */}
               <FormControl
-                placeholder="¿Que cancion quieres reproducir?"
+                placeholder="¿Que quieres reproducir?"
                 aria-label="Buscador de música"
               />
               {/* Botón de búsqueda */}
@@ -79,7 +78,7 @@ const UserPage = () => {
             </InputGroup>
           </div>
           {/*Principal*/}
-          <Row className="g-2">
+          <Row className="g-3">
             {cancionesFiltradas.map((song) => (
               <SongCard
                 key={song.id}
@@ -91,7 +90,7 @@ const UserPage = () => {
           </Row>
           {/* Listas */}
           <div className="guest-glass mt-5 mx-2">
-            <h2 className="m-2">holaa</h2>
+            <h2 className="m-2">Tus Playlist</h2>
             <Row className="g-2">
               {cancionesFiltradas.map((song) => (
                 <SongCard
@@ -106,9 +105,9 @@ const UserPage = () => {
         </div>
         {/*Lista de favoritos*/}
         <div className="d-none d-md-block col-md-4 col-lg-3 guest-glass mx-md-4">
-          <h5 className="text-center">
+          <h5 className="text-center mt-3">
             <FaRegHeart className="me-2 mb-1" />
-            Tu Lista de Favoritos
+            Tus Favoritos
           </h5>
         </div>
       </Row>
