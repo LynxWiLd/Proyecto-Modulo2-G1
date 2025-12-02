@@ -6,7 +6,6 @@ import About from "./components/pages/About";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Error404 from "./components/pages/Error404";
-import DetalleCancion from "./components/pages/DetalleCancion";
 import { useEffect, useState } from "react";
 import FormularioCancion from "./components/pages/FormularioCancion";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
@@ -65,7 +64,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route
           path="/detalle/:id"
-          element={<DetalleCancion canciones={canciones} />}
+          element={""}
         />
 
         {/* RUTAS PROTEGIDAS */}
