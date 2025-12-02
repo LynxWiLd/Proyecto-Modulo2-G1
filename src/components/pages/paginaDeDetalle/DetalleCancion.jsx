@@ -8,6 +8,7 @@ import TablaCanciones from './TablaCanciones';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import CardCancionesPopulares from './CardCancionesPopulares';
+import { useParams } from "react-router";
 // import CardArtistasRecomendados from './CardArtistasRecomendados';
 
 // IMPORTACIONES PARA LOS ARTISTAS RECOMENDADOS:
@@ -24,6 +25,25 @@ import emiliaMernesImg from '../../assets/imgDetalleCancion/emilia-mernes.webp';
 // debera recibir por path el ID de la "cancion" seleccionada. canciones tiene un array con las canciones del localstorage para mostrar en la lista de sugeridos
 // const DetalleCancion = ({ canciones, buscarCancion }) => {
 const DetalleCancion = ({ canciones }) => {
+    // id pasado en el path. id es un objeto que devuelve useParams
+    const { id } = useParams();
+    console.log(id)
+
+    // 1. DEFINE EL ESTADO PARA GUARDAR LA CANCIÓN
+    const [cancionBuscada, setCancionBuscada] = useState({});
+
+    // buscar cancion
+    const buscarCancion = (id) => {
+        const cancionEncontrada = canciones.find((item) => item.idCancion === id)
+        return cancionEncontrada
+    }
+
+    useEffect(() => {
+        // busca en array canciones la cancion que tiene el ID
+        const cancionBuscada = buscarCancion(id)
+        setCancionBuscada(cancionBuscada); 
+    },[id, canciones])
+
 
     // variable de estado: pausa o play
     const [isPlaying, setIsPlaying] = useState(false);
@@ -57,12 +77,6 @@ const DetalleCancion = ({ canciones }) => {
         }
     };
 
-    // buscar cancion
-    //   const buscarCancion = (idCancion)=>{
-    //     const cancionEncontrada = canciones.find((item)=>item.id===idCancion)
-    //     return cancionEncontrada
-    //   }
-
 
     return (
         <main>
@@ -78,12 +92,12 @@ const DetalleCancion = ({ canciones }) => {
 
                 {/* Overlay centro: nombre Cancion */}
                 <div className="overlay centered-text text-white p-2">
-                    <h1 className="mb-0 fw-bold display-1 px-3">YELLOW</h1>
+                    <h1 className="mb-0 fw-bold display-1 px-3">{cancionBuscada.nombreCancion}</h1>
                 </div>
 
                 {/* Overlay Inferior Izquierda: Detalles */}
                 <div className="overlay bottom-left text-white p-2">
-                    <p className="mb-0"><span className='fw-bold'>ColdPlay - Parachutes</span> - 2000 - 4:26 - 3.421.608.407</p>
+                    <p className="mb-0"><span className='fw-bold'>{cancionBuscada.artistaGrupo} - {cancionBuscada.nombreAlbun}</span> - {cancionBuscada.anioCancion} - {cancionBuscada.duracionCancion} - 3.421.608.407</p>
                 </div>
             </section>
 
@@ -95,7 +109,6 @@ const DetalleCancion = ({ canciones }) => {
                     className='botonPlay d-flex justify-content-center align-items-center rounded-circle'
                     onClick={handlePlayPause}
                     title={isPlaying ? "Pausar canción" : "Reproducir canción"}>
-                    {/* 🔴 PASO 5: Renderizado Condicional del Ícono */}
                     <i className={`bi ${isPlaying ? 'bi-pause-fill' : 'bi-play-fill'} fs-1 text-white`}></i>
                 </Button>
 
@@ -115,7 +128,7 @@ const DetalleCancion = ({ canciones }) => {
 
                 <div className='ms-3 fondoTransparente p-4'>
                     <div className='fw-bold fs-4 text-light'>Artista</div>
-                    <Link className='fw-bold fs-4 text-light' to={''}>ColdPlay</Link>
+                    <Link className='fw-bold fs-4 text-light' to={''}>{cancionBuscada.artistaGrupo}</Link>
                 </div>
             </section>
 
@@ -146,73 +159,73 @@ const DetalleCancion = ({ canciones }) => {
                 <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
                 <Container>
                     <Row xs={3} md={4} lg={6} className="g-6">
-                            <Col>
-                                <div className="text-center ">
-                                    <Image
-                                        src={badBunnyImg}
-                                        alt='Foto Bud Bunny'
-                                        className="galeria-circular-img mb-2"
-                                        roundedCircle
-                                    />
-                                    <p className="fw-bold text-dark">Bad Bunny</p>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="text-center">
-                                    <Image
-                                        src={mariaBecerraImg}
-                                        alt='Foto Bud Bunny'
-                                        className="galeria-circular-img mb-2"
-                                        roundedCircle
-                                    />
-                                    <p className="fw-bold text-dark">María Becerra</p>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="text-center">
-                                    <Image
-                                        src={airbagImg}
-                                        alt='Foto Bud Bunny'
-                                        className="galeria-circular-img mb-2"
-                                        roundedCircle
-                                    />
-                                    <p className="fw-bold text-dark">AirBag</p>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="text-center">
-                                    <Image
-                                        src={luckRaImg}
-                                        alt='Foto Bud Bunny'
-                                        className="galeria-circular-img mb-2"
-                                        roundedCircle
-                                    />
-                                    <p className="fw-bold text-dark">Luck Ra</p>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="text-center">
-                                    <Image
-                                        src={bizarrapImg}
-                                        alt='Foto Bud Bunny'
-                                        className="galeria-circular-img mb-2"
-                                        roundedCircle
-                                    />
-                                    <p className="fw-bold text-dark">Bizarrap</p>
-                                </div>
-                            </Col>
-                            <Col>
-                                <div className="text-center">
-                                    <Image
-                                        src={emiliaMernesImg}
-                                        alt='Foto Bud Bunny'
-                                        className="galeria-circular-img mb-2"
-                                        roundedCircle
-                                    />
-                                    <p className="fw-bold text-dark"
-                                    >Emilia Mernes</p>
-                                </div>
-                            </Col>
+                        <Col>
+                            <div className="text-center ">
+                                <Image
+                                    src={badBunnyImg}
+                                    alt='Foto Bud Bunny'
+                                    className="galeria-circular-img mb-2"
+                                    roundedCircle
+                                />
+                                <p className="fw-bold text-dark">Bad Bunny</p>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div className="text-center">
+                                <Image
+                                    src={mariaBecerraImg}
+                                    alt='Foto Bud Bunny'
+                                    className="galeria-circular-img mb-2"
+                                    roundedCircle
+                                />
+                                <p className="fw-bold text-dark">María Becerra</p>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div className="text-center">
+                                <Image
+                                    src={airbagImg}
+                                    alt='Foto Bud Bunny'
+                                    className="galeria-circular-img mb-2"
+                                    roundedCircle
+                                />
+                                <p className="fw-bold text-dark">AirBag</p>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div className="text-center">
+                                <Image
+                                    src={luckRaImg}
+                                    alt='Foto Bud Bunny'
+                                    className="galeria-circular-img mb-2"
+                                    roundedCircle
+                                />
+                                <p className="fw-bold text-dark">Luck Ra</p>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div className="text-center">
+                                <Image
+                                    src={bizarrapImg}
+                                    alt='Foto Bud Bunny'
+                                    className="galeria-circular-img mb-2"
+                                    roundedCircle
+                                />
+                                <p className="fw-bold text-dark">Bizarrap</p>
+                            </div>
+                        </Col>
+                        <Col>
+                            <div className="text-center">
+                                <Image
+                                    src={emiliaMernesImg}
+                                    alt='Foto Bud Bunny'
+                                    className="galeria-circular-img mb-2"
+                                    roundedCircle
+                                />
+                                <p className="fw-bold text-dark"
+                                >Emilia Mernes</p>
+                            </div>
+                        </Col>
                     </Row>
                 </Container>
             </section>

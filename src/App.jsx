@@ -45,6 +45,10 @@ function App() {
     localStorage.setItem("adminKey", JSON.stringify(servicios));
   }, [servicios]);
 
+
+  // id que se pasa por PATH
+  const id = 'd223ac36-692f-46c1-8ae4-1dd473f630a2'
+
   return (
     <BrowserRouter>
       <Menu
@@ -67,7 +71,7 @@ function App() {
           />
         </Route>
 
-        <Route path="/detalleCancion" element={<DetalleCancion canciones={canciones} />} />
+        <Route path="/detalleCancion/:id" element={<DetalleCancion canciones={canciones} />} />
         <Route
           path="/crearCancion"
           element={
