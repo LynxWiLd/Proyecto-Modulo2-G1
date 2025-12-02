@@ -34,7 +34,6 @@ const Login = ({ setUsuarioLogueado }) => {
         title: "¡Bienvenido al centro de control!",
         text: "Tu musica y sistema sincronizados. Adelante",
         icon: "success",
-                 
       });
       navegacion("/administracion");
     } else {

@@ -7,10 +7,11 @@ import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Error404 from "./components/pages/Error404";
 import DetalleCancion from "./components/pages/DetalleCancion";
-import { useEffect, useState } from "react";
 import FormularioCancion from "./components/pages/FormularioCancion";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import Administracion from "./components/pages/Administracion";
+import UserPage from "./components/pages/UserPage";
+import { useEffect, useState } from "react";
 
 function App() {
   const usuarioSessionStorage =
@@ -103,6 +104,7 @@ function App() {
         </Route>
 
         <Route path="*" element={<Error404 />} />
+        <Route path="/userPage" element={<UserPage/>} />
       </Routes>
 
       <Footer />

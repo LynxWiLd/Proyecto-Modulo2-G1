@@ -1,5 +1,5 @@
 import { Navbar, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Icon from "/Icon.png";
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
@@ -7,13 +7,13 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
   const manejarLogout = () => {
     setUsuarioLogueado(false);
     sessionStorage.removeItem("usuarioKey");
+      navigate("/"); 
   };
-
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="px-5">
       <img src={Icon} alt="icono" id="icon" />
 
-      <Navbar.Brand as={Link} to="/">Tuneo</Navbar.Brand>
+      <Navbar.Brand as={Link} to="/UserPage">Tuneo</Navbar.Brand>
 
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
