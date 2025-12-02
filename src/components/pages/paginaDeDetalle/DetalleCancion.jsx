@@ -41,8 +41,8 @@ const DetalleCancion = ({ canciones }) => {
     useEffect(() => {
         // busca en array canciones la cancion que tiene el ID
         const cancionBuscada = buscarCancion(id)
-        setCancionBuscada(cancionBuscada); 
-    },[id, canciones])
+        setCancionBuscada(cancionBuscada);
+    }, [id, canciones])
 
 
     // variable de estado: pausa o play
@@ -124,7 +124,7 @@ const DetalleCancion = ({ canciones }) => {
 
             {/* ----- informacion del cantante o banda -------- */}
             <section className='container d-flex justify-content-center align-items-center mb-5'>
-                <Image src={cancionBuscada.urlImgCancion} className='galeria-circular-img rounded-circle' alt={`imagen del Artista ${cancionBuscada.artistaGrupo}`}/>
+                <Image src={cancionBuscada.urlImgCancion} className='galeria-circular-img rounded-circle' alt={`imagen del Artista ${cancionBuscada.artistaGrupo}`} />
 
                 <div className='ms-3 fondoTransparente p-4 text-center'>
                     <div className='fw-bold text-light'>Artista</div>
