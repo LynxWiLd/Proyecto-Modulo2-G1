@@ -1,5 +1,4 @@
 import {Col,Image} from 'react-bootstrap';
-import imgGrupo from '../../assets/imgDetalleCancion/Coldplay.jpg'
 
 
 const CardArtistasRecomendados = ({artista}) => {
@@ -7,7 +6,7 @@ const CardArtistasRecomendados = ({artista}) => {
         <Col>
             <div className="text-center">
                 <Image
-                    src={badBunnyImg}
+                    src={"badBunnyImg"}
                     alt={`Foto de ${artista.nombre}`}
                     className="galeria-circular-img mb-2"
                     roundedCircle

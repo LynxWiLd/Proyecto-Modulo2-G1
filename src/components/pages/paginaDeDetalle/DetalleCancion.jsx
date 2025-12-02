@@ -1,13 +1,11 @@
 
 import Image from 'react-bootstrap/Image';
-import imgPortada from '../../assets/imgDetalleCancion/portadaYellow.jpg'
-import imgGrupo from '../../assets/imgDetalleCancion/Coldplay.jpg'
 import { Button, Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router';
 import TablaCanciones from './TablaCanciones';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import CardCancionesPopulares from './CardCancionesPopulares';
+import CardCancionesPopulares from '../../services/CardCancionesPopulares';
 import { useParams } from "react-router";
 // import CardArtistasRecomendados from './CardArtistasRecomendados';
 
@@ -34,6 +32,7 @@ const DetalleCancion = ({ canciones }) => {
 
     // buscar cancion
     const buscarCancion = (id) => {
+        console.log(canciones)
         const cancionEncontrada = canciones.find((item) => item.idCancion === id)
         return cancionEncontrada
     }
@@ -41,8 +40,9 @@ const DetalleCancion = ({ canciones }) => {
     useEffect(() => {
         // busca en array canciones la cancion que tiene el ID
         const cancionBuscada = buscarCancion(id)
+        console.log(cancionBuscada)
         setCancionBuscada(cancionBuscada);
-    }, [id, canciones])
+    },[])
 
 
     // variable de estado: pausa o play

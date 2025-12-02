@@ -10,8 +10,18 @@ import DetalleCancion from "./components/pages/paginaDeDetalle/DetalleCancion";
 import { useEffect, useState } from "react";
 import FormularioCancion from "./components/shared/FormularioCancion";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
+import Administracion from "./components/pages/Administracion";
 
 function App() {
+  const usuarioSessionStorage =
+    JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
+  const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
+
+  useEffect(() => {
+    sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
+  }, [usuarioLogueado]);
+
+
   //canciones
   const cancionesLocalStorage =
     JSON.parse(localStorage.getItem("cancionesKey")) || [];
@@ -30,20 +40,21 @@ function App() {
     setCanciones([...canciones, nuevaCancion]);
   };
 
-  const usuarioSessionStorage =
-    JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
-  const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
 
-  const adminLocalStorage = JSON.parse(localStorage.getItem("adminKey")) || [];
-  const [servicios, setServicios] = useState(adminLocalStorage);
+  const editarCancion = (idSong, nuevaSong) => {
+    const songEditado = canciones.map((song) => {
+      if (song.id === idSong) {
+        return { ...song, ...nuevaSong };
+      }
+      return song;
+    });
+    setCanciones(songEditado);
+  };
 
-  useEffect(() => {
-    sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
-  }, [usuarioLogueado]);
-
-  useEffect(() => {
-    localStorage.setItem("adminKey", JSON.stringify(servicios));
-  }, [servicios]);
+  const eliminarCancion = (id) => {
+    const songFiltrado = canciones.filter((song) => song.id !== id);
+    setCanciones(songFiltrado);
+  };
 
   return (
     <BrowserRouter>
@@ -53,31 +64,52 @@ function App() {
       />
 
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home canciones={canciones} />} />
         <Route path="/about" element={<About />} />
         <Route
           path="/login"
           element={<Login setUsuarioLogueado={setUsuarioLogueado} />}
         />
         <Route path="/register" element={<Register />} />
-        <Route element={<ProtectorRutas usuarioLogueado={usuarioLogueado} />}>
+        <Route
+          path="/detalle/:id"
+          element={<DetalleCancion canciones={canciones} />}
+        />
+
+        {/* RUTAS PROTEGIDAS */}
+        <Route
+          path="/administracion"
+          element={<ProtectorRutas usuarioLogueado={usuarioLogueado} />}
+        >
           <Route
-            path="/administracion"
-            element={<div>Administración (Ruta Protegida)</div>}
+            index
+            element={
+              <Administracion
+                canciones={canciones}
+                eliminarCancion={eliminarCancion}
+              ></Administracion>
+            }
+          />
+          <Route
+            path="crearCancion"
+            element={
+              <FormularioCancion
+                titulo="Crear Canción"
+                crearCancion={crearCancion}
+              />
+            }
+          />
+          <Route
+            path="editarCancion"
+            element={
+              <FormularioCancion
+                titulo="Editar Canción"
+                editarCancion={editarCancion}
+              />
+            }
           />
         </Route>
 
-        <Route path="/detalleCancion/:id" element={<DetalleCancion canciones={canciones} />} />
-        <Route
-          path="/crearCancion"
-          element={
-            <FormularioCancion
-              titulo={"Crear Canción"}
-              crearCancion={crearCancion}
-              canciones={canciones}
-            />
-          }
-        />
         <Route path="*" element={<Error404 />} />
       </Routes>
 

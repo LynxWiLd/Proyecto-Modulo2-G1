@@ -1,5 +1,4 @@
-import imgCancion1 from '../../assets/imgDetalleCancion/vivaLaVida.png'
-import ItemCancion from "./ItemCancion";
+import ItemCancion from "../../services/ItemCancion";
 import { Table, Image } from 'react-bootstrap';
 
 
