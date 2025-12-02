@@ -11,16 +11,24 @@ const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
     sessionStorage.removeItem("usuarioKey");
       navegacion("/"); 
   };
+  const navegacionlogin = () => {
+    if (!usuarioLogueado) {
+      navegacion("/");
+    }else{
+      navegacion("/userPage");
+    }
+  };
+
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="px-5">
       <img src={Icon} alt="icono" id="icon" />
 
-      <Navbar.Brand as={Link} to="/UserPage">Tuneo</Navbar.Brand>
+      <Navbar.Brand as={Link} to={"/"}>Tuneo</Navbar.Brand>
 
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
         <Nav className="me-auto">
-          <Nav.Link as={Link} to="/">Inicio</Nav.Link>
+          <Nav.Link onClick={navegacionlogin} >Inicio</Nav.Link>
           <Nav.Link as={Link} to="/about">Sobre Nosotros</Nav.Link>
         </Nav>
 
