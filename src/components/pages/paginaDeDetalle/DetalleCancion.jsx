@@ -6,8 +6,8 @@ import TablaCanciones from './TablaCanciones';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import CardCancionesPopulares from '../../services/CardCancionesPopulares';
+import CardArtistasRecomendados from '../../services/CardArtistasRecomendados';
 import { useParams } from "react-router";
-// import CardArtistasRecomendados from './CardArtistasRecomendados';
 
 // IMPORTACIONES PARA LOS ARTISTAS RECOMENDADOS:
 import badBunnyImg from '../../assets/imgDetalleCancion/badBunny.webp';
@@ -23,6 +23,7 @@ import emiliaMernesImg from '../../assets/imgDetalleCancion/emilia-mernes.webp';
 // debera recibir por path el ID de la "cancion" seleccionada. canciones tiene un array con las canciones del localstorage para mostrar en la lista de sugeridos
 // const DetalleCancion = ({ canciones, buscarCancion }) => {
 const DetalleCancion = ({ canciones }) => {
+    
     // id pasado en el path. id es un objeto que devuelve useParams
     const { id } = useParams();
     console.log(id)
@@ -42,7 +43,7 @@ const DetalleCancion = ({ canciones }) => {
         const cancionBuscada = buscarCancion(id)
         console.log(cancionBuscada)
         setCancionBuscada(cancionBuscada);
-    },[])
+    }, [])
 
 
     // variable de estado: pausa o play
@@ -159,6 +160,9 @@ const DetalleCancion = ({ canciones }) => {
                 <h3 className='py-2 ps-3 fondoTransparente'>Artistas Recomendados</h3>
                 <Container>
                     <Row xs={3} md={4} lg={6} className="g-6">
+                        {/* {
+                            artistasRecomendados.map((artista, indice) => <CardArtistasRecomendados key={indice} artista={artista}></CardArtistasRecomendados>)
+                        } */}
                         <Col>
                             <div className="text-center ">
                                 <Image
