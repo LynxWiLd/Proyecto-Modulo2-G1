@@ -7,10 +7,6 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import "../styles/stylologin.css";
 
-
-
-
-
 const Login = ({ setUsuarioLogueado }) => {
   const {
     register,
@@ -18,24 +14,35 @@ const Login = ({ setUsuarioLogueado }) => {
     formState: { errors },
   } = useForm();
 
-  
-  const navegacion = useNavigate(); 
+  const navegacion = useNavigate();
 
   const onSubmit = (data) => {
     console.log(data);
     if (
-      data.email === import.meta.env.VITE_ADMIN_EMAIL&&
+      data.email === import.meta.env.VITE_ADMIN_EMAIL &&
       data.password === import.meta.env.VITE_ADMIN_PASSWORD
     ) {
-      
       setUsuarioLogueado(true);
-      
+
       Swal.fire({
         title: "¡Bienvenido al centro de control!",
         text: "Tu musica y sistema sincronizados. Adelante",
         icon: "success",
       });
       navegacion("/administracion");
+    } else if (
+      /*Opcion de acceso a la pagina de visitante*/
+      data.email === import.meta.env.VITE_USER_EMAIL &&
+      data.password === import.meta.env.VITE_USER_PASSWORD
+    ) {
+      setUsuarioLogueado(true);
+
+      Swal.fire({
+        title: "¡Bienvenido al centro de control!",
+        text: "Tu musica y sistema sincronizados. Adelante",
+        icon: "success",
+      });
+      navegacion("/userPage");
     } else {
       Swal.fire({
         title: "Ocurrió un error",
@@ -65,7 +72,9 @@ const Login = ({ setUsuarioLogueado }) => {
                 },
               })}
             />
-            <Form.Text className="text-danger">{errors.email?.message}</Form.Text>
+            <Form.Text className="text-danger">
+              {errors.email?.message}
+            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -78,8 +87,7 @@ const Login = ({ setUsuarioLogueado }) => {
                 pattern: {
                   value:
                     /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,16}$/,
-                  message:
-                    "La contraseña debe tener entre 5 y 16 caracteres.",
+                  message: "La contraseña debe tener entre 5 y 16 caracteres.",
                 },
               })}
             />
@@ -99,7 +107,7 @@ const Login = ({ setUsuarioLogueado }) => {
         <Button
           className="w-100 mt-3 "
           variant="secondary"
-          onClick={() => navegacion("/register")} 
+          onClick={() => navegacion("/register")}
         >
           ¿No tenés cuenta? Registrate
         </Button>

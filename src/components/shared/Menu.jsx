@@ -4,10 +4,12 @@ import Icon from "/Icon.png";
 
 const Menu = ({ usuarioLogueado, setUsuarioLogueado }) => {
 
+  const navegacion = useNavigate(); 
+
   const manejarLogout = () => {
     setUsuarioLogueado(false);
     sessionStorage.removeItem("usuarioKey");
-      navigate("/"); 
+      navegacion("/"); 
   };
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="px-5">
