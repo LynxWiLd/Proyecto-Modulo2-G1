@@ -1,8 +1,11 @@
 import { Button, Col, Row, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -44,6 +47,7 @@ const FormularioCancion = ({ titulo, crearCancion, canciones }) => {
           icon: "success",
         });
         reset();
+        navigate("/administracion");
       }
     }
   };

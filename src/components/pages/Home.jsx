@@ -36,7 +36,7 @@ const Home = ({ canciones }) => {
   const handleRegister = () => navigate("/register");
 
   return (
-    <Container className="mt-5 p-4 text-white">
+    <main className="mt-5 p-4 text-white container">
       <h1 className="text-center mb-4">
         <FaMusic className="me-2" /> Explora Música
       </h1>
@@ -63,13 +63,13 @@ const Home = ({ canciones }) => {
       </div>
 
       {/* CARDS */}
-      <div className="home-cards-glass">
-        <Row className="g-4">
+      <Container className="home-cards-glass ">
+        <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
           {cancionesFiltradas.map((song) => (
-            <SongCard key={song.id} canciones={song} />
+            <SongCard key={song.id} cancion={song} />
           ))}
         </Row>
-      </div>
+      </Container>
 
       {/* CREA TU CUENTA */}
       <section className="home-create-account">
@@ -86,7 +86,7 @@ const Home = ({ canciones }) => {
           Crear Cuenta
         </Button>
       </section>
-    </Container>
+    </main>
   );
 };
 

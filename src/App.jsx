@@ -25,7 +25,7 @@ function App() {
   const cancionesLocalStorage =
     JSON.parse(localStorage.getItem("cancionesKey")) || [];
   const [canciones, setCanciones] = useState(cancionesLocalStorage);
-
+  console.log(canciones);
   useEffect(() => {
     localStorage.setItem("cancionesKey", JSON.stringify(canciones));
   }, [canciones]);
@@ -33,7 +33,7 @@ function App() {
   //CRUD - CREAR CANCION
   const crearCancion = (nuevaCancion) => {
     //crear ID cancion y agregarlo al objeto
-    nuevaCancion.idCancion = crypto.randomUUID();
+    nuevaCancion.id = crypto.randomUUID();
 
     // agrego la nueva cancion al array que existe
     setCanciones([...canciones, nuevaCancion]);

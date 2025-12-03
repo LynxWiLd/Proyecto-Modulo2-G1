@@ -29,6 +29,10 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   margin-bottom: 3rem;
+
+  /* 👇 nuevo */
+  width: 100%;
+  overflow: hidden; /* evita que se desborde */
 }
 
 /* CREA TU CUENTA */

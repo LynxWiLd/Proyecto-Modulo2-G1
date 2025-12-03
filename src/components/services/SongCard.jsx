@@ -3,10 +3,10 @@ import { FaPlay } from "react-icons/fa";
 import "../styles/songCard.css";
 import { Link } from "react-router";
 
-const SongCard = ({ songs }) => {
+const SongCard = ({ cancion }) => {
   const handlePlay = () => {
-    if (songs?.urlCancion) {
-      window.open(songs.urlCancion, "_blank");
+    if (cancion?.urlCancion) {
+      window.open(cancion.urlCancion, "_blank");
     } else {
       console.warn("URL de la canción no disponible.");
     }
@@ -19,10 +19,10 @@ const SongCard = ({ songs }) => {
           <Card.Img
             variant="top"
             src={
-              songs?.urlImgCancion ||
+              cancion?.urlImgCancion ||
               "https://via.placeholder.com/400?text=No+Image"
             }
-            alt={`Portada de ${songs?.nombreCancion}`}
+            alt={`Portada de ${cancion?.nombreCancion}`}
             className="w-100 object-fit-cover"
             style={{ aspectRatio: "1/1" }}
           />
@@ -34,21 +34,21 @@ const SongCard = ({ songs }) => {
         <Card.Body className="song-info d-flex flex-column justify-content-between">
           <div>
             <h3 className="text-truncate fs-5">
-              {songs?.nombreCancion || "Título Desconocido"}
+              {cancion?.nombreCancion || "Título Desconocido"}
             </h3>
 
             <p className="text-truncate mb-2">
-              {songs?.artistaGrupo || "Artista Desconocido"}
+              {cancion?.artistaGrupo || "Artista Desconocido"}
             </p>
           </div>
           <small className="text-muted">
-            {songs?.categoriaCancion} | {songs?.duracionCancion}
+            {cancion?.categoriaCancion} | {cancion?.duracionCancion}
           </small>
         </Card.Body>
         <Card.Footer className="text-muted border-top border-secondary bg-dark">
           <Link
             className="mt-2 w-100 btn btn-primary"
-            to={`/detalle/${songs?.id}`}
+            to={`/detalle/${cancion?.id}`}
           >
             Detalle
           </Link>
