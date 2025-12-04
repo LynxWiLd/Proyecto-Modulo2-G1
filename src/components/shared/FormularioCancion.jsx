@@ -181,12 +181,12 @@ const FormularioCancion = ({
           <Form.Label>URL de la imagen</Form.Label>
           <Form.Control
             type="text"
-            {...register("imagenCancion", {
+            {...register("urlImgCancion", {
               required: "La imagen es obligatoria",
             })}
           />
           <Form.Text className="text-danger">
-            {errors.imagenCancion?.message}
+            {errors.urlImgCancion?.message}
           </Form.Text>
         </Form.Group>
 
