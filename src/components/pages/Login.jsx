@@ -7,10 +7,6 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import "../styles/stylologin.css";
 
-
-
-
-
 const Login = ({ setUsuarioLogueado }) => {
   const {
     register,
@@ -18,32 +14,54 @@ const Login = ({ setUsuarioLogueado }) => {
     formState: { errors },
   } = useForm();
 
-  
-  const navegacion = useNavigate(); 
+  const navegacion = useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data);
+    let usuario = null;
+
     if (
-      data.email === import.meta.env.VITE_ADMIN_EMAIL&&
+      data.email === import.meta.env.VITE_ADMIN_EMAIL &&
       data.password === import.meta.env.VITE_ADMIN_PASSWORD
     ) {
-      
-      setUsuarioLogueado(true);
-      
+      usuario = {
+        email: data.email,
+        rol: "admin",
+      };
+
       Swal.fire({
         title: "¡Bienvenido al centro de control!",
-        text: "Tu musica y sistema sincronizados. Adelante",
+        text: "Gestiona canciones y usuarios.",
         icon: "success",
-                 
       });
+
       navegacion("/administracion");
-    } else {
+    } else if (
+      data.email === import.meta.env.VITE_USER_EMAIL &&
+      data.password === import.meta.env.VITE_USER_PASSWORD
+    ) {
+      usuario = {
+        email: data.email,
+        rol: "user",
+      };
+
       Swal.fire({
+        title: "¡Bienvenido!",
+        text: "Tu música y sistema sincronizados.",
+        icon: "success",
+      });
+
+      navegacion("/userPage");
+    } else {
+      return Swal.fire({
         title: "Ocurrió un error",
-        text: "Algo está fuera de sintonía. Usuario o contraseña incorrectos.",
+        text: "Usuario o contraseña incorrectos.",
         icon: "error",
       });
     }
+
+    // Guardamos el usuario COMPLETO (email + rol)
+    setUsuarioLogueado(usuario);
+    sessionStorage.setItem("usuarioKey", JSON.stringify(usuario));
   };
 
   return (
@@ -66,7 +84,9 @@ const Login = ({ setUsuarioLogueado }) => {
                 },
               })}
             />
-            <Form.Text className="text-danger">{errors.email?.message}</Form.Text>
+            <Form.Text className="text-danger">
+              {errors.email?.message}
+            </Form.Text>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -79,8 +99,7 @@ const Login = ({ setUsuarioLogueado }) => {
                 pattern: {
                   value:
                     /^(?=.*\d)(?=.*[\u0021-\u002b\u003c-\u0040])(?=.*[A-Z])(?=.*[a-z])\S{5,16}$/,
-                  message:
-                    "La contraseña debe tener entre 5 y 16 caracteres.",
+                  message: "La contraseña debe tener entre 5 y 16 caracteres.",
                 },
               })}
             />
@@ -100,7 +119,7 @@ const Login = ({ setUsuarioLogueado }) => {
         <Button
           className="w-100 mt-3 "
           variant="secondary"
-          onClick={() => navegacion("/register")} 
+          onClick={() => navegacion("/register")}
         >
           ¿No tenés cuenta? Registrate
         </Button>

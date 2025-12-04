@@ -5,33 +5,23 @@ import { useState } from "react";
 import SongCard from "../services/SongCard";
 import "../styles/home.css";
 
-// Recibe la lista de canciones como prop 'canciones' (la lista completa)
 const Home = ({ canciones }) => {
+  const usuarioSession = JSON.parse(sessionStorage.getItem("usuarioKey"));
   const navigate = useNavigate();
 
-  const [categoria, setCategoria] = useState("Todas");
+  const [artista, setArtista] = useState("Todos");
 
-  const categorias = [
-    "Rock",
-    "Pop",
-    "Electrónica",
-    "Cuarteto",
-    "Rap",
-    "Folclore",
-    "Reggae",
-    "Clásica",
-    "Tango",
-    "Jazz",
-    "Blues",
-    "Country",
+  // ARTISTAS ÚNICOS
+  const artistas = [
+    "Todos",
+    ...new Set((canciones || []).map((c) => c.artistaGrupo)),
   ];
 
-  // Filtra las canciones usando la prop 'canciones'. Usamos 'canciones || []' para evitar errores si 'canciones' es undefined.
+  // FILTRO POR ARTISTA
   const cancionesFiltradas =
-    categoria === "Todas"
+    artista === "Todos"
       ? canciones || []
-      : // Usamos c.categoriaCancion si ese es el nombre de la propiedad en tus objetos
-        (canciones || []).filter((c) => c.categoriaCancion === categoria);
+      : (canciones || []).filter((c) => c.artistaGrupo === artista);
 
   const handleRegister = () => navigate("/register");
 
@@ -42,20 +32,16 @@ const Home = ({ canciones }) => {
       </h1>
 
       {/* FILTRO */}
-      <div className="home-filter-container">
+      <div className="home-filter-container d-flex justify-content-start align-items-center mb-4">
         <Dropdown>
           <Dropdown.Toggle className="home-filter-toggle" variant="dark">
-            <FaFilter className="me-2" /> Filtrar: {categoria}
+            <FaFilter className="me-2" /> Filtrar por artista: {artista}
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="home-filter-menu">
-            <Dropdown.Item onClick={() => setCategoria("Todas")}>
-              Todas
-            </Dropdown.Item>
-
-            {categorias.map((cat) => (
-              <Dropdown.Item key={cat} onClick={() => setCategoria(cat)}>
-                {cat}
+            {artistas.map((art) => (
+              <Dropdown.Item key={art} onClick={() => setArtista(art)}>
+                {art}
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>
@@ -63,29 +49,37 @@ const Home = ({ canciones }) => {
       </div>
 
       {/* CARDS */}
-      <Container className="home-cards-glass ">
-        <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
+      <Container className="home-cards-glass">
+        <Row className="g-3">
           {cancionesFiltradas.map((song) => (
             <SongCard key={song.id} cancion={song} />
           ))}
+
+          {cancionesFiltradas.length === 0 && (
+            <p className="text-center mt-3" style={{ opacity: 0.7 }}>
+              No hay canciones de este artista.
+            </p>
+          )}
         </Row>
       </Container>
 
       {/* CREA TU CUENTA */}
-      <section className="home-create-account">
-        <h4 className="mb-3">
-          <FaUserPlus /> Crea tu cuenta ahora
-        </h4>
+      {!usuarioSession && (
+        <section className="home-create-account">
+          <h4 className="mb-3">
+            <FaUserPlus /> Crea tu cuenta ahora
+          </h4>
 
-        <p>
-          Regístrate gratis para guardar favoritos, crear playlists y recibir
-          recomendaciones personalizadas.
-        </p>
+          <p>
+            Regístrate gratis para guardar favoritos, crear playlists y recibir
+            recomendaciones personalizadas.
+          </p>
 
-        <Button className="home-register-btn" onClick={handleRegister}>
-          Crear Cuenta
-        </Button>
-      </section>
+          <Button className="home-register-btn" onClick={handleRegister}>
+            Crear Cuenta
+          </Button>
+        </section>
+      )}
     </main>
   );
 };
