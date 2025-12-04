@@ -1,69 +1,58 @@
-import { Col, Card, Button } from "react-bootstrap";
-import { FaHeart, FaRegHeart, FaPlay } from "react-icons/fa";
-import "../styles/songcard.css";
+import { Card, Col } from "react-bootstrap";
+import { FaPlay } from "react-icons/fa";
+import "../styles/songCard.css";
+import { Link } from "react-router";
 
-const SongCard = ({ song, isFavorite, toggleFavorito }) => {
+const SongCard = ({ cancion }) => {
+  const handlePlay = () => {
+    if (cancion?.urlCancion) {
+      window.open(cancion.urlCancion, "_blank");
+    } else {
+      console.warn("URL de la canción no disponible.");
+    }
+  };
+
   return (
-    <Col sm={6} md={4} lg={3}>
-      <Card
-        className="bg-dark text-white p-2"
-        style={{
-          borderRadius: "20px",
-          overflow: "hidden",
-          transition: "0.3s",
-          boxShadow: "0 0 18px rgba(0,0,0,0.4)",
-        }}
-      >
-        {/* Imagen simulada */}
-        <div
-          style={{
-            height: "160px",
-            background: "linear-gradient(135deg, #1db954 0%, #121212 100%)",
-            borderRadius: "15px",
-            position: "relative",
-          }}
-        >
-          {/* Botón Play */}
-          <Button
-            variant="light"
-            style={{
-              width: "55px",
-              height: "55px",
-              borderRadius: "50%",
-              position: "absolute",
-              bottom: "12px",
-              right: "12px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "0 0 10px rgba(0,0,0,0.6)",
-            }}
-          >
-            <FaPlay />
-          </Button>
+    <Col xs={12} sm={6} md={4} lg={4} className="mb-4">
+      <Card className="song-card h-100 bg-dark text-white ">
+        <div className="img-container">
+          <Card.Img
+            variant="top"
+            src={
+              cancion?.urlImgCancion ||
+              "https://via.placeholder.com/400?text=No+Image"
+            }
+            alt={`Portada de ${cancion?.nombreCancion}`}
+            className="w-100 object-fit-cover"
+            style={{ aspectRatio: "1/1" }}
+          />
+
+          <button className="play-btn" onClick={handlePlay}>
+            <FaPlay size={22} />
+          </button>
         </div>
+        <Card.Body className="song-info d-flex flex-column justify-content-between">
+          <div>
+            <h3 className="text-truncate fs-5">
+              {cancion?.nombreCancion || "Título Desconocido"}
+            </h3>
 
-        <Card.Body>
-          {/* Título */}
-          <Card.Title className="d-flex justify-content-between align-items-center">
-            {song.nombre}
-
-            {/* CORAZÓN */}
-            <div
-              style={{ cursor: "pointer" }}
-              onClick={() => toggleFavorito(song.id)}
-            >
-              {isFavorite ? (
-                <FaHeart className="text-danger fs-4" />
-              ) : (
-                <FaRegHeart className="text-white fs-4" />
-              )}
-            </div>
-          </Card.Title>
-
-          {/* Categoría */}
-          <Card.Text className="text-secondary">{song.categoria}</Card.Text>
+            <p className="text-truncate mb-2">
+              {cancion?.artistaGrupo || "Artista Desconocido"}
+            </p>
+          </div>
+          <small className="text-muted">
+            {cancion?.categoriaCancion} | {cancion?.duracionCancion}
+          </small>
         </Card.Body>
+        <Card.Footer className="text-muted border-top border-secondary bg-dark">
+          <Link
+            className="mt-2 w-100 btn btn-primary"
+            to={`/detalle/${cancion?.id}`}
+          >
+            Detalle
+          </Link>
+        </Card.Footer>
       </Card>
     </Col>
   );

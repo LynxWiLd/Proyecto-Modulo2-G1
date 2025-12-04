@@ -5,39 +5,38 @@ import { useState } from "react";
 import SongCard from "../services/SongCard";
 import "../styles/home.css";
 
-const Home = () => {
+// Recibe la lista de canciones como prop 'canciones' (la lista completa)
+const Home = ({ canciones }) => {
   const navigate = useNavigate();
 
   const [categoria, setCategoria] = useState("Todas");
-  const categorias = ["Rock", "Pop", "Electrónica", "Cuarteto", "Rap"];
 
-  const [favoritos, setFavoritos] = useState([]);
-
-  const canciones = [
-    { id: 1, nombre: "Tema 1", categoria: "Rock" },
-    { id: 2, nombre: "Tema 2", categoria: "Pop" },
-    { id: 3, nombre: "Tema 3", categoria: "Cuarteto" },
-    { id: 4, nombre: "Tema 4", categoria: "Rock" },
-    { id: 5, nombre: "Tema 5", categoria: "Electrónica" },
-    { id: 6, nombre: "Tema 6", categoria: "Rap" },
+  const categorias = [
+    "Rock",
+    "Pop",
+    "Electrónica",
+    "Cuarteto",
+    "Rap",
+    "Folclore",
+    "Reggae",
+    "Clásica",
+    "Tango",
+    "Jazz",
+    "Blues",
+    "Country",
   ];
 
+  // Filtra las canciones usando la prop 'canciones'. Usamos 'canciones || []' para evitar errores si 'canciones' es undefined.
   const cancionesFiltradas =
     categoria === "Todas"
-      ? canciones
-      : canciones.filter((c) => c.categoria === categoria);
-
-  const toggleFavorito = (id) => {
-    setFavoritos((prev) =>
-      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
-    );
-  };
+      ? canciones || []
+      : // Usamos c.categoriaCancion si ese es el nombre de la propiedad en tus objetos
+        (canciones || []).filter((c) => c.categoriaCancion === categoria);
 
   const handleRegister = () => navigate("/register");
 
   return (
-    <Container className="mt-5 p-4 text-white">
-
+    <main className="mt-5 p-4 text-white container">
       <h1 className="text-center mb-4">
         <FaMusic className="me-2" /> Explora Música
       </h1>
@@ -64,18 +63,13 @@ const Home = () => {
       </div>
 
       {/* CARDS */}
-      <div className="home-cards-glass">
-        <Row className="g-4">
+      <Container className="home-cards-glass ">
+        <Row xs={1} sm={2} md={3} lg={4} xl={5} className="g-4">
           {cancionesFiltradas.map((song) => (
-            <SongCard
-              key={song.id}
-              song={song}
-              isFavorite={favoritos.includes(song.id)}
-              toggleFavorito={toggleFavorito}
-            />
+            <SongCard key={song.id} cancion={song} />
           ))}
         </Row>
-      </div>
+      </Container>
 
       {/* CREA TU CUENTA */}
       <section className="home-create-account">
@@ -84,19 +78,16 @@ const Home = () => {
         </h4>
 
         <p>
-          Registrate gratis para guardar favoritos, crear playlists
-          y recibir recomendaciones personalizadas.
+          Regístrate gratis para guardar favoritos, crear playlists y recibir
+          recomendaciones personalizadas.
         </p>
 
         <Button className="home-register-btn" onClick={handleRegister}>
           Crear Cuenta
         </Button>
       </section>
-
-    </Container>
+    </main>
   );
 };
 
 export default Home;
-
-

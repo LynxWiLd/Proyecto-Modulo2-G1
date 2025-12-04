@@ -4,7 +4,10 @@
 
 .song-card {
   position: relative;
-  width: 260px;
+  width: 100%; /* ✅ ocupa todo el ancho de la columna */
+  max-width: 300px; /* opcional: límite máximo */
+  margin-left: auto;
+  margin-right: auto;
   padding: 15px;
   border-radius: 20px;
   background: #151515;
@@ -12,6 +15,7 @@
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4);
+  margin: 0 auto; /* ✅ centra la card dentro de la columna */
 }
 
 .song-card:hover {
