@@ -11,10 +11,12 @@ import DetalleCancion from "./components/pages/paginaDeDetalle/DetalleCancion";
 import FormularioCancion from "./components/shared/FormularioCancion";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import Administracion from "./components/pages/Administracion";
+import UserPage from "./components/pages/UserPage";
 
 function App() {
   const usuarioSessionStorage =
-    JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
+    JSON.parse(sessionStorage.getItem("usuarioKey")) || null;
+
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
 
   useEffect(() => {
@@ -108,7 +110,7 @@ function App() {
             }
           />
         </Route>
-
+        <Route path="/user" element={<UserPage canciones={canciones} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
 
