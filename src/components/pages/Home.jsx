@@ -2,7 +2,7 @@ import { Container, Dropdown, Row, Button } from "react-bootstrap";
 import { FaFilter, FaMusic, FaUserPlus } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import SongCard from "../services/SongCard";
+import SongCard from "../complementos/SongCard";
 import "../styles/home.css";
 
 const Home = ({ canciones }) => {

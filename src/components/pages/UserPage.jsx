@@ -1,7 +1,7 @@
 import { Container, Dropdown, Row } from "react-bootstrap";
 import { FaFilter } from "react-icons/fa";
 import { useState } from "react";
-import SongCardPlaylist from "../services/SongCardPlaylist";
+import SongCardPlaylist from "../complementos/SongCardPlaylist";
 import "../styles/guest.css";
 
 const UserPage = ({ canciones }) => {

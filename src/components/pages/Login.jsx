@@ -50,7 +50,7 @@ const Login = ({ setUsuarioLogueado }) => {
         icon: "success",
       });
 
-      navegacion("/userPage");
+      navegacion("/user");
     } else {
       return Swal.fire({
         title: "Ocurrió un error",

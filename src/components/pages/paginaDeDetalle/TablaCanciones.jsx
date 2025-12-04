@@ -1,4 +1,4 @@
-import ItemCancion from "../../services/ItemCancion";
+import ItemCancion from "../../complementos/ItemCancion";
 import { Table } from "react-bootstrap";
 
 const TablaCanciones = ({ canciones }) => {
