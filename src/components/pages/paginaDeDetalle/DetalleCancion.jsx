@@ -3,9 +3,8 @@ import { Container, Col, Row } from "react-bootstrap";
 import { Link, useParams } from "react-router";
 import TablaCanciones from "./TablaCanciones";
 import Swal from "sweetalert2";
-import CardCancionesPopulares from "../../services/CardCancionesPopulares";
 import { FaPlay } from "react-icons/fa";
-import SongCard from "../../services/SongCard";
+import SongCard from "../../complementos/SongCard";
 
 // IMPORTACIONES PARA LOS ARTISTAS RECOMENDADOS:
 import badBunnyImg from "../../assets/imgDetalleCancion/badBunny.webp";

@@ -41,15 +41,15 @@ function App() {
     setCanciones([...canciones, nuevaCancion]);
   };
 
-  // const editarCancion = (idSong, nuevaSong) => {
-  //   const songEditado = canciones.map((song) => {
-  //     if (song.id === idSong) {
-  //       return { ...song, ...nuevaSong };
-  //     }
-  //     return song;
-  //   });
-  //   setCanciones(songEditado);
-  // };
+  const editarCancion = (idSong, nuevaSong) => {
+    const songEditado = canciones.map((song) => {
+      if (song.id === idSong) {
+        return { ...song, ...nuevaSong };
+      }
+      return song;
+    });
+    setCanciones(songEditado);
+  };
 
   const eliminarCancion = (id) => {
     const songFiltrado = canciones.filter((song) => song.id !== id);
@@ -101,11 +101,12 @@ function App() {
             }
           />
           <Route
-            path="editarCancion"
+            path="editarCancion/:id"
             element={
               <FormularioCancion
                 titulo="Editar Canción"
-                editarCancion={"editarCancion"}
+                editarCancion={editarCancion}
+                canciones={canciones}
               />
             }
           />
