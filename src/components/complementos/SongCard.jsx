@@ -1,6 +1,6 @@
 import { Card, Col } from "react-bootstrap";
 import { FaPlay } from "react-icons/fa";
-import "../styles/songCard.css";
+import "../../components/styles/songcard.css";
 import { Link } from "react-router";
 
 const SongCard = ({ cancion }) => {

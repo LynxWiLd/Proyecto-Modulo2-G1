@@ -1,6 +1,6 @@
 import { Card, Col } from "react-bootstrap";
 import { FaPlay } from "react-icons/fa";
-import "../styles/songCard.css";
+import "../../components/styles/songcard.css";
 import { Link } from "react-router";
 import { Button } from "react-bootstrap";
 
@@ -18,8 +18,6 @@ const SongCard = ({
     }
   };
 
-
-  
   return (
     <Col xs={12} sm={6} md={4} lg={4} className="mb-4">
       <Card className="song-card h-100 bg-dark text-white ">
@@ -56,7 +54,7 @@ const SongCard = ({
         <Card.Footer className="text-muted border-top border-secondary bg-dark">
           <Link
             className="mt-2 w-100 btn btn-primary"
-            to={`/detalle/${cancion?.id}`}
+            to={`/detalle/${cancion?.idCancion}`}
           >
             Detalle
           </Link>

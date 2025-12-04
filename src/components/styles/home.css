@@ -51,3 +51,29 @@
   font-size: 1.2rem !important;
   border-radius: 50px !important;
 }
+/*
+ * Nuevos estilos para el mensaje de lista vacía
+ */
+.empty-list-message {
+  /* Ocupa todo el ancho de la fila */
+  width: 100%;
+
+  /* Centra el mensaje en el contenedor */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Fondo oscuro y esquinas redondeadas */
+  background-color: rgba(0, 0, 0, 0.7); /* Negro semi-transparente */
+  border-radius: 12px;
+  padding: 1rem; /* Espaciado interno */
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilo para el texto dentro del mensaje */
+.empty-list-message p {
+  color: white; /* Asegura que el texto sea blanco */
+  margin: 0; /* Elimina márgenes extra de bootstrap o por defecto */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Sombra de texto sutil para contraste */
+}
