@@ -6,27 +6,28 @@ import About from "./components/pages/About";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Error404 from "./components/pages/Error404";
-import DetalleCancion from "./components/pages/paginaDeDetalle/DetalleCancion";
 import { useEffect, useState } from "react";
+import DetalleCancion from "./components/pages/paginaDeDetalle/DetalleCancion";
 import FormularioCancion from "./components/shared/FormularioCancion";
 import ProtectorRutas from "./components/routes/ProtectorRutas";
 import Administracion from "./components/pages/Administracion";
+import UserPage from "./components/pages/UserPage";
 
 function App() {
   const usuarioSessionStorage =
-    JSON.parse(sessionStorage.getItem("usuarioKey")) || false;
+    JSON.parse(sessionStorage.getItem("usuarioKey")) || null;
+
   const [usuarioLogueado, setUsuarioLogueado] = useState(usuarioSessionStorage);
 
   useEffect(() => {
     sessionStorage.setItem("usuarioKey", JSON.stringify(usuarioLogueado));
   }, [usuarioLogueado]);
 
-
   //canciones
   const cancionesLocalStorage =
     JSON.parse(localStorage.getItem("cancionesKey")) || [];
   const [canciones, setCanciones] = useState(cancionesLocalStorage);
-
+  console.log(canciones);
   useEffect(() => {
     localStorage.setItem("cancionesKey", JSON.stringify(canciones));
   }, [canciones]);
@@ -34,22 +35,21 @@ function App() {
   //CRUD - CREAR CANCION
   const crearCancion = (nuevaCancion) => {
     //crear ID cancion y agregarlo al objeto
-    nuevaCancion.idCancion = crypto.randomUUID();
+    nuevaCancion.id = crypto.randomUUID();
 
     // agrego la nueva cancion al array que existe
     setCanciones([...canciones, nuevaCancion]);
   };
 
-
-  const editarCancion = (idSong, nuevaSong) => {
-    const songEditado = canciones.map((song) => {
-      if (song.id === idSong) {
-        return { ...song, ...nuevaSong };
-      }
-      return song;
-    });
-    setCanciones(songEditado);
-  };
+  // const editarCancion = (idSong, nuevaSong) => {
+  //   const songEditado = canciones.map((song) => {
+  //     if (song.id === idSong) {
+  //       return { ...song, ...nuevaSong };
+  //     }
+  //     return song;
+  //   });
+  //   setCanciones(songEditado);
+  // };
 
   const eliminarCancion = (id) => {
     const songFiltrado = canciones.filter((song) => song.id !== id);
@@ -96,6 +96,7 @@ function App() {
               <FormularioCancion
                 titulo="Crear Canción"
                 crearCancion={crearCancion}
+                canciones={canciones}
               />
             }
           />
@@ -104,12 +105,12 @@ function App() {
             element={
               <FormularioCancion
                 titulo="Editar Canción"
-                editarCancion={editarCancion}
+                editarCancion={"editarCancion"}
               />
             }
           />
         </Route>
-
+        <Route path="/user" element={<UserPage canciones={canciones} />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
 

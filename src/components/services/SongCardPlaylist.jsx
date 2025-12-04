@@ -2,8 +2,14 @@ import { Card, Col } from "react-bootstrap";
 import { FaPlay } from "react-icons/fa";
 import "../styles/songCard.css";
 import { Link } from "react-router";
+import { Button } from "react-bootstrap";
 
-const SongCard = ({ cancion }) => {
+const SongCard = ({
+  cancion,
+  agregarAPlaylist,
+  quitarDePlaylist,
+  playlist,
+}) => {
   const handlePlay = () => {
     if (cancion?.urlCancion) {
       window.open(cancion.urlCancion, "_blank");
@@ -12,6 +18,8 @@ const SongCard = ({ cancion }) => {
     }
   };
 
+
+  
   return (
     <Col xs={12} sm={6} md={4} lg={4} className="mb-4">
       <Card className="song-card h-100 bg-dark text-white ">
@@ -52,6 +60,24 @@ const SongCard = ({ cancion }) => {
           >
             Detalle
           </Link>
+
+          {playlist?.some((item) => item.id === cancion.id) ? (
+            <Button
+              variant="danger"
+              className="mt-2 w-100"
+              onClick={() => quitarDePlaylist(cancion.id)}
+            >
+              – Quitar de Playlist
+            </Button>
+          ) : (
+            <Button
+              variant="outline-light"
+              className="mt-2 w-100"
+              onClick={() => agregarAPlaylist(cancion)}
+            >
+              + Agregar a Playlist
+            </Button>
+          )}
         </Card.Footer>
       </Card>
     </Col>

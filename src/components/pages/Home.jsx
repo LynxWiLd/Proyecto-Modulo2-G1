@@ -5,58 +5,43 @@ import { useState } from "react";
 import SongCard from "../services/SongCard";
 import "../styles/home.css";
 
-const Home = () => {
+const Home = ({ canciones }) => {
+  const usuarioSession = JSON.parse(sessionStorage.getItem("usuarioKey"));
   const navigate = useNavigate();
 
-  const [categoria, setCategoria] = useState("Todas");
-  const categorias = ["Rock", "Pop", "Electrónica", "Cuarteto", "Rap"];
+  const [artista, setArtista] = useState("Todos");
 
-  const [favoritos, setFavoritos] = useState([]);
-
-  const canciones = [
-    { id: 1, nombre: "Tema 1", categoria: "Rock" },
-    { id: 2, nombre: "Tema 2", categoria: "Pop" },
-    { id: 3, nombre: "Tema 3", categoria: "Cuarteto" },
-    { id: 4, nombre: "Tema 4", categoria: "Rock" },
-    { id: 5, nombre: "Tema 5", categoria: "Electrónica" },
-    { id: 6, nombre: "Tema 6", categoria: "Rap" },
+  // ARTISTAS ÚNICOS
+  const artistas = [
+    "Todos",
+    ...new Set((canciones || []).map((c) => c.artistaGrupo)),
   ];
 
+  // FILTRO POR ARTISTA
   const cancionesFiltradas =
-    categoria === "Todas"
-      ? canciones
-      : canciones.filter((c) => c.categoria === categoria);
-
-  const toggleFavorito = (id) => {
-    setFavoritos((prev) =>
-      prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]
-    );
-  };
+    artista === "Todos"
+      ? canciones || []
+      : (canciones || []).filter((c) => c.artistaGrupo === artista);
 
   const handleRegister = () => navigate("/register");
 
   return (
-    <Container className="mt-5 p-4 text-white">
-
+    <main className="mt-5 p-4 text-white container">
       <h1 className="text-center mb-4">
         <FaMusic className="me-2" /> Explora Música
       </h1>
 
       {/* FILTRO */}
-      <div className="home-filter-container">
+      <div className="home-filter-container d-flex justify-content-start align-items-center mb-4">
         <Dropdown>
           <Dropdown.Toggle className="home-filter-toggle" variant="dark">
-            <FaFilter className="me-2" /> Filtrar: {categoria}
+            <FaFilter className="me-2" /> Filtrar por artista: {artista}
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="home-filter-menu">
-            <Dropdown.Item onClick={() => setCategoria("Todas")}>
-              Todas
-            </Dropdown.Item>
-
-            {categorias.map((cat) => (
-              <Dropdown.Item key={cat} onClick={() => setCategoria(cat)}>
-                {cat}
+            {artistas.map((art) => (
+              <Dropdown.Item key={art} onClick={() => setArtista(art)}>
+                {art}
               </Dropdown.Item>
             ))}
           </Dropdown.Menu>
@@ -64,39 +49,39 @@ const Home = () => {
       </div>
 
       {/* CARDS */}
-      <div className="home-cards-glass">
-        <Row className="g-4">
+      <Container className="home-cards-glass">
+        <Row className="g-3">
           {cancionesFiltradas.map((song) => (
-            <SongCard
-              key={song.id}
-              song={song}
-              isFavorite={favoritos.includes(song.id)}
-              toggleFavorito={toggleFavorito}
-            />
+            <SongCard key={song.id} cancion={song} />
           ))}
+
+          {cancionesFiltradas.length === 0 && (
+            <p className="text-center mt-3" style={{ opacity: 0.7 }}>
+              No hay canciones de este artista.
+            </p>
+          )}
         </Row>
-      </div>
+      </Container>
 
       {/* CREA TU CUENTA */}
-      <section className="home-create-account">
-        <h4 className="mb-3">
-          <FaUserPlus /> Crea tu cuenta ahora
-        </h4>
+      {!usuarioSession && (
+        <section className="home-create-account">
+          <h4 className="mb-3">
+            <FaUserPlus /> Crea tu cuenta ahora
+          </h4>
 
-        <p>
-          Registrate gratis para guardar favoritos, crear playlists
-          y recibir recomendaciones personalizadas.
-        </p>
+          <p>
+            Regístrate gratis para guardar favoritos, crear playlists y recibir
+            recomendaciones personalizadas.
+          </p>
 
-        <Button className="home-register-btn" onClick={handleRegister}>
-          Crear Cuenta
-        </Button>
-      </section>
-
-    </Container>
+          <Button className="home-register-btn" onClick={handleRegister}>
+            Crear Cuenta
+          </Button>
+        </section>
+      )}
+    </main>
   );
 };
 
 export default Home;
-
-
