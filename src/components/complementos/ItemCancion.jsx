@@ -12,7 +12,7 @@ const ItemCancion = ({ cancionRecomendada, fila }) => {
   return (
     <tr className="text-center">
       <td>{fila}</td>
-      <td>{cancionRecomendada.nombreAlbum}</td>
+      <td>{cancionRecomendada.albumCancion}</td>
       <td>{cancionRecomendada.artistaGrupo}</td>
       <td>{cancionRecomendada.nombreCancion}</td>
       <td>{cancionRecomendada.categoriaCancion}</td>

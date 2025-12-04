@@ -70,10 +70,10 @@ const DetalleCancion = ({ canciones }) => {
         <div className="overlay bottom-left text-white p-2">
           <p className="mb-0">
             <span className="fw-bold">
-              {cancionBuscada.artistaGrupo} - {cancionBuscada.nombreAlbun}
+              {cancionBuscada.artistaGrupo} - {cancionBuscada.albumCancion}
             </span>{" "}
             - {cancionBuscada.anioCancion} - {cancionBuscada.duracionCancion} -
-            3.421.608.407
+            {cancionBuscada.id}
           </p>
         </div>
       </section>
@@ -89,11 +89,11 @@ const DetalleCancion = ({ canciones }) => {
           <FaPlay size={22} />
         </button>
 
-        <Link className="text-light" title="Guardar en tu Biblioteca">
+        <Link className="text-light" to="*" title="Guardar en tu Biblioteca">
           <i className="bi bi-plus-circle fs-1"></i>
         </Link>
 
-        <Link className="text-light" title="Más opciones">
+        <Link className="text-light" to="*" title="Más opciones">
           <i className="bi bi-three-dots fs-1"></i>
         </Link>
       </section>
@@ -108,7 +108,7 @@ const DetalleCancion = ({ canciones }) => {
 
         <div className="ms-3 fondoTransparente p-4 text-center">
           <div className="fw-bold text-light">Artista</div>
-          <Link className="fw-bold text-light" to={""}>
+          <Link className="fw-bold text-light" to="*">
             {cancionBuscada.artistaGrupo}
           </Link>
         </div>
@@ -142,9 +142,6 @@ const DetalleCancion = ({ canciones }) => {
         <h3 className="py-2 ps-3 fondoTransparente">Artistas Recomendados</h3>
         <Container>
           <Row xs={3} md={4} lg={6} className="g-6">
-            {/* {
-                            artistasRecomendados.map((artista, indice) => <CardArtistasRecomendados key={indice} artista={artista}></CardArtistasRecomendados>)
-                        } */}
             <Col>
               <div className="text-center ">
                 <Image
